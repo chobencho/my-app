@@ -77,8 +77,8 @@ class Api::V1::User::UsersController < ApplicationController
           unless tags.nil?
             # 新しくタグデータを作成
             tags.each do |tag_name|
-              tag = UserResearchtag.new(user_id: user_id, tag_id: "1", tag_name: tag_name)
-              @user.user_researchtags << tag
+              tag = UserResearchtag.new(user_id: user_id, tag_name: tag_name)
+              @user.user_researchtags_taggings << tag
             end
           end
   
@@ -117,9 +117,6 @@ class Api::V1::User::UsersController < ApplicationController
         :prefecture_id,
         :birthplace_id,
         :subject_id,
-        :interest_id_1,
-        :interest_id_2,
-        :interest_id_3
       )
     end
   

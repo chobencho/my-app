@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
     backgroundColor: "black",
     fontSize: "10px",
-    color: "white"
+    color: "white",
   },
   imageContainer: {
     width: "100%",
@@ -44,43 +44,10 @@ const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
 
-
-  const handleSignOut = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    try {
-      const res = await signOut();
-      console.log(res);
-
-      if (res.data.success === true) {
-        // サインアウト時には各Cookieを削除
-        Cookies.remove("_access_token");
-        Cookies.remove("_client");
-        Cookies.remove("_uid");
-
-        setIsSignedIn(false);
-        navigate("/signin");
-
-        console.log("Succeeded in sign out");
-      } else {
-        console.log("Failed in sign out");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-
   const AuthButtons = () => {
     if (!loading) {
       if (isSignedIn) {
-        return (
-          <button
-            color="inherit"
-            className={classes.linkBtn}
-            onClick={handleSignOut}
-          >
-            Sign out
-          </button>
-        );
+        return null;
       } else {
         return (
           <>

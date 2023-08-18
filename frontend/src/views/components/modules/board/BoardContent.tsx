@@ -77,6 +77,7 @@ const BoardContent = ({
             generalId={boardId}
             generalData={board}
             handleData={handleGetBoardData}
+            discrimination={"board"}
           />
         </div>
 

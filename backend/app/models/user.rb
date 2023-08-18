@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
 
-  # mount_uploader :image, ImageUploader
+  mount_uploader :image, ImageUploader
 
   has_many :boards
   belongs_to :prefecture, foreign_key: 'prefecture_id', primary_key: 'id', class_name: 'Prefecture'
@@ -20,5 +20,6 @@ class User < ActiveRecord::Base
   has_many :community_comments
   has_many :messages
   has_many :user_likes, foreign_key: :user_id
+  has_many :room_members
 end
 

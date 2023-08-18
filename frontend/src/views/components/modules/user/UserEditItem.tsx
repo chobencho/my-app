@@ -9,6 +9,7 @@ import Hobby from "options/hobby";
 import Interest from "options/interest";
 
 import TableTr from "views/components/block/TableTr";
+import { FaStarOfDavid } from "react-icons/fa";
 
 interface UserEditItemProps {
   userData: UserData;
@@ -96,8 +97,9 @@ const UserEditItem = ({
             <div className="flex flex-wrap">
               {userHobbyData.map((hobby) => {
                 const hobbyOption = Hobby.HOB_OPTIONS.find(
-                  (option) => option[0] === hobby.hobbyId
+                  (option) => option[0] === parseInt(hobby.hobbyId)
                 );
+                console.log(hobbyOption);
                 if (hobbyOption) {
                   const [, hobbyName, hobbyImage] = hobbyOption;
                   return (
@@ -124,7 +126,7 @@ const UserEditItem = ({
             <div className="flex flex-wrap">
               {userInterestData.map((interest) => {
                 const interestOption = Interest.INT_OPTIONS.find(
-                  (option) => option[0] === interest.interestId
+                  (option) => option[0] === parseInt(interest.interestId)
                 );
                 if (interestOption) {
                   const [, interestName, interestImage] = interestOption;

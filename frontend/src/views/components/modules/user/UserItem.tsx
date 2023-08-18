@@ -31,8 +31,6 @@ const UserItem = ({
   interestData,
   researchTagData,
 }: UserItemProps) => {
-
-
   return (
     <>
       <JudgeLogin
@@ -51,6 +49,7 @@ const UserItem = ({
             generalId={userId}
             generalData={userData}
             handleData={handleGetUserData}
+            discrimination={"user"}
           />
         </div>
 

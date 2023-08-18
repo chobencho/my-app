@@ -53,7 +53,7 @@ const Footer = () => {
   return (
     <>
       <ThemeProvider theme={theme}>
-        <div color="inherit" className="border-t bg-white">
+        <div color="inherit" className="border-y bg-white">
           <div className="my-1 mx-2 flex justify-evenly">
             <Link to="/" className={`${classes.transitionButton}`}>
               <PersonSearchIcon fontSize="large" className={classes.icon} />

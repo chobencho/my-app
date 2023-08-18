@@ -35,7 +35,7 @@ const CommonLayout = ({ children }: CommonLayoutProps) => {
       <header className="fixed w-full top-0 z-10">
         <Header />
       </header>
-      <main className="py-11">
+      <main className="pt-11 pb-20">
         <Container maxWidth="lg" className="">
           {children}
         </Container>

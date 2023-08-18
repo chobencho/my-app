@@ -32,7 +32,7 @@ const HobbyComponent = ({ hobbies }: HobbyProps) => (
   <div className="flex flex-wrap">
     {hobbies.map((hobby) => {
       const hobbyOption = Hobby.HOB_OPTIONS.find(
-        (option) => option[0] === hobby.hobbyId
+        (option) => option[0] === parseInt(hobby.hobbyId)
       );
       if (hobbyOption) {
         const [, hobbyName, hobbyImage] = hobbyOption;
@@ -59,7 +59,7 @@ const InterestComponent = ({ interests }: InterestProps) => (
   <div className="flex flex-wrap">
     {interests.map((interest) => {
       const interestOption = Interest.INT_OPTIONS.find(
-        (option) => option[0] === interest.interestId
+        (option) => option[0] === parseInt(interest.interestId)
       );
       if (interestOption) {
         const [, interestName, interestImage] = interestOption;

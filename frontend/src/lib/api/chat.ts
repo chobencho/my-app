@@ -8,22 +8,22 @@ export const getMessages = (
   id: string | undefined,
   partnerId: string | undefined
 ) => {
-  return client.get<MessageItemsData[]>(`/chat/chats/${id}`, {
+  return client.get<MessageItemsData[]>(`/message/chats/${id}`, {
     params: { partnerId },
   });
 };
 
 // 自分がやりとりしてるルーム情報を取得
 export const getChatPartner = (id: string | undefined) => {
-  return client.get<ChatUserData>(`/chat/chats/${id}/chatBuddy`);
+  return client.get<ChatUserData>(`/message/chats/${id}/chatBuddy`);
 };
 
 // チェットメッセージを作成する
 export const createMessage = (data: FormData): AxiosPromise => {
-  return client.post(`/chat/chats`, data);
+  return client.post(`/message/chats`, data);
 };
 
 // ルームを削除する
 export const deleteChatRoom = (room_id: string | undefined): AxiosPromise => {
-  return client.delete(`/chat/chats/${room_id}`);
+  return client.delete(`/message/chats/${room_id}`);
 };

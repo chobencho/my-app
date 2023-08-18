@@ -39,14 +39,14 @@ const Information = () => {
         {infos?.map((info) => (
           <button
             key={info.id}
-            className="border inline-block p-2"
+            className="border inline-block p-2 w-full"
             onClick={() => handleShowInfoModal(info)}
           >
             <div className="flex items-center">
               <p className="text-sm pr-2">{info.title}</p>
               <p className="required">重要</p>
             </div>
-            <p className="txt-limit-1 text-xs pt-1">{info.body}</p>
+            <p className="txt-limit-1 text-xs pt-1 text-left">{info.body}</p>
           </button>
         ))}
       </div>
