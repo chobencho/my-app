@@ -92,7 +92,7 @@ const Boards = () => {
 
   return (
     <>
-      <div className="">
+      <div className="w-96 m-auto">
         <p className="text-center p-3">掲示板一覧</p>
         {boards && (
           <>

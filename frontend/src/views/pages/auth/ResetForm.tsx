@@ -25,39 +25,58 @@ const ResetForm: FC<Props> = ({ resetPasswordToken }) => {
     });
   };
 
-  if (isSubmitted) return <p>パスワード再設定完了</p>;
+  if (isSubmitted)
+    return (
+      <>
+        <div className="w-4/5  m-auto text-center py-5">
+          <p>パスワード変更が完了しました。</p>
+        </div>
+      </>
+    );
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="password">パスワード</label>
-        <input
-          className="border"
-          type="password"
-          {...register("password", {
-            // required: validation.required,
-            // pattern: validation.pattern.password,
-          })}
-          //   errors={errors}
-        />
-        <label htmlFor="passwordConfirmation">パスワード確認</label>
-        <input
-          className="border"
-          type="password"
-          {...register("passwordConfirmation", {
-            // required: validation.required,
-            // validate: (value) => validation.validate.confirm(password, value),
-          })}
-          //   errors={errors}
-        />
-        <input
-          type="hidden"
-          value={resetPasswordToken}
-          {...register("resetPasswordToken")}
-        />
-        <button type="submit" className="border bg-gray-200">
-          変更
-        </button>
+        <p className="w-4/5 m-auto text-justify text-sm py-5">
+          新しいパスワードを入力してパスワード変更を完了してください。
+        </p>
+        <div className="w-4/5 m-auto pb-5">
+          <label htmlFor="password"></label>
+          <input
+            className="input-text"
+            type="password"
+            placeholder="新しいパスワード"
+            {...register("password", {
+              // required: validation.required,
+              // pattern: validation.pattern.password,
+            })}
+            //   errors={errors}
+          />
+          <label htmlFor="passwordConfirmation"></label>
+          <input
+            className="input-text"
+            type="password"
+            placeholder="新しいパスワード確認用"
+            {...register("passwordConfirmation", {
+              // required: validation.required,
+              // validate: (value) => validation.validate.confirm(password, value),
+            })}
+            //   errors={errors}
+          />
+          <input
+            type="hidden"
+            value={resetPasswordToken}
+            {...register("resetPasswordToken")}
+          />
+        </div>
+        <div className="text-center py-5">
+          <button
+            type="submit"
+            className="border w-3/5 rounded-3xl p-3 bg-blue-base text-white"
+          >
+            パスワード変更
+          </button>
+        </div>
       </form>
     </>
   );

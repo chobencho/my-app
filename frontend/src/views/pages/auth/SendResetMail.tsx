@@ -18,23 +18,44 @@ const SendResetMail = () => {
     setIsSubmitted(true);
   };
 
-  if (isSubmitted) return <p>再設定メール送信完了</p>;
+  if (isSubmitted)
+    return (
+      <>
+        <div className="w-4/5 text-justify m-auto py-5">
+          <p>
+            再設定メールをメールアドレスに送信しました。ご確認お願いいたします。
+          </p>
+        </div>
+      </>
+    );
 
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">メールアドレス</label>
-        <input
-          className="border"
-          {...register("email", {
-            // required: validation.required,
-            // pattern: validation.pattern.email,
-          })}
-          //   errors={errors}
-        />
-        <button type="submit" className="border bg-gray-200">
-          送信
-        </button>
+        <p className="w-4/5 m-auto text-justify text-sm py-5">
+          ご登録中のメールアドレスを入力して送信してください。
+          パスワード変更用のURLをご入力のメールアドレスに送信します。
+        </p>
+        <div className="w-4/5 m-auto pb-5">
+          <label htmlFor="email"></label>
+          <input
+            className="input-text"
+            placeholder="メールアドレス"
+            {...register("email", {
+              // required: validation.required,
+              // pattern: validation.pattern.email,
+            })}
+            //   errors={errors}
+          />
+        </div>
+        <div className="text-center py-5">
+          <button
+            type="submit"
+            className="border w-3/5 rounded-3xl p-3 bg-blue-base text-white"
+          >
+            送信
+          </button>
+        </div>
       </form>
     </>
   );

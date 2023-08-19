@@ -3,10 +3,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 // Function
 import { subscribeCommunity } from "lib/api/community";
 // Components
-// import GoBackButton from "components/utils/common/GoBackButton";
-
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-
+import GoBackButton from "views/components/block/GoBackButton";
 export interface ModalSubscribeProps {
   community_id: string | undefined;
   user_id: string | undefined;
@@ -77,7 +74,7 @@ const ModalSubscribeCommunity = ({
                 参加する
               </button>
             </form>
-            {/* <GoBackButton discriminationText={"参加しない"} /> */}
+            <GoBackButton discriminationText={"参加しない"} />
           </div>
         </div>
       </div>

@@ -15,13 +15,13 @@ const CommonLayout = ({ children }: CommonLayoutProps) => {
 
   return (
     <>
-      <header className="fixed w-full top-0 z-10">
+      <header className="fixed w-full top-0 z-30">
         <Header />
       </header>
       <main className="pt-11 pb-20">{children}</main>
       {isSignedIn && currentUser ? (
         <>
-          <footer className="fixed w-full bottom-0 z-10">
+          <footer className="fixed w-full bottom-0 z-30">
             <Footer />
           </footer>
         </>

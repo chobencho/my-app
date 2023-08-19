@@ -8,6 +8,7 @@ type CommonEditButtonProps = {
   generalId: string;
   verifiedAge: boolean;
   commonRoomId: string;
+  discrimination: string;
 };
 
 const CommonEditButton = ({
@@ -16,6 +17,7 @@ const CommonEditButton = ({
   generalId,
   verifiedAge,
   commonRoomId,
+  discrimination,
 }: CommonEditButtonProps) => {
   const navigate = useNavigate();
 
@@ -31,7 +33,7 @@ const CommonEditButton = ({
   };
 
   const handleTransitionUserEdit = () => {
-    navigate(`/board/${generalId}/edit`);
+    navigate(`/${discrimination}/${generalId}/edit`);
   };
 
   let toLink: () => void;

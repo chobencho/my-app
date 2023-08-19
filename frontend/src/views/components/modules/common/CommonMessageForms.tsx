@@ -119,7 +119,7 @@ const CommonMessageForms = ({
               )}
 
               <textarea
-                placeholder="Hello World"
+                placeholder="コメント"
                 // className→whitespace-pre-wrapで改行している
                 className="border h-8 py-1 px-2 w-full rounded text-sm"
                 value={body}

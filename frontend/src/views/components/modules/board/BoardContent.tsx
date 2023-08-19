@@ -1,3 +1,6 @@
+// Common
+import { Link } from "react-router-dom";
+
 // Interface
 import { BoardData } from "interfaces/index";
 
@@ -58,7 +61,7 @@ const BoardContent = ({
       <div className="w-96 m-auto">
         <p className="text-xl my-2">{board.title}</p>
         <div className="flex justify-between">
-          <div className="flex my-auto">
+          <Link to={`/user/${board.userId}`} className="flex my-auto">
             <img
               src={`http://localhost:3001/uploads/user/image/${board.userId}/${board.userImage}`}
               alt="boardData image"
@@ -70,7 +73,7 @@ const BoardContent = ({
                 {moment(board.createdAt).format("YYYY年MM月DD日 HH:mm")}
               </p>
             </div>
-          </div>
+          </Link>
 
           <LikeButton
             myId={myId}
@@ -82,7 +85,10 @@ const BoardContent = ({
         </div>
 
         <p className="whitespace-pre-wrap my-5 text-sm">{board.boardBody}</p>
-        <CommonDeleteButton generalId={generalId} discrimination={"board"} />
+
+        {myId === board.userId && (
+          <CommonDeleteButton generalId={generalId} discrimination={"board"} />
+        )}
       </div>
     </>
   );

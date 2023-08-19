@@ -32,9 +32,9 @@ const UserItem = ({
     <>
       <JudgeLogin
         generalData={userData}
-        position={"absolute right-3"}
+        position={"absolute right-1"}
         padding={"py-1"}
-        fontSize={""}
+        fontSize={"text-sm"}
       />
 
       <UserImage generalData={userData} />

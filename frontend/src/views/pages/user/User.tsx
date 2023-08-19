@@ -76,6 +76,7 @@ const User = () => {
           generalId={id || ""}
           verifiedAge={verifiedAge}
           commonRoomId={commonRoomId || ""}
+          discrimination={"user"}
         />
       </div>
     </>

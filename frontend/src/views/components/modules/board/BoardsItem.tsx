@@ -36,7 +36,7 @@ const BoardsItem = ({ boards }: BoardItemProps) => {
         >
           <div className="flex">
             <div className="w-3/5">
-              <p className="text-base h-12">{board.title}</p>
+              <p className="text-base h-12 txt-limit-2 pr-2">{board.title}</p>
               <div className="flex my-1">
                 <img
                   src={`http://localhost:3001/uploads/user/image/${board.userId}/${board.userImage}`}

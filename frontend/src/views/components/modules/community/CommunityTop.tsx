@@ -18,20 +18,19 @@ export interface CommunityProps {
 const useStyles = makeStyles((theme) => ({
   mainContent: {
     position: "fixed",
-    top: 55,
+    top: 47,
     left: 0,
     display: "flex",
     width: "100%",
     padding: "8px 10px 5px",
     background: "#fff",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    zIndex: 20,
+    zIndex: 10,
     alignItems: "center", // 上下中央寄せ
-    justifyContent: "center", // 左右中央寄せ
   },
   slideUpContent: {
     position: "fixed",
-    top: -130,
+    top: -140,
     left: 0,
     width: "100%",
     height: "230px",
@@ -67,15 +66,16 @@ const CommunityTop = ({ community, community_id, user_id }: CommunityProps) => {
 
   return (
     <>
-      <div className={`${classes.mainContent}`}>
-        <span onClick={() => navigate("/communities")}>
-          <ChevronLeftIcon />
-        </span>
+      <div className={`justify-between ${classes.mainContent}`}>
         <div className="flex items-center">
+          <span onClick={() => navigate("/communities")}>
+            <ChevronLeftIcon />
+          </span>
+
           <img
-            src={`${process.env.PUBLIC_URL}/images/no-image.jpg`}
+            src={`${process.env.PUBLIC_URL}/images/community/${community.id}_category.jpg`}
             alt=""
-            className="w-12 h-8 object-cover rounded"
+            className="w-12 h-8 object-cover rounded mr-2"
           />
           <p className="txt-limit-1 text-sm mr-1">{community.title}</p>
         </div>

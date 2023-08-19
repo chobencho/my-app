@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     zIndex: 99,
   },
   modalContent: {
-    maxWidth: "80%",
+    width: "80%",
     maxHeight: "60%",
     background: "#fff",
     padding: "5px",

@@ -1,5 +1,6 @@
+// Common
 import { useEffect, useState, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // Style
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import TocIcon from "@mui/icons-material/Toc";
@@ -19,7 +20,7 @@ interface ChatPartnerProps {
 const useStyles = makeStyles((theme) => ({
   mainContent: {
     position: "fixed",
-    top: 55,
+    top: 48,
     left: 0,
     display: "flex",
     width: "100%",
@@ -59,13 +60,15 @@ const ChatPartner = ({ buddy, generalId }: ChatPartnerProps) => {
             >
               <ChevronLeftIcon />
             </span>
-            {buddy.image?.url ? (
-              <img
-                src={buddy.image.url}
-                alt="userData image"
-                className="w-8 h-8 object-cover rounded-3xl ml-1 mr-2"
-              />
-            ) : null}
+            <Link to={`/user/${buddy.id}`}>
+              {buddy.image?.url ? (
+                <img
+                  src={buddy.image.url}
+                  alt="userData image"
+                  className="w-8 h-8 object-cover rounded-3xl ml-1 mr-2"
+                />
+              ) : null}
+            </Link>
             <p className="flex items-center">{buddy.name}</p>
           </div>
         )}

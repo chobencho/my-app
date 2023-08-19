@@ -40,7 +40,7 @@ const Message = () => {
       {buddy !== null ? (
         <>
           <ChatPartner buddy={buddy} generalId={id ?? ""} />
-          <div className="py-10">
+          <div className="py-12">
             {messages.map((message) => (
               <div key={message.id}>
                 <CommonMessageItems

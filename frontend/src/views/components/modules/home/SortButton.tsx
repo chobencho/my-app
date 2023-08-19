@@ -25,7 +25,7 @@ const SortButton = ({ handleSort }: SortProps) => {
   ];
   return (
     <>
-      <div className="my-1 text-xs">
+      <div className="my-1 text-xs px-1">
         <Select
           value={sortValue}
           onChange={handleChangeSort}

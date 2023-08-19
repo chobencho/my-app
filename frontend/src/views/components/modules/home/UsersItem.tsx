@@ -84,23 +84,22 @@ const UsersItem = ({ userData }: UsersProps) => {
             />
           )}
 
-          <div className="p-2">
-            <div className="flex w-full flex-wrap justify-between">
-              <p className="text-sm font-semibold">{userData.name}</p>
-
+          <div className="py-1 px-2">
+            <div className="flex w-full flex-wrap justify-between items-center">
+              <p className="text-base font-semibold">{userData.name}</p>
               <JudgeLogin
                 generalData={userData}
                 position={""}
                 padding={""}
-                fontSize={"text-xs"}
+                fontSize={"text-10"}
               />
             </div>
             <div className="flex justify-between">
-              <p className="text-xs">
+              <p className="text-10">
                 {userData.age}歳 {userData.prefectureCode}
               </p>
 
-              <p className="text-xs">{userData.subjectCode}専攻</p>
+              <p className="text-10">{userData.subjectCode}専攻</p>
             </div>
           </div>
         </div>

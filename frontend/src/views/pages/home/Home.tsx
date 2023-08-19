@@ -41,9 +41,7 @@ const Home = () => {
     <>
       <div className="w-96 m-auto pt-2">
         <div className="flex justify-between">
-          <p className="text-xl flex items-center">さがす</p>
-          <div className="flex items-center">
-            <SortButton handleSort={handleSortUsersData} />
+          <p className="text-xl flex items-center">
             {/* 検索ボタン */}
             <SearchButton
               handleGetUsersData={handleGetUsersData}
@@ -51,6 +49,9 @@ const Home = () => {
               tags={tags}
               verifiedAge={verifiedAge}
             />
+          </p>
+          <div className="flex items-center">
+            <SortButton handleSort={handleSortUsersData} />
           </div>
         </div>
         <div className="w-full flex flex-wrap">

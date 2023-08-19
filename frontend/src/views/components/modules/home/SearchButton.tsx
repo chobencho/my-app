@@ -34,8 +34,9 @@ const SearchButton = ({
 
   return (
     <>
-      <div className="text-black">
-        <SearchIcon fontSize="large" onClick={showModalWindow} />
+      <div className="text-black px-1" onClick={showModalWindow}>
+        <SearchIcon fontSize="medium" />
+        <span className="text-base">キーワード検索</span>
       </div>
       {/* 検索モーダル */}
       {showModal ? (

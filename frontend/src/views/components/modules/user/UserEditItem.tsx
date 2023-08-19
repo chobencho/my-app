@@ -4,18 +4,16 @@ import { UserHobbyData } from "interfaces/index";
 import { UserInterestData } from "interfaces/index";
 import { UserTagData } from "interfaces/index";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-
-import Hobby from "options/hobby";
-import Interest from "options/interest";
-
 import TableTr from "views/components/block/TableTr";
-import { FaStarOfDavid } from "react-icons/fa";
 
 interface UserEditItemProps {
+  myId: string | undefined;
+  userId: string | undefined;
+  handleGetUserData: Function;
   userData: UserData;
-  userHobbyData: UserHobbyData[];
-  userInterestData: UserInterestData[];
-  userResearchTagData: UserTagData[];
+  hobbyData: UserHobbyData[];
+  interestData: UserInterestData[];
+  researchTagData: UserTagData[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -42,10 +40,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const UserEditItem = ({
+  myId,
+  userId,
+  handleGetUserData,
   userData,
-  userHobbyData,
-  userInterestData,
-  userResearchTagData,
+  hobbyData,
+  interestData,
+  researchTagData,
 }: UserEditItemProps) => {
   const classes = useStyles();
 
@@ -76,81 +77,9 @@ const UserEditItem = ({
           <TableTr trTitle={"専攻分野"} trData={userData.subjectCode} />
           <TableTr trTitle={"居住地"} trData={userData.prefectureCode} />
           <TableTr trTitle={"出身地"} trData={userData.birthplaceCode} />
-          <tr className={`${classes.tr}`}>
-            <td className={`${classes.trLeft}`}>研究タグ</td>
-            <td className={`${classes.trRight}`}>
-              <div className="flex flex-wrap">
-                {userResearchTagData.map((tag) => (
-                  <p
-                    key={tag.id}
-                    className="bg-blue-base rounded-3xl text-white py-1 px-3 mr-1 mb-1"
-                  >
-                    {tag.tagName}
-                  </p>
-                ))}
-              </div>
-            </td>
-          </tr>
-          <tr className={`${classes.tr}`}>
-            <td className={`${classes.trLeft}`}>趣味</td>
-            <td className={`${classes.trRight}`}></td>
-            <div className="flex flex-wrap">
-              {userHobbyData.map((hobby) => {
-                const hobbyOption = Hobby.HOB_OPTIONS.find(
-                  (option) => option[0] === parseInt(hobby.hobbyId)
-                );
-                console.log(hobbyOption);
-                if (hobbyOption) {
-                  const [, hobbyName, hobbyImage] = hobbyOption;
-                  return (
-                    <div key={hobby.hobbyId} className="w-1/5 p-1 relative">
-                      <div className="relative">
-                        <img
-                          src={`${process.env.PUBLIC_URL}/images/hobby/${hobbyImage}`}
-                          className="w-full h-auto rounded image-dark"
-                        />
-                        <span className="absolute bottom-4 left-0 right-0 text-white text-sm text-center py-1">
-                          {hobbyName}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                }
-                return null;
-              })}
-            </div>
-          </tr>
-          <tr className="mt-1 pb-1 block">
-            <td className={`${classes.trLeft}`}>興味分野</td>
-            <td className={`${classes.trRight}`}></td>
-            <div className="flex flex-wrap">
-              {userInterestData.map((interest) => {
-                const interestOption = Interest.INT_OPTIONS.find(
-                  (option) => option[0] === parseInt(interest.interestId)
-                );
-                if (interestOption) {
-                  const [, interestName, interestImage] = interestOption;
-                  return (
-                    <div
-                      key={interest.interestId}
-                      className="w-1/5 p-1 relative"
-                    >
-                      <div className="relative">
-                        <img
-                          src={`${process.env.PUBLIC_URL}/images/interest/${interestImage}`}
-                          className="w-full h-auto rounded image-dark"
-                        />
-                        <span className="absolute bottom-4 left-0 right-0 text-white text-sm text-center py-1">
-                          {interestName}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                }
-                return null;
-              })}
-            </div>
-          </tr>
+          <TableTr trTitle={"研究タグ"} trData={researchTagData} />
+          <TableTr trTitle={"趣味"} trData={hobbyData} />
+          <TableTr trTitle={"興味分野"} trData={interestData} />
         </table>
       </div>
     </>

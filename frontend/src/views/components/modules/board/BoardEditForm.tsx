@@ -149,7 +149,7 @@ const BoardEditForm = ({
             <p className="required">必須</p>
           </div>
           <textarea
-            placeholder="body"
+            placeholder="内容"
             className="input-text whitespace-pre-wrap h-40"
             value={body}
             onChange={(e) => {

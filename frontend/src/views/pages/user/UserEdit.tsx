@@ -64,10 +64,13 @@ const UserEdit = () => {
 
           {/* ユーザプレビュー */}
           <UserEditItem
+            myId={id}
+            userId={""}
+            handleGetUserData={handleGetUserData}
             userData={userData}
-            userHobbyData={hobbyData}
-            userInterestData={interestData}
-            userResearchTagData={researchTagData}
+            hobbyData={hobbyData}
+            interestData={interestData}
+            researchTagData={researchTagData}
           />
         </>
       )}

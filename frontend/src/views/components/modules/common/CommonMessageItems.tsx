@@ -1,3 +1,5 @@
+// Common
+import { Link } from "react-router-dom";
 import { useState } from "react";
 // Interface
 import { MessageItemsData } from "interfaces/index";
@@ -67,11 +69,13 @@ const CommonMessageItems = ({ message, stringMyId }: CommunityCommentProps) => {
       ) : (
         <div className="px-2 py-3 flex w-4/5 justify-start mr-auto">
           <div className="flex">
-            <img
-              src={`http://localhost:3001/uploads/user/image/${message.userId}/${message.userImage}`}
-              alt="boardData image"
-              className={`${classes.userImage}`}
-            />
+            <Link to={`/user/${message.userId}`} className="inline-block w-10">
+              <img
+                src={`http://localhost:3001/uploads/user/image/${message.userId}/${message.userImage}`}
+                alt="boardData image"
+                className={`${classes.userImage}`}
+              />
+            </Link>
             <div className="pl-2">
               <p className="text-xs pb-1">{message.name}</p>
               {message.body ? (

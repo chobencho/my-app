@@ -71,6 +71,7 @@ const Board = () => {
               generalId={id || ""}
               verifiedAge={verifiedAge}
               commonRoomId={commonRoomId || ""}
+              discrimination={"board"}
             />
 
             {/* 戻るボタン */}
