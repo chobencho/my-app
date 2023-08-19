@@ -38,7 +38,7 @@ const BoardEditItem = ({
           className={`${classes.boardImage}`}
         />
       ) :
-        <img src={`${process.env.PUBLIC_URL}/images/no-image.jpg`} alt="boardData image" className={`${classes.boardImage}`} />
+        <img src={`${process.env.PUBLIC_URL}/images/common/no-image.jpg`} alt="boardData image" className={`${classes.boardImage}`} />
       }
       <div className="w-96 m-auto">
         <p className="text-xl my-2">{boardData.title}</p>

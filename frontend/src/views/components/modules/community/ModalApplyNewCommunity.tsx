@@ -1,3 +1,4 @@
+import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState, useContext } from "react";
 import { AuthContext } from "App";
 // Style
@@ -45,21 +46,26 @@ const ModalApplyNewCommunity = ({ onClose }: ModalApplyNewCommunityProps) => {
   const [body, setBody] = useState<string>("");
   // Id
   const { stringMyId } = useAuthData();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
-  // 新規コミュニティ申請
-  const handleApplyNewCommunity = async (
-    e: React.FormEvent<HTMLFormElement>
-  ) => {
-    e.preventDefault();
+
+  const onSubmit = async (data: Record<string, any>) => { // Record<string, any>型は一時的な解決策です。適切な型情報を追加してください。
+
+    const title = data.title;
+    const body = data.body;
 
     if (stringMyId !== undefined) {
-      await sendMailApplyNewCommunity(stringMyId, title, body).then(() => { });
+      await sendMailApplyNewCommunity(stringMyId, title, body).then(() => {
+        onClose()
+      });
     }
   };
 
+
   return (
     <>
-      <form onSubmit={handleApplyNewCommunity} className={`${classes.modal}`}>
+      <form onSubmit={handleSubmit(onSubmit)} className={`${classes.modal}`}>
+
         <div className={`${classes.modalContent}`}>
           <button onClick={() => onClose()} className="">
             <HighlightOffIcon />
@@ -74,15 +80,16 @@ const ModalApplyNewCommunity = ({ onClose }: ModalApplyNewCommunityProps) => {
               <p className="required">必須</p>
             </div>
 
+
             <input
               type="text"
               placeholder="おすすめの参考書について語ろう！"
               className="input-text"
-              value={title}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setTitle(e.target.value);
-              }}
+              {...register("title", { required: true })}
             />
+            {errors.title && (
+              <p className="text-red-500">タイトルは必須です。</p>
+            )}
           </div>
 
           <div className="input-part px-3">
@@ -90,14 +97,15 @@ const ModalApplyNewCommunity = ({ onClose }: ModalApplyNewCommunityProps) => {
               <b className="input-title">概要</b>
               <p className="required">必須</p>
             </div>
+
             <textarea
-              placeholder="body"
+              placeholder="みなさんのおすすめの本や参考書を共有して知見を深めていきたい！そんな情報共有コミュニティです！"
               className="input-text whitespace-pre-wrap h-32"
-              value={body}
-              onChange={(e) => {
-                setBody(e.target.value);
-              }}
+              {...register("body", { required: true })} // 内容のバリデーションルール
             ></textarea>
+            {errors.body && (
+              <p className="text-red-500">内容は必須です。</p>
+            )}
           </div>
 
           <div className="px-3 text-center">

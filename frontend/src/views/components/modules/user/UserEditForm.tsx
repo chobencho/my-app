@@ -59,9 +59,9 @@ const UserEditForm = ({
 
   const initialGender = userData.genderId
     ? {
-        value: userData.genderId.toString(),
-        label: userData.genderCode.toString(),
-      } // 適切なラベルをセットしてください
+      value: userData.genderId.toString(),
+      label: userData.genderCode.toString(),
+    } // 適切なラベルをセットしてください
     : null;
 
   const [gender, setGender] = useState(initialGender);
@@ -77,9 +77,9 @@ const UserEditForm = ({
 
   const initialGrade = userData.gradeId
     ? {
-        value: userData.gradeId.toString(),
-        label: userData.gradeCode.toString(),
-      } // 適切なラベルをセットしてください
+      value: userData.gradeId.toString(),
+      label: userData.gradeCode.toString(),
+    } // 適切なラベルをセットしてください
     : null;
 
   const [grade, setGrade] = useState(initialGrade);
@@ -95,9 +95,9 @@ const UserEditForm = ({
 
   const initialSubject = userData.subjectId
     ? {
-        value: userData.subjectId.toString(),
-        label: userData.subjectCode.toString(),
-      } // 適切なラベルをセットしてください
+      value: userData.subjectId.toString(),
+      label: userData.subjectCode.toString(),
+    } // 適切なラベルをセットしてください
     : null;
 
   const [subject, setSubject] = useState(initialSubject);
@@ -113,9 +113,9 @@ const UserEditForm = ({
 
   const initialPrefecture = userData.prefectureId
     ? {
-        value: userData.prefectureId.toString(),
-        label: userData.prefectureCode.toString(),
-      } // 適切なラベルをセットしてください
+      value: userData.prefectureId.toString(),
+      label: userData.prefectureCode.toString(),
+    } // 適切なラベルをセットしてください
     : null;
 
   const [prefecture, setPrefecture] = useState(initialPrefecture);
@@ -131,9 +131,9 @@ const UserEditForm = ({
 
   const initialBirthplace = userData.birthplaceId
     ? {
-        value: userData.birthplaceId.toString(),
-        label: userData.birthplaceCode.toString(),
-      } // 適切なラベルをセットしてください
+      value: userData.birthplaceId.toString(),
+      label: userData.birthplaceCode.toString(),
+    } // 適切なラベルをセットしてください
     : null;
 
   const [birthplace, setBirthplace] = useState(initialBirthplace);
@@ -485,14 +485,14 @@ const UserEditForm = ({
           {tags.map((tag, index) => (
             <p
               key={index}
-              className="bg-blue-600 text-white rounded-3xl py-1 px-2 mr-1 mb-1 text-sm"
+              className="bg-blue-600 text-white rounded-3xl py-1 px-2 mr-1 mb-1 text-sm flex items-center"
             >
               {tag}
               <button
-                className="text-lg text-white ml-1"
+                className="text-lg text-white ml-1 flex items-center"
                 onClick={() => handleRemoveTag(tag)}
               >
-                <HighlightOffIcon />
+                <HighlightOffIcon fontSize="small" />
               </button>
             </p>
           ))}
@@ -573,9 +573,8 @@ const UserEditForm = ({
                       />
                       <img
                         src={`${process.env.PUBLIC_URL}/images/hobby/${image}`}
-                        className={`rounded ${
-                          isChecked ? classes.checkBoxChecked : ""
-                        }`}
+                        className={`rounded ${isChecked ? classes.checkBoxChecked : ""
+                          }`}
                         alt=""
                       />
                     </label>

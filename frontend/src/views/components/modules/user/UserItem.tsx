@@ -33,7 +33,7 @@ const UserItem = ({
       <JudgeLogin
         generalData={userData}
         position={"absolute right-1"}
-        padding={"py-1"}
+        padding={"py-2"}
         fontSize={"text-sm"}
       />
 

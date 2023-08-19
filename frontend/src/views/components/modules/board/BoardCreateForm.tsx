@@ -1,3 +1,5 @@
+import { useForm, SubmitHandler } from "react-hook-form";
+
 import { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 // Function
@@ -18,6 +20,8 @@ const BoardCreateForm = () => {
   // Id
   const { stringMyId } = useAuthData();
 
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
   // 画像アップロード機能
   const handleUploadImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => uploadImage(e, setImage),
@@ -36,31 +40,27 @@ const BoardCreateForm = () => {
     clearPreview();
   };
 
-  // FormData形式でデータを作成
-  const createFormData = (): FormData => {
+
+  const onSubmit = async (data: Record<string, any>) => { // Record<string, any>型は一時的な解決策です。適切な型情報を追加してください。
+    // フォームデータの送信
     const formData = new FormData();
 
     formData.append("user_id", stringMyId || "");
-    formData.append("title", title);
-    if (image) formData.append("image", image);
-    formData.append("body", body);
+    formData.append("title", data.title);
+    if (image) {
+      formData.append("image", image);
+    }
+    formData.append("body", data.body);
 
-    return formData;
-  };
-
-  // 掲示板情報を作成する
-  const handleCreateBoardData = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = createFormData();
-
-    await createBoardData(data).then(() => {
+    await createBoardData(formData).then(() => {
       navigate("/boards");
     });
   };
 
+
   return (
     <>
-      <form onSubmit={handleCreateBoardData} className="w-96 m-auto">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-96 m-auto">
         <div className="input-part">
           <div className="flex items-center">
             <b className="input-title">タイトル</b>
@@ -70,11 +70,11 @@ const BoardCreateForm = () => {
             type="text"
             placeholder="タイトル"
             className="input-text"
-            value={title}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setTitle(e.target.value);
-            }}
+            {...register("title", { required: true })}
           />
+          {errors.title && (
+            <p className="text-red-500">タイトルは必須です。</p>
+          )}
         </div>
 
         <div className="input-part">
@@ -83,11 +83,20 @@ const BoardCreateForm = () => {
             id="icon-button-file"
             type="file"
             className="hidden"
+            accept=".jpg, .png, .gif"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleUploadImage(e);
-              handlePreviewImage(e);
+              handlePreviewImage(e); // プレビューを更新する
+              const selectedFile = e.target.files?.[0]; // 選択されたファイルを取得
+              if (selectedFile) {
+                // フォームデータにファイルを追加
+                const formData = new FormData();
+                formData.append("image", selectedFile);
+                // ここで formData を state などにセットする
+                setImage(selectedFile); // 画像の状態を更新
+              }
             }}
           />
+
           <div className="relative">
             <label className="image-label" htmlFor="icon-button-file">
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -140,11 +149,11 @@ const BoardCreateForm = () => {
           <textarea
             placeholder="内容"
             className="input-text whitespace-pre-wrap h-40"
-            value={body}
-            onChange={(e) => {
-              setBody(e.target.value);
-            }}
+            {...register("body", { required: true })} // 内容のバリデーションルール
           ></textarea>
+          {errors.body && (
+            <p className="text-red-500">内容は必須です。</p>
+          )}
         </div>
 
         <div className="w-full text-center">

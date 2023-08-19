@@ -130,21 +130,16 @@ const CommonMessageForms = ({
 
               <button
                 type="submit"
-                disabled={!body || body.length < 0}
-                className="w-12 bg-blue-base text-white rounded mx-1 text-sm"
+                disabled={!body.trim()} // ボディが空白文字のみの場合にボタンを無効にする
+                className={`w-12 text-white rounded mx-1 text-sm ${!body.trim() ? "bg-gray-300" : "bg-blue-base"
+                  }`}
               >
                 送信
               </button>
+
+
             </div>
           </div>
-          {/* {!verifiedAge && (
-            <span
-              className=""
-              style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-            >
-              年齢確認が完了していません
-            </span>
-          )} */}
         </div>
       </form>
       {/* メッセージ入力モーダル */}

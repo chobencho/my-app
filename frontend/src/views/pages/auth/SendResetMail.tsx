@@ -45,7 +45,7 @@ const SendResetMail = () => {
               // required: validation.required,
               // pattern: validation.pattern.email,
             })}
-            //   errors={errors}
+          //   errors={errors}
           />
         </div>
         <div className="text-center py-5">

@@ -81,56 +81,58 @@ const ModalSearchForm = ({
               <p className="text-xs text-center my-2">
                 キーワードを追加してユーザ検索してみよう
               </p>
-              <input
-                type="text"
-                placeholder="キーワード"
-                className="border py-1 px-2 m-2 rounded-md"
-                value={tag}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setTag(e.target.value);
-                }}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    e.preventDefault();
-                    const addButton = document.getElementById("addBtn");
-                    if (addButton) {
-                      addButton.click();
+              <div className="flex w-full">
+                <input
+                  type="text"
+                  placeholder="キーワード"
+                  className="input-text m-1"
+                  value={tag}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setTag(e.target.value);
+                  }}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
+                      const addButton = document.getElementById("addBtn");
+                      if (addButton) {
+                        addButton.click();
+                      }
                     }
-                  }
-                }}
-              />
-              <button
-                id="addBtn"
-                className="border rounded-md py-1 px-2 border-blue-600 text-blue-600"
-                onClick={(
-                  e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-                ) => {
-                  handleAddTag(e);
-                }}
-              >
-                追加
-              </button>
+                  }}
+                />
+                <button
+                  id="addBtn"
+                  className="border rounded-md text-sm py-1 px-2 border-blue-600 text-blue-600 w-1/4 ml-2 my-1"
+                  onClick={(
+                    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+                  ) => {
+                    handleAddTag(e);
+                  }}
+                >
+                  追加
+                </button>
+              </div>
               {/* 追加されたタグを表示 */}
-              <div className=" p-2 flex flex-wrap my-2">
+              <div className="py-2 flex flex-wrap my-2">
                 {tags.map((tag, index) => (
                   <p
                     key={index}
-                    className="bg-blue-600 text-white rounded-2xl py-1 px-2 mr-1 mb-1"
+                    className="bg-blue-600 text-white rounded-2xl text-base py-1 px-2 mr-1 mb-1 flex items-center"
                   >
                     {tag}
                     <button
-                      className="text-xl text-white ml-1"
+                      className="text-white ml-1 flex items-center"
                       onClick={(
                         e: React.MouseEvent<HTMLButtonElement, MouseEvent>
                       ) => handleRemoveTag(e, tag)}
                     >
-                      <HighlightOffIcon />
+                      <HighlightOffIcon fontSize="small" />
                     </button>
                   </p>
                 ))}
               </div>
               <div>
-                <button className="border text-white bg-gray-400 w-full py-2 my-2">
+                <button className="border text-white bg-gray-400 w-full py-2 my-2 text-base">
                   この条件でユーザー検索
                 </button>
               </div>
