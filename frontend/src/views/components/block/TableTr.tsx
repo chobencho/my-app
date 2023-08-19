@@ -64,13 +64,13 @@ const InterestComponent = ({ interests }: InterestProps) => (
       if (interestOption) {
         const [, interestName, interestImage] = interestOption;
         return (
-          <div key={interest.interestId} className="w-1/5 p-1 relative">
+          <div key={interest.interestId} className="w-1/3 p-1 relative">
             <div className="relative">
               <img
                 src={`${process.env.PUBLIC_URL}/images/interest/${interestImage}`}
-                className="w-full h-auto rounded image-dark"
+                className="w-full h-20 object-cover rounded image-dark"
               />
-              <span className="absolute bottom-4 left-0 right-0 text-white text-sm text-center py-1">
+              <span className="absolute h-20 w-full bottom-0 left-0 right-0 text-white text-sm text-center py-1 px-1 flex items-center justify-center">
                 {interestName}
               </span>
             </div>
@@ -127,7 +127,7 @@ const TableTr = ({ trTitle, trData }: TableTrProps) => {
             <InterestComponent interests={trData as UserInterestData[]} />
           </>
         ) : (
-          <span>No matching UI component for the given data type</span>
+          <span>設定されていません</span>
         )
       ) : (
         <span>Invalid data</span>

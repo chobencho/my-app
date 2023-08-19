@@ -9,9 +9,6 @@ import TableTr from "views/components/block/TableTr";
 import JudgeLogin from "views/components/block/JudgeLogin";
 import UserImage from "views/components/block/UserImage";
 
-import moment from "moment"; // moment ライブラリをインポート
-import "moment/locale/ja"; // 日本語ロケールをインポート
-
 export interface UserItemProps {
   myId: string | undefined;
   userId: string | undefined;

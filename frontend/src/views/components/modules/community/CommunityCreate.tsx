@@ -19,23 +19,22 @@ const CommunityCreate = () => {
   };
   return (
     <>
-      <div
-        className={"generalButton w-3/5 relative border-blue-base bg-blue-base"}
-      >
+      <div className="text-center my-5">
         <button
-          className="text-white w-full"
+          className={`relative border w-3/5 rounded-3xl p-3 bg-blue-base text-white`}
           onClick={() => handleModalApplyNewCommunity()}
+          disabled={!verifiedAge}
         >
-          新規コミュニティ申請
+          <span>新規コミュニティ申請</span>
+          {verifiedAge ? null : (
+            <p
+              className="absolute  w-full rounded-3xl py-3 top-0 left-0 text-white"
+              style={{ backgroundColor: "rgba(128, 128, 128, 0.7)" }}
+            >
+              年齢確認してね
+            </p>
+          )}
         </button>
-        {!verifiedAge && (
-          <span
-            className="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-          >
-            年齢確認が完了していません
-          </span>
-        )}
       </div>
 
       {/* 新規コミュニティ申請モーダル */}

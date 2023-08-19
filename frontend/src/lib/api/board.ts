@@ -38,7 +38,7 @@ export const getMyFavBoards = (id: string | undefined) => {
 
 // 掲示板を作成
 export const createBoardData = (data: FormData): AxiosPromise => {
-  return clientImage.post(`/board/boards`, data);
+  return client.post(`/board/boards`, data);
 };
 
 // 掲示板を削除

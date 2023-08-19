@@ -186,3 +186,13 @@
 
 # Information.create(title: "年齢確認のお願い", body: "年齢確認をお願いいたします。\n\n年齢確認が完了していない方は一部機能が利用できません。\n\n下記から学生証の提出をお願いいたします。\n https:~~")
 # Information.create(title: "ユーザー情報の登録", body: "ユーザー情報を入力することで返信率が上がります！")
+
+# Community.create(category_id: 1, title: "雑談しましょう！", body: "大学院生の日常を雑多に話しあうコミュニティです")
+# Community.create(category_id: 2, title: "大学院生の恋愛事情", body: "出会いの場を話題を共有しましょう！")
+# Community.create(category_id: 3, title: "なんでも相談", body: "研究とか授業とか困ったことを相談できる相手が欲しいだけなんです！")
+# Community.create(category_id: 4, title: "趣味あります？", body: "趣味を語り合う場所。本とか旅行とかおすすめ教えて")
+# Community.create(category_id: 5, title: "研究たのしい？", body: "研究について語り合おうよ")
+# Community.create(category_id: 6, title: "海外の学会発表って無理げーじゃね？", body: "はい、無理げーです")
+# Community.create(category_id: 7, title: "みなさんどんなこと学んでるんですか？", body: "学問を制する者は人生を制する")
+# Community.create(category_id: 8, title: "課題一緒にできる人募集します！", body: "もくもく会開きましょう！")
+# Community.create(category_id: 9, title: "進路どうする？", body: "卒業した後の人生の長さに絶望している大学院生集合")

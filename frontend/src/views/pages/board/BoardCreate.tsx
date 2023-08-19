@@ -1,6 +1,5 @@
 // Components
 import BoardCreateForm from "views/components/modules/board/BoardCreateForm";
-// import GoBackButton from "views/components/modules/common/GoBackButton";
 
 const BoardCreate = () => {
   return (

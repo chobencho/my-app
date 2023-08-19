@@ -62,8 +62,8 @@ const CommunitiesBranchSearch = ({
               }
             >
               <img
-                src={`${process.env.PUBLIC_URL}/images/hobby/${option[2]}`}
-                className="h-11 w-11 rounded-3xl mr-2"
+                src={`${process.env.PUBLIC_URL}/images/community/${option[2]}`}
+                className="h-11 w-11 object-cover rounded-3xl mr-2"
                 alt=""
               />
               <span className="text-sm">{option[1]}</span>

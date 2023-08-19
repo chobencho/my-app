@@ -72,7 +72,7 @@ const Verification = () => {
           <br />
           学生証を使って１８歳以上である確認をします。
         </p>
-        <img src={`${process.env.PUBLIC_URL}/images/card.jpg`} alt="" />
+        <img src={`${process.env.PUBLIC_URL}/images/common/card.jpg`} alt="" />
         <p className="text-xs text-center">
           認証がお済みでない方は、一部の機能をご利用いただけません。
         </p>

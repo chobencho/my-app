@@ -149,7 +149,7 @@ export interface CommunityData {
   communityId: string;
   communityCode: string;
   userId: string;
-  categoryId: string;
+  categoryId: number;
   title: string;
   body: string;
   image?: {

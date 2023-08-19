@@ -76,7 +76,13 @@ const UsersItem = ({ userData }: UsersProps) => {
                 className="absolute top-0 w-full h-full object-cover border-b rounded-t"
               />
             </div>
-          ) : null}
+          ) : (
+            <img
+              src={`${process.env.PUBLIC_URL}/images/common/no-image.jpg`}
+              alt="boardData image"
+              className="absolute top-0 w-full h-full object-cover border-b rounded-t"
+            />
+          )}
 
           <div className="p-2">
             <div className="flex w-full flex-wrap justify-between">

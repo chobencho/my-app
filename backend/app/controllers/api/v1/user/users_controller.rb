@@ -5,7 +5,7 @@ class Api::V1::User::UsersController < ApplicationController
       keywords = params[:keywords].flatten
       # 複数のキーワードに対して部分一致の条件を作成し、それをORで結合する
       conditions = keywords.map { |keyword| "tag_name LIKE '%#{keyword}%'" }.join(" OR ")
-      user_ids = UserResearchtagz.where(conditions).pluck(:user_id).uniq
+      user_ids = UserResearchtag.where(conditions).pluck(:user_id).uniq
       @users = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.*, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code").where(id: user_ids).where.not(id: params[:id]).order(last_login: :desc)
   
       render json: @users
@@ -78,7 +78,7 @@ class Api::V1::User::UsersController < ApplicationController
             # 新しくタグデータを作成
             tags.each do |tag_name|
               tag = UserResearchtag.new(user_id: user_id, tag_name: tag_name)
-              @user.user_researchtags_taggings << tag
+              @user.user_researchtags << tag
             end
           end
   

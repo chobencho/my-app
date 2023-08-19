@@ -1,27 +1,35 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 
 export interface CreateNewBoardButtonProps {
-  verifiedAge: boolean
+  verifiedAge: boolean;
 }
 
 const CreateNewBoardButton = ({ verifiedAge }: CreateNewBoardButtonProps) => {
+  const navigate = useNavigate();
+  const toLink = () => {
+    navigate("/boardCreate");
+  };
   return (
-    <div className="fixed w-full bottom-16">
-      <div className={"relative border bg-blue-base text-white p-3 my-3 mx-auto w-3/5 rounded-3xl"}>
-        <p className="text-center">新規作成</p>
-        {!verifiedAge && (
-          <span
-            className="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.7)" }}
-          >
-            年齢確認が完了していません
-          </span>
-        )}
-        {verifiedAge && (<Link to={`/boardCreate`} className="absolute top-0 left-0 w-full h-full opacity-0"></Link>)}
+    <>
+      <div className="text-center my-5">
+        <button
+          className={`relative border w-3/5 rounded-3xl p-3 bg-blue-base text-white`}
+          onClick={() => toLink()}
+          disabled={!verifiedAge}
+        >
+          <span>新規作成</span>
+          {verifiedAge ? null : (
+            <p
+              className="absolute  w-full rounded-3xl py-3 top-0 left-0 text-white"
+              style={{ backgroundColor: "rgba(128, 128, 128, 0.7)" }}
+            >
+              年齢確認してね
+            </p>
+          )}
+        </button>
       </div>
-    </div>
+    </>
+  );
+};
 
-  )
-}
-
-export default CreateNewBoardButton
+export default CreateNewBoardButton;

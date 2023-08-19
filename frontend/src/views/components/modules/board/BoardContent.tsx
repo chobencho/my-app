@@ -50,7 +50,7 @@ const BoardContent = ({
         />
       ) : (
         <img
-          src={`${process.env.PUBLIC_URL}/images/no-image.jpg`}
+          src={`${process.env.PUBLIC_URL}/images/common/no-image.jpg`}
           alt="boardData image"
           className={`${classes.boardImage}`}
         />

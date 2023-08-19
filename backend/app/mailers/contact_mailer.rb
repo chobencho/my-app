@@ -5,7 +5,7 @@ class ContactMailer < ApplicationMailer
       @email = email
       @image = image
   
-      mail(to: 'y-nakatani@tanesho.co.jp', subject: '年齢確認のお願い')
+      mail(to: 'chobencho@gmail.com', subject: '年齢確認のお願い')
     end
   
     def apply_email(id, title, body)
@@ -13,7 +13,7 @@ class ContactMailer < ApplicationMailer
       @title = title
       @body = body
   
-      mail(to: 'y-nakatani@tanesho.co.jp', subject: '新規コミュニティの申請')
+      mail(to: 'chobencho@gmail.com', subject: '新規コミュニティの申請')
     end
   end
   
