@@ -1,18 +1,13 @@
+// Common
 import { useState, useCallback } from "react";
 // Style
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import Box from "@material-ui/core/Box";
-import Typography from "@material-ui/core/Typography";
 import SearchIcon from "@mui/icons-material/Search";
-
 // Components
 import ModalSearchForm from "views/components/modules/home/ModalSearchForm";
 
 interface ModalSearchFormProps {
   handleGetUsersData: Function;
   stringMyId: string;
-  tags: string[];
-  verifiedAge: boolean;
 }
 
 const SearchButton = ({
@@ -34,7 +29,7 @@ const SearchButton = ({
 
   return (
     <>
-      <div className="text-black px-1" onClick={showModalWindow}>
+      <div className="text-black px-1 text-xl flex items-center" onClick={showModalWindow}>
         <SearchIcon fontSize="medium" />
         <span className="text-base">キーワード検索</span>
       </div>

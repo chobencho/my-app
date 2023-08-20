@@ -1,3 +1,4 @@
+import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
@@ -15,7 +16,7 @@ import { updateUserData } from "lib/api/user";
 import { UserData } from "interfaces/index";
 import { UserTagData } from "interfaces/index";
 import { clearPreview } from "lib/api/helper";
-import { uploadImage } from "lib/api/helper";
+import { uploadUniqueImage } from "lib/api/helper";
 import { previewImage } from "lib/api/helper";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
@@ -56,6 +57,7 @@ const UserEditForm = ({
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   // Id
   const { id } = useParams<{ id: string }>();
+  const { register, handleSubmit, formState: { errors } } = useForm();
 
   const initialGender = userData.genderId
     ? {
@@ -189,7 +191,7 @@ const UserEditForm = ({
 
   // 画像アップロード機能
   const handleUploadImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => uploadImage(e, setImage),
+    (e: React.ChangeEvent<HTMLInputElement>) => uploadUniqueImage(e, setImage),
     [setImage]
   );
 
@@ -205,14 +207,16 @@ const UserEditForm = ({
     clearPreview();
   };
 
-  // FormData形式でデータを作成
-  const createFormData = (): FormData => {
+  const onSubmit = async (data: Record<string, any>) => {
+    // フォームデータの送信
     const formData = new FormData();
 
-    formData.append("name", name);
-    if (image) formData.append("image", image);
-    formData.append("body", body);
-    formData.append("age", age);
+    formData.append("name", data.name);
+    if (image) {
+      formData.append("image", image);
+    }
+    formData.append("body", data.body);
+    formData.append("age", data.age);
     formData.append("gender_id", gender ? gender.value : "");
     formData.append("grade_id", grade ? grade.value : "");
     formData.append("prefecture_id", prefecture ? prefecture.value : "");
@@ -239,19 +243,9 @@ const UserEditForm = ({
       });
     }
 
-    return formData;
-  };
-
-  // ユーザ情報を変更する
-  const handleEditUserData = async (e: React.FormEvent<HTMLFormElement>) => {
-    // デフォルト操作を拒否するメソッド(ページ再読み込みを拒否する)
-    e.preventDefault();
-    const data = createFormData();
-
-    await updateUserData(id, data).then(() => {
+    await updateUserData(id, formData).then(() => {
       handleGetUserData();
     });
-
     handleClearPreview();
   };
 
@@ -291,22 +285,27 @@ const UserEditForm = ({
 
   return (
     <>
-      <form onSubmit={handleEditUserData} className="w-96 m-auto">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-96 m-auto">
         <p className="text-center pt-5 pb-3">ユーザー情報編集</p>
         <div className="">
           <div className="flex items-center">
             <b className="input-title">名前</b>
             <p className="required">必須</p>
           </div>
+
           <input
             type="text"
-            placeholder="name"
+            placeholder="名前"
             className="input-text"
             value={name}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            {...register("name", { required: true })}
+            onChange={(e) => {
               setName(e.target.value);
             }}
           />
+          {errors.name && (
+            <p className="text-red-500">名前は必須です。</p>
+          )}
         </div>
 
         <div className="input-part">
@@ -370,13 +369,17 @@ const UserEditForm = ({
             <p className="required">必須</p>
           </div>
           <textarea
-            placeholder="introduce"
+            placeholder="自己紹介"
             className="input-text whitespace-pre-wrap h-40"
             value={body}
+            {...register("body", { required: true })} // 内容のバリデーションルール
             onChange={(e) => {
               setBody(e.target.value);
             }}
           ></textarea>
+          {errors.body && (
+            <p className="text-red-500">自己紹介は必須です。</p>
+          )}
         </div>
 
         <div className="">
@@ -386,13 +389,17 @@ const UserEditForm = ({
           </div>
           <input
             type="number"
-            placeholder="age"
+            placeholder="年齢"
             className="input-text"
             value={age}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            {...register("age", { required: true })}
+            onChange={(e) => {
               setAge(e.target.value);
             }}
           />
+          {errors.age && (
+            <p className="text-red-500">年齢は必須です。</p>
+          )}
         </div>
 
         <div className="my-1">

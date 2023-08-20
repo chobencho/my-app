@@ -4,10 +4,15 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { subscribeCommunity } from "lib/api/community";
 // Components
 import GoBackButton from "views/components/block/GoBackButton";
+
+import Fade from "@mui/material/Fade";
+
+
 export interface ModalSubscribeProps {
   community_id: string | undefined;
   user_id: string | undefined;
   handleGetSubscribedCommunity: Function;
+  isModalOpen: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,6 +41,7 @@ const ModalSubscribeCommunity = ({
   community_id,
   user_id,
   handleGetSubscribedCommunity,
+  isModalOpen
 }: ModalSubscribeProps) => {
   const classes = useStyles();
 
@@ -62,22 +68,25 @@ const ModalSubscribeCommunity = ({
 
   return (
     <>
-      <div className={`${classes.modal}`}>
-        <div className={`${classes.modalContent}`}>
-          <h1 className="text-sm mb-5">このコミュニティに参加しますか？</h1>
-          <div className="w-4/5 flex justify-between m-auto">
-            <form onSubmit={handleSubscribeCommunity} className="w-1/2">
-              <button
-                type="submit"
-                className="bg-blue-base text-white text-sm py-1 w-4/5"
-              >
-                参加する
-              </button>
-            </form>
-            <GoBackButton discriminationText={"参加しない"} />
+      <Fade in={isModalOpen} timeout={500}>
+        <div className={`${classes.modal}`}>
+          <div className={`${classes.modalContent}`}>
+            <h1 className="text-sm mb-5">このコミュニティに参加しますか？</h1>
+            <div className="w-4/5 flex justify-between m-auto">
+              <form onSubmit={handleSubscribeCommunity} className="w-1/2">
+                <button
+                  type="submit"
+                  className="bg-blue-base text-white text-sm py-1 w-4/5"
+                >
+                  参加する
+                </button>
+              </form>
+              <GoBackButton discriminationText={"参加しない"} />
+            </div>
           </div>
+
         </div>
-      </div>
+      </Fade>
     </>
   );
 };

@@ -15,6 +15,8 @@ import CommentItem from "views/components/modules/board/CommentItem";
 import CommonMessageForms from "views/components/modules/common/CommonMessageForms";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 
+import SkeletonLoaderBoard from "views/components/modules/board/SkeletonLoaderBoard"
+
 const Board = () => {
   // State
   const [board, setBoard] = useState<BoardData | null>(null);
@@ -22,6 +24,9 @@ const Board = () => {
   const [commonRoomId, setCommonRoomId] = useState<string | null>(null);
   // Id
   const { stringMyId, id, verifiedAge } = useAuthData();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   // 掲示板情報を取得
   const handleGetBoardData = async () => {
@@ -40,6 +45,7 @@ const Board = () => {
     getCommonRoomId(userId, stringMyId).then((res) =>
       setCommonRoomId(res.data)
     );
+    // setIsLoading(false);
   };
 
   useEffect(() => {
@@ -50,51 +56,68 @@ const Board = () => {
     handleGetBoardComment();
   }, [board]);
 
+  // タイムアウト用
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setIsLoading(false);
+      setShowSkeleton(false); // データが取得されたらSkeletonを非表示に
+    }, 200); // 遅延時間を調整（ここでは2000ミリ秒、つまり2秒）
+
+    return () => clearTimeout(delay); // コンポーネントがアンマウントされたらタイマーをクリア
+  }, []);
+
   return (
     <>
-      {board && (
+      {isLoading ? (
+        <SkeletonLoaderBoard />
+      ) : (
         <>
-          <div>
-            {/* 掲示板表示 */}
-            <BoardContent
-              board={board}
-              handleGetBoardData={handleGetBoardData}
-              boardId={board.id.toString()}
-              myId={stringMyId || ""}
-              generalId={id || ""}
-            />
+          {board && (
+            <>
+              <div>
+                {/* 掲示板表示 */}
+                <BoardContent
+                  board={board}
+                  handleGetBoardData={handleGetBoardData}
+                  boardId={board.id.toString()}
+                  myId={stringMyId || ""}
+                  generalId={id || ""}
+                />
 
-            {/* チャット開始ボタン || 掲示板編集ボタン */}
-            <CommonEditButton
-              userId={board.userId || ""}
-              myId={stringMyId || ""}
-              generalId={id || ""}
-              verifiedAge={verifiedAge}
-              commonRoomId={commonRoomId || ""}
-              discrimination={"board"}
-            />
+                {/* チャット開始ボタン || 掲示板編集ボタン */}
+                <CommonEditButton
+                  userId={board.userId || ""}
+                  myId={stringMyId || ""}
+                  generalId={id || ""}
+                  verifiedAge={verifiedAge}
+                  commonRoomId={commonRoomId || ""}
+                  discrimination={"board"}
+                />
 
-            {/* 戻るボタン */}
-            {/* <GoBackButton /> */}
+                {/* 戻るボタン */}
+                {/* <GoBackButton /> */}
 
-            {/* コメントフォーム */}
-            <div className="border-b border-t w-96 mx-auto py-2">
-              <p className="m-1">コメント</p>
-              <CommonMessageForms
-                handleGetData={handleGetBoardComment}
-                id={id ?? ""}
-                stringMyId={stringMyId ?? ""}
-                discrimination={"board"}
-              />
-            </div>
+                {/* コメントフォーム */}
+                <div className="border-b border-t w-96 mx-auto py-2">
+                  <p className="m-1">コメント</p>
+                  <CommonMessageForms
+                    handleGetData={handleGetBoardComment}
+                    id={id ?? ""}
+                    stringMyId={stringMyId ?? ""}
+                    discrimination={"board"}
+                  />
+                </div>
 
-            {/* コメント欄 */}
-            {comments.map((comment: CommentData) => (
-              <CommentItem comment={comment} key={comment.commentId} />
-            ))}
-          </div>
+                {/* コメント欄 */}
+                {comments.map((comment: CommentData) => (
+                  <CommentItem comment={comment} key={comment.commentId} />
+                ))}
+              </div>
+            </>
+          )}
         </>
       )}
+
     </>
   );
 };

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { createBoardData } from "lib/api/board";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 import { clearPreview } from "lib/api/helper";
-import { uploadImage } from "lib/api/helper";
+import { uploadUniqueImage } from "lib/api/helper";
 import { previewImage } from "lib/api/helper";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
@@ -24,7 +24,7 @@ const BoardCreateForm = () => {
 
   // 画像アップロード機能
   const handleUploadImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => uploadImage(e, setImage),
+    (e: React.ChangeEvent<HTMLInputElement>) => uploadUniqueImage(e, setImage),
     [setImage]
   );
 
@@ -83,17 +83,9 @@ const BoardCreateForm = () => {
             id="icon-button-file"
             type="file"
             className="hidden"
-            accept=".jpg, .png, .gif"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handlePreviewImage(e); // プレビューを更新する
-              const selectedFile = e.target.files?.[0]; // 選択されたファイルを取得
-              if (selectedFile) {
-                // フォームデータにファイルを追加
-                const formData = new FormData();
-                formData.append("image", selectedFile);
-                // ここで formData を state などにセットする
-                setImage(selectedFile); // 画像の状態を更新
-              }
+              handleUploadImage(e);
+              handlePreviewImage(e);
             }}
           />
 

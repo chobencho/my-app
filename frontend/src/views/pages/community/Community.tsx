@@ -12,6 +12,7 @@ import CommonMessageItems from "views/components/modules/common/CommonMessageIte
 import CommonMessageForms from "views/components/modules/common/CommonMessageForms";
 import ModalSubscribeCommunity from "views/components/modules/community/ModalSubscribeCommunity";
 import { useAuthData } from "views/components/modules/common/useAuthData";
+import Fade from "@mui/material/Fade";
 
 const Community = () => {
   const [community, setCommunity] = useState<CommunityData | null>(null);
@@ -19,6 +20,8 @@ const Community = () => {
   const [subscribed, setSubscribed] = useState<boolean>(false);
 
   const { stringMyId, id } = useAuthData();
+
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   // コミュニティ情報取得
   const handleGetCommunityData = async () => {
@@ -40,10 +43,25 @@ const Community = () => {
   };
 
   useEffect(() => {
-    handleGetCommunityData();
-    handleGetCommunityCommentData();
-    handleGetSubscribedCommunity();
+    // データ取得関数を非同期で呼び出す
+    const fetchData = async () => {
+      await handleGetCommunityData();
+      await handleGetCommunityCommentData();
+      await handleGetSubscribedCommunity();
+    };
+
+    fetchData();
   }, []);
+
+  // データ取得が完了したらモーダルを表示する
+  useEffect(() => {
+    if (subscribed === false) {
+      // subscribed ステートが false の場合にモーダルを表示
+      setTimeout(() => {
+        setIsModalOpen(true);
+      }, 200); // 3秒遅延
+    }
+  }, [subscribed]);
 
   return (
     <>
@@ -75,11 +93,12 @@ const Community = () => {
       )}
 
       {/* コミュニティ登録画面 */}
-      {subscribed ? null : (
+      {subscribed === false && isModalOpen && (
         <ModalSubscribeCommunity
           community_id={id}
           user_id={stringMyId}
           handleGetSubscribedCommunity={handleGetSubscribedCommunity}
+          isModalOpen={isModalOpen}
         />
       )}
     </>

@@ -1,6 +1,5 @@
+// Common
 import { Link } from "react-router-dom";
-// Style
-import { makeStyles, Theme } from "@material-ui/core/styles";
 // Interface
 import { UserData } from "interfaces/index";
 import JudgeLogin from "views/components/block/JudgeLogin";
@@ -10,60 +9,7 @@ interface UsersProps {
   userData: UserData;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  header: {
-    textAlign: "center",
-  },
-  cardContainer: {
-    width: "50%",
-    padding: "1%",
-  },
-  card: {
-    width: "100%",
-    border: "0.1px solid #eee",
-  },
-  box: {
-    width: "50%",
-    border: "1px solid #000",
-  },
-  cardContent: {
-    padding: "5px",
-  },
-  flexbox: {
-    display: "flex",
-    width: "100%",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-  },
-  squareImageContainer: {
-    width: "100%",
-    paddingTop: "100%", // 1:1のアスペクト比を設定
-    position: "relative",
-  },
-  squareImage: {
-    position: "absolute",
-    top: 0,
-    width: "100%",
-    height: "100%",
-    objectFit: "cover", // 画像をコンテナに収める
-    borderBottom: "0.5px solid #eee",
-  },
-  name: {
-    fontSize: "14px",
-    fontWeight: 600,
-  },
-  login: {
-    fontSize: "10px",
-  },
-  age: {
-    fontSize: "12px",
-  },
-}));
-
 const UsersItem = ({ userData }: UsersProps) => {
-  //Style
-  const classes = useStyles();
-
   return (
     <>
       <Link to={`/user/${userData.id}`} key={userData.id} className="w-1/2 p-1">

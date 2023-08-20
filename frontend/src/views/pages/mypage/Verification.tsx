@@ -5,7 +5,7 @@ import { sendCertificateImage } from "lib/api/verification";
 import { getEditUserData } from "lib/api/user";
 import { clearPreview } from "lib/api/helper";
 import { previewImage } from "lib/api/helper";
-import { uploadUniqeImage } from "lib/api/helper";
+import { uploadUniqueImage } from "lib/api/helper";
 // Interface
 import { UserData } from "interfaces/index";
 // Components
@@ -24,7 +24,7 @@ const Verification = () => {
 
   // 画像アップロード機能
   const handleUploadImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => uploadUniqeImage(e, setImage),
+    (e: React.ChangeEvent<HTMLInputElement>) => uploadUniqueImage(e, setImage),
     [setImage]
   );
 
@@ -166,7 +166,8 @@ const Verification = () => {
         <div className="text-center">
           <button
             type="submit"
-            className="generalButton w-3/5 bg-blue-base text-white"
+            disabled={!preview}
+            className={`generalButton w-3/5 text-white ${preview ? ("bg-blue-base") : ("bg-gray-200")}`}
           >
             送信する
           </button>

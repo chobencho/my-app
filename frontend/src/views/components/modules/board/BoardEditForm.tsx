@@ -1,10 +1,11 @@
+import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState, useCallback } from "react";
 // Function
 import { editBoardData } from "lib/api/board";
 // Interface
 import { BoardData } from "interfaces/index";
 import { clearPreview } from "lib/api/helper";
-import { uploadImage } from "lib/api/helper";
+import { uploadUniqueImage } from "lib/api/helper";
 import { previewImage } from "lib/api/helper";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -28,10 +29,10 @@ const BoardEditForm = ({
   const [image, setImage] = useState<File | undefined>();
   const [preview, setPreview] = useState<string>("");
   const classes = useStyles();
-
+  const { register, handleSubmit, formState: { errors } } = useForm();
   // 画像アップロード機能
   const handleUploadImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => uploadImage(e, setImage),
+    (e: React.ChangeEvent<HTMLInputElement>) => uploadUniqueImage(e, setImage),
     [setImage]
   );
 
@@ -69,9 +70,26 @@ const BoardEditForm = ({
     });
   };
 
+
+  const onSubmit = async (data: Record<string, any>) => { // Record<string, any>型は一時的な解決策です。適切な型情報を追加してください。
+    // フォームデータの送信
+    const formData = new FormData();
+
+    formData.append("title", data.title);
+    if (image) {
+      formData.append("image", image);
+    }
+    formData.append("body", data.body);
+
+    await editBoardData(id, formData).then(() => {
+      handleGetBoardData();
+      handleClearPreview();
+    });
+  };
+
   return (
     <>
-      <form onSubmit={handleEditBoardData} className="w-96 m-auto">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-96 m-auto">
         <div className="input-part">
           <div className="flex items-center">
             <b className="input-title">タイトル</b>
@@ -82,10 +100,14 @@ const BoardEditForm = ({
             placeholder="タイトル"
             className="input-text"
             value={title}
+            {...register("title", { required: true })}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setTitle(e.target.value);
             }}
           />
+          {errors.title && (
+            <p className="text-red-500">タイトルは必須です。</p>
+          )}
         </div>
 
         <div className="input-part">
@@ -152,10 +174,14 @@ const BoardEditForm = ({
             placeholder="内容"
             className="input-text whitespace-pre-wrap h-40"
             value={body}
+            {...register("body", { required: true })}
             onChange={(e) => {
               setBody(e.target.value);
             }}
           ></textarea>
+          {errors.body && (
+            <p className="text-red-500">内容は必須です。</p>
+          )}
         </div>
 
         <div className="w-full text-center">

@@ -1,3 +1,4 @@
+// Common
 import { useEffect, useState } from "react";
 // Function
 import { getBoards } from "lib/api/board";
@@ -33,7 +34,6 @@ const Boards = () => {
   // タイムアウト用
   useEffect(() => {
     const delay = setTimeout(() => {
-      handleGetBoardData();
       setShowSkeleton(false); // データが取得されたらSkeletonを非表示に
     }, 200); // 遅延時間を調整（ここでは2000ミリ秒、つまり2秒）
 

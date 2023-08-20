@@ -75,13 +75,15 @@ const BoardContent = ({
             </div>
           </Link>
 
-          <LikeButton
-            myId={myId}
-            generalId={boardId}
-            generalData={board}
-            handleData={handleGetBoardData}
-            discrimination={"board"}
-          />
+          <div className="relative">
+            <LikeButton
+              myId={myId}
+              generalId={boardId}
+              generalData={board}
+              handleData={handleGetBoardData}
+              discrimination={"board"}
+            />
+          </div>
         </div>
 
         <p className="whitespace-pre-wrap my-5 text-sm">{board.boardBody}</p>

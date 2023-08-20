@@ -7,7 +7,7 @@ export const uploadImage = (e: React.ChangeEvent<HTMLInputElement>, setImage: Re
 };
 
 // 画像アップロード機能(画像名ユニーク)
-export const uploadUniqeImage = (e: React.ChangeEvent<HTMLInputElement>, setImage: React.Dispatch<React.SetStateAction<File | undefined>>) => {
+export const uploadUniqueImage = (e: React.ChangeEvent<HTMLInputElement>, setImage: React.Dispatch<React.SetStateAction<File | undefined>>) => {
   const file = e.target.files?.[0];
   if (file) {
     const uniqueFileName = uuidv4() + ".jpg";

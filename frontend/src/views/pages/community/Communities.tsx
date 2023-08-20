@@ -11,6 +11,8 @@ import CommunitiesBranchSearch from "views/components/modules/community/Communit
 import CommunitiesBranchJoin from "views/components/modules/community/CommunitiesBranchJoin";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 
+import SkeletonLoaderCommunities from "views/components/modules/community/SkeletonLoaderCommunities";
+
 const Communities = () => {
   const [allCommunity, setAllCommunity] = useState<CommunityData[]>([]);
   const [popularCommunity, setPopularCommunity] = useState<CommunityData[]>([]);
@@ -21,85 +23,107 @@ const Communities = () => {
 
   const { stringMyId } = useAuthData();
 
-  // コミュニティを探すボタンをクリックしたときの処理
+  const [isLoading, setIsLoading] = useState(true);
+  const [showSkeleton, setShowSkeleton] = useState(true); // タイムアウト用
+
+
   const handleSearchClick = () => {
     setSearchButtonActive(true);
     setJoinButtonActive(false);
   };
 
-  // 参加中のコミュニティボタンをクリックしたときの処理
   const handleJoinClick = () => {
     setSearchButtonActive(false);
     setJoinButtonActive(true);
   };
 
-  // コミュニティ情報一括取得
   const handleGetCommunityData = async () => {
-    // Promise.allを使ってすべての非同期処理が完了するのを待つ
-    const [
-      allCommunityRes,
-      popularCommunityRes,
-      newCommunityRes,
-      myCommunityRes,
-    ] = await Promise.all([
-      getAllCommunityData(),
-      getPopularCommunityData(),
-      getNewCommunityData(),
-      getMyCommunityData(stringMyId),
-    ]);
+    try {
+      const [
+        allCommunityRes,
+        popularCommunityRes,
+        newCommunityRes,
+        myCommunityRes,
+      ] = await Promise.all([
+        getAllCommunityData(),
+        getPopularCommunityData(),
+        getNewCommunityData(),
+        getMyCommunityData(stringMyId),
+      ]);
 
-    setAllCommunity(allCommunityRes.data);
-    setPopularCommunity(popularCommunityRes.data);
-    setNewCommunity(newCommunityRes.data);
-    setMyCommunity(myCommunityRes.data);
+      setAllCommunity(allCommunityRes.data);
+      setPopularCommunity(popularCommunityRes.data);
+      setNewCommunity(newCommunityRes.data);
+      setMyCommunity(myCommunityRes.data);
+
+    } catch (error) {
+      console.error("Failed to fetch community data:", error);
+    }
   };
 
   useEffect(() => {
     handleGetCommunityData();
+  }, [stringMyId]);
+
+
+  // タイムアウト用
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setIsLoading(false); // データ取得完了後にisLoadingをfalseに設定
+      setShowSkeleton(false); // データが取得されたらSkeletonを非表示に
+    }, 1000); // 遅延時間を調整（ここでは2000ミリ秒、つまり2秒）
+
+    return () => clearTimeout(delay); // コンポーネントがアンマウントされたらタイマーをクリア
   }, []);
 
   return (
     <>
-      <div className="w-96 m-auto py-5">
-        <div className="flex justify-center mb-3">
-          <div
-            className={` ${searchButtonActive ? "border border-blue-base" : "border"
-              }`}
-          >
-            <button
-              className={`text-xs py-2 px-4 border-2 bg-gray-200 text-gray-600 ${searchButtonActive ? "bg-blue-base text-white border-white" : ""
-                }`}
-              onClick={handleSearchClick}
-            >
-              コミュニティを探す
-            </button>
-          </div>
-          <div
-            className={` ${joinButtonActive ? "border border-blue-base" : "border"
-              }`}
-          >
-            <button
-              className={`text-xs py-2 px-4 border-2 bg-gray-200 text-gray-600 ${joinButtonActive
-                  ? "bg-blue-base text-white border-2 border-white"
-                  : ""
-                }`}
-              onClick={handleJoinClick}
-            >
-              参加中のコミュニティ
-            </button>
-          </div>
-        </div>
+      {isLoading ? (
+        <SkeletonLoaderCommunities />
+      ) : (
+        <>
+          <div className="w-96 m-auto py-5">
+            <div className="flex justify-center mb-3">
+              <div
+                className={` ${searchButtonActive ? "border border-blue-base" : "border"
+                  }`}
+              >
+                <button
+                  className={`text-xs py-2 px-4 border-2 bg-gray-200 text-gray-600 ${searchButtonActive ? "bg-blue-base text-white border-white" : ""
+                    }`}
+                  onClick={handleSearchClick}
+                >
+                  コミュニティを探す
+                </button>
+              </div>
+              <div
+                className={` ${joinButtonActive ? "border border-blue-base" : "border"
+                  }`}
+              >
+                <button
+                  className={`text-xs py-2 px-4 border-2 bg-gray-200 text-gray-600 ${joinButtonActive
+                    ? "bg-blue-base text-white border-2 border-white"
+                    : ""
+                    }`}
+                  onClick={handleJoinClick}
+                >
+                  参加中のコミュニティ
+                </button>
+              </div>
+            </div>
 
-        {searchButtonActive ? (
-          <CommunitiesBranchSearch
-            allCommunity={allCommunity}
-            popularCommunity={popularCommunity}
-            newCommunity={newCommunity}
-          />
-        ) : (
-          <CommunitiesBranchJoin myCommunity={myCommunity} />
-        )}
-      </div>
+            {searchButtonActive ? (
+              <CommunitiesBranchSearch
+                allCommunity={allCommunity}
+                popularCommunity={popularCommunity}
+                newCommunity={newCommunity}
+              />
+            ) : (
+              <CommunitiesBranchJoin myCommunity={myCommunity} />
+            )}
+          </div>
+        </>
+      )}
     </>
   );
 };

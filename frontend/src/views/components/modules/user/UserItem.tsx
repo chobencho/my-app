@@ -3,11 +3,12 @@ import { UserData } from "interfaces/index";
 import { UserHobbyData } from "interfaces/index";
 import { UserInterestData } from "interfaces/index";
 import { UserTagData } from "interfaces/index";
-
+// Components
 import LikeButton from "views/components/modules/common/LikeButton";
 import TableTr from "views/components/block/TableTr";
 import JudgeLogin from "views/components/block/JudgeLogin";
 import UserImage from "views/components/block/UserImage";
+
 
 export interface UserItemProps {
   myId: string | undefined;

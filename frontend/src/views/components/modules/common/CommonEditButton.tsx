@@ -1,3 +1,4 @@
+// Common
 import { useNavigate } from "react-router-dom";
 // Function
 import { createChatRoom } from "lib/api/message";
@@ -28,14 +29,17 @@ const CommonEditButton = ({
     });
   };
 
+  // チャットに移動する
   const handleTransitionChat = () => {
     navigate(`/message/${commonRoomId}?buddyId=${userId}`);
   };
 
+  // ユーザ編集画面に移動する
   const handleTransitionUserEdit = () => {
     navigate(`/${discrimination}/${generalId}/edit`);
   };
 
+  // ボタン表示切り替え
   let toLink: () => void;
   let style = "";
   let txt = "";

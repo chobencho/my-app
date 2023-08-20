@@ -1,28 +1,8 @@
+// Common
 import { useState } from "react";
 // Style
-import { makeStyles, Theme } from "@material-ui/core/styles";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  modal: {
-    position: "fixed",
-    top: "0",
-    left: "0",
-    width: "100%",
-    height: "100%",
-    background: "rgba(0, 0, 0, 0.6)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 100,
-  },
-  modalContent: {
-    maxWidth: "80%",
-    maxHeight: "80%",
-    background: "#fff",
-    padding: "5px",
-  },
-}));
 
 interface ModalSearchFormProps {
   onClose: Function;
@@ -37,8 +17,6 @@ const ModalSearchForm = ({
   // State
   const [tag, setTag] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
-  // Style
-  const classes = useStyles();
 
   // ユーザ検索関数
   const handleSearchUsers = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -62,7 +40,7 @@ const ModalSearchForm = ({
     tagToRemove: string
   ) => {
     e.preventDefault();
-    // タグを取り除くために、現在のtagsステートから対象のタグをフィルタリングします
+    // タグを削除するため、現在のtagsステートから対象のタグをフィルタリングします
     setTags((prevTags) => prevTags.filter((tag) => tag !== tagToRemove));
   };
 
@@ -72,8 +50,8 @@ const ModalSearchForm = ({
         onSubmit={handleSearchUsers}
         className="border flex justify-between"
       >
-        <div className={`${classes.modal}`}>
-          <div className={`${classes.modalContent}`}>
+        <div className="modal">
+          <div className="modal-content">
             <button onClick={() => onClose()} className="">
               <HighlightOffIcon />
             </button>
@@ -131,11 +109,9 @@ const ModalSearchForm = ({
                   </p>
                 ))}
               </div>
-              <div>
-                <button className="border text-white bg-gray-400 w-full py-2 my-2 text-base">
-                  この条件でユーザー検索
-                </button>
-              </div>
+              <button className="border text-white bg-gray-400 w-full py-2 my-2 text-base">
+                この条件でユーザー検索
+              </button>
             </div>
           </div>
         </div>

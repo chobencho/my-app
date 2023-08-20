@@ -1,3 +1,4 @@
+// Common
 import { useEffect, useState } from "react";
 // Function
 import { getUsers } from "lib/api/user";
@@ -9,62 +10,69 @@ import UsersItem from "views/components/modules/home/UsersItem";
 import SearchButton from "views/components/modules/home/SearchButton";
 import SortButton from "views/components/modules/home/SortButton";
 import { useAuthData } from "views/components/modules/common/useAuthData";
-// import Button from "views/components/atoms/Button";
+import SkeletonLoaderHome from "views/components/modules/home/SkeletonLoaderHome"
 
 const Home = () => {
   // State
   const [users, setUsers] = useState<UserData[]>([]);
-  const [tags, setTags] = useState<string[]>([]);
   const [sortValue, setSortValue] = useState<string>("sortLogin");
-  // Style
   // Id
   const { stringMyId, verifiedAge } = useAuthData();
+  const [isLoading, setIsLoading] = useState(true);
+  const [showSkeleton, setShowSkeleton] = useState(true);
 
   // ユーザ情報を取得
   const handleGetUsersData = async (tags: string[]) => {
     getUsers(stringMyId, tags).then((res) => setUsers(res.data));
   };
 
+  // ユーザソート
   const handleSortUsersData = async (sortValue: string) => {
     getSortUsers(stringMyId, sortValue).then((res) => setUsers(res.data));
+
   };
 
   useEffect(() => {
     handleSortUsersData(sortValue);
   }, []);
 
-  const handleClick = () => {
-    console.log("Click!");
-  };
+  // タイムアウト用
+  useEffect(() => {
+    const delay = setTimeout(() => {
+      setIsLoading(false);
+      setShowSkeleton(false); // データが取得されたらSkeletonを非表示に
+    }, 200); // 遅延時間を調整（ここでは2000ミリ秒、つまり2秒）
+
+    return () => clearTimeout(delay); // コンポーネントがアンマウントされたらタイマーをクリア
+  }, []);
 
   return (
     <>
-      <div className="w-96 m-auto pt-2">
-        <div className="flex justify-between">
-          <p className="text-xl flex items-center">
+      {isLoading ? (
+        <SkeletonLoaderHome />
+      ) : (
+        <div className="w-96 m-auto pt-2">
+          <div className="flex justify-between">
             {/* 検索ボタン */}
             <SearchButton
               handleGetUsersData={handleGetUsersData}
               stringMyId={stringMyId ?? ""}
-              tags={tags}
-              verifiedAge={verifiedAge}
             />
-          </p>
-          <div className="flex items-center">
+            {/* 並び替えセレクトボックス */}
             <SortButton handleSort={handleSortUsersData} />
+          </div >
+          <div className="w-full flex flex-wrap">
+            {/* ユーザ情報表示 */}
+            {users.map((user) => (
+              <UsersItem
+                key={user.id}
+                handleGetUsersData={handleGetUsersData}
+                userData={user}
+              />
+            ))}
           </div>
-        </div>
-        <div className="w-full flex flex-wrap">
-          {/* ユーザ情報表示 */}
-          {users.map((user) => (
-            <UsersItem
-              key={user.id}
-              handleGetUsersData={handleGetUsersData}
-              userData={user}
-            />
-          ))}
-        </div>
-      </div>
+        </div >
+      )}
     </>
   );
 };
