@@ -20,6 +20,12 @@ import { uploadUniqueImage } from "lib/api/helper";
 import { previewImage } from "lib/api/helper";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
+import FormInputText from "views/components/block/FormInputText";
+import FormTextarea from "views/components/block/FormTextarea";
+import FormImage from "views/components/block/FormImage";
+import FormSubmitButton from "views/components/block/FormSubmitButton";
+import FormSelect from "views/components/block/FormSelect";
+
 interface UserEditFormProps {
   handleGetUserData: Function;
   userData: UserData;
@@ -57,35 +63,36 @@ const UserEditForm = ({
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   // Id
   const { id } = useParams<{ id: string }>();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
+  // Gender
   const initialGender = userData.genderId
     ? {
-      value: userData.genderId.toString(),
-      label: userData.genderCode.toString(),
-    } // 適切なラベルをセットしてください
+        value: userData.genderId.toString(),
+        label: userData.genderCode.toString(),
+      }
     : null;
-
   const [gender, setGender] = useState(initialGender);
-
   const handleGenderChange = (selectedOption: any) => {
     setGender(selectedOption);
   };
-
   const genderOptions = Gender.GEN_OPTIONS.map(([value, label]) => ({
     value: value.toString(),
-    label: label.toString(), // labelをstring型に変換
+    label: label.toString(),
   }));
 
+  // Grade
   const initialGrade = userData.gradeId
     ? {
-      value: userData.gradeId.toString(),
-      label: userData.gradeCode.toString(),
-    } // 適切なラベルをセットしてください
+        value: userData.gradeId.toString(),
+        label: userData.gradeCode.toString(),
+      }
     : null;
-
   const [grade, setGrade] = useState(initialGrade);
-
   const handleGradeChange = (selectedOption: any) => {
     setGrade(selectedOption);
   };
@@ -97,9 +104,9 @@ const UserEditForm = ({
 
   const initialSubject = userData.subjectId
     ? {
-      value: userData.subjectId.toString(),
-      label: userData.subjectCode.toString(),
-    } // 適切なラベルをセットしてください
+        value: userData.subjectId.toString(),
+        label: userData.subjectCode.toString(),
+      } // 適切なラベルをセットしてください
     : null;
 
   const [subject, setSubject] = useState(initialSubject);
@@ -115,9 +122,9 @@ const UserEditForm = ({
 
   const initialPrefecture = userData.prefectureId
     ? {
-      value: userData.prefectureId.toString(),
-      label: userData.prefectureCode.toString(),
-    } // 適切なラベルをセットしてください
+        value: userData.prefectureId.toString(),
+        label: userData.prefectureCode.toString(),
+      } // 適切なラベルをセットしてください
     : null;
 
   const [prefecture, setPrefecture] = useState(initialPrefecture);
@@ -133,9 +140,9 @@ const UserEditForm = ({
 
   const initialBirthplace = userData.birthplaceId
     ? {
-      value: userData.birthplaceId.toString(),
-      label: userData.birthplaceCode.toString(),
-    } // 適切なラベルをセットしてください
+        value: userData.birthplaceId.toString(),
+        label: userData.birthplaceCode.toString(),
+      } // 適切なラベルをセットしてください
     : null;
 
   const [birthplace, setBirthplace] = useState(initialBirthplace);
@@ -287,133 +294,50 @@ const UserEditForm = ({
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="w-96 m-auto">
         <p className="text-center pt-5 pb-3">ユーザー情報編集</p>
-        <div className="">
-          <div className="flex items-center">
-            <b className="input-title">名前</b>
-            <p className="required">必須</p>
-          </div>
 
-          <input
-            type="text"
-            placeholder="名前"
-            className="input-text"
-            value={name}
-            {...register("name", { required: true })}
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          />
-          {errors.name && (
-            <p className="text-red-500">名前は必須です。</p>
-          )}
-        </div>
+        <FormInputText
+          state={name}
+          setState={setName}
+          register={register}
+          errors={errors}
+          inputTitle={"名前"}
+          column={"name"}
+          type={"text"}
+        />
 
-        <div className="input-part">
-          <b className="input-title">プロフィール画像</b>
-          <input
-            id="icon-button-file"
-            type="file"
-            className="hidden"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleUploadImage(e);
-              handlePreviewImage(e);
-            }}
-          />
-          <div className="relative">
-            <label className="image-label" htmlFor="icon-button-file">
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg
-                  aria-hidden="true"
-                  className="w-6 h-6 mb-1 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  ></path>
-                </svg>
-                <p className="mb-1 text-sm text-gray-400">
-                  <span className="font-semibold">
-                    写真のアップロードはここをクリック
-                  </span>
-                </p>
-                <p className="text-xs text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
-                </p>
-              </div>
-            </label>
-            {preview ? (
-              <div className="absolute top-0 left-0">
-                <HighlightOffIcon
-                  onClick={() => handleClearPreview()}
-                  className="absolute text-white top-1 left-1"
-                />
-                <img
-                  src={preview}
-                  alt="preview img"
-                  className="preview-image"
-                />
-              </div>
-            ) : null}
-          </div>
-        </div>
+        <FormImage
+          setState={setImage}
+          inputTitle={"プロフィール画像"}
+          preview={preview}
+          setPreview={setPreview}
+          onClose={handleClearPreview}
+        />
 
-        <div className="input-part">
-          <div className="flex items-center">
-            <b className="input-title">自己紹介</b>
-            <p className="required">必須</p>
-          </div>
-          <textarea
-            placeholder="自己紹介"
-            className="input-text whitespace-pre-wrap h-40"
-            value={body}
-            {...register("body", { required: true })} // 内容のバリデーションルール
-            onChange={(e) => {
-              setBody(e.target.value);
-            }}
-          ></textarea>
-          {errors.body && (
-            <p className="text-red-500">自己紹介は必須です。</p>
-          )}
-        </div>
+        <FormTextarea
+          state={body}
+          setState={setBody}
+          register={register}
+          errors={errors}
+          inputTitle={"自己紹介"}
+          column={"body"}
+        />
 
-        <div className="">
-          <div className="flex items-center">
-            <b className="input-title">年齢</b>
-            <p className="required">必須</p>
-          </div>
-          <input
-            type="number"
-            placeholder="年齢"
-            className="input-text"
-            value={age}
-            {...register("age", { required: true })}
-            onChange={(e) => {
-              setAge(e.target.value);
-            }}
-          />
-          {errors.age && (
-            <p className="text-red-500">年齢は必須です。</p>
-          )}
-        </div>
+        <FormInputText
+          state={age}
+          setState={setAge}
+          register={register}
+          errors={errors}
+          inputTitle={"年齢"}
+          column={"age"}
+          type={"number"}
+        />
 
-        <div className="my-1">
-          <div className="flex items-center">
-            <b className="input-title">性別</b>
-            <p className="required">必須</p>
-          </div>
-          <Select
-            className=""
-            value={gender}
-            onChange={handleGenderChange}
-            options={genderOptions}
-          />
-        </div>
+        <FormSelect
+          value={gender}
+          onChange={handleGenderChange}
+          inputTitle="性別"
+          options={genderOptions}
+        />
 
         <div className="my-1">
           <div className="flex items-center">
@@ -517,35 +441,37 @@ const UserEditForm = ({
           </button>
         </div>
 
-        {/* 興味オプションを表示する部分 */}
-        {showInterestOptions && (
-          <div>
-            <div className="w-full flex flex-wrap py-2">
-              {Interest.INT_OPTIONS.map((option: (string | number)[]) => {
-                if (option.length !== 3) return null; // オプションが3つの要素を持たない場合はnullを返す
+        <div className="mb-5">
+          {/* 興味オプションを表示する部分 */}
+          {showInterestOptions && (
+            <div>
+              <div className="w-full flex flex-wrap py-2">
+                {Interest.INT_OPTIONS.map((option: (string | number)[]) => {
+                  if (option.length !== 3) return null; // オプションが3つの要素を持たない場合はnullを返す
 
-                const [value, label, image] = option as InterestOption; // オプションの型をInterestOptionに変換
-                const isChecked = selectedInterests.includes(value);
+                  const [value, label, image] = option as InterestOption; // オプションの型をInterestOptionに変換
+                  const isChecked = selectedInterests.includes(value);
 
-                return (
-                  <div key={value} className="w-1/2 p-1">
-                    <label className="flex">
-                      <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={() => handleInterestSelection(value)}
-                        className="mr-1"
-                      />
-                      <option value={value} className="text-center text-xs">
-                        {label}
-                      </option>
-                    </label>
-                  </div>
-                );
-              })}
+                  return (
+                    <div key={value} className="w-1/2 p-1">
+                      <label className="flex">
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => handleInterestSelection(value)}
+                          className="mr-1"
+                        />
+                        <option value={value} className="text-center text-xs">
+                          {label}
+                        </option>
+                      </label>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* 興味オプションの表示を切り替えるボタン */}
         <div className="mt-3">
@@ -559,52 +485,49 @@ const UserEditForm = ({
           </button>
         </div>
 
-        {/* 興味オプションを表示する部分 */}
-        {showHobbyOptions && (
-          <div>
-            <div className="w-full flex flex-wrap py-3">
-              {Hobby.HOB_OPTIONS.map((option: (string | number)[]) => {
-                if (option.length !== 3) return null; // オプションが3つの要素を持たない場合はnullを返す
+        <div className="mb-5">
+          {/* 興味オプションを表示する部分 */}
+          {showHobbyOptions && (
+            <div>
+              <div className="w-full flex flex-wrap py-3">
+                {Hobby.HOB_OPTIONS.map((option: (string | number)[]) => {
+                  if (option.length !== 3) return null; // オプションが3つの要素を持たない場合はnullを返す
 
-                const [value, label, image] = option as HobbyOption; // オプションの型をHobbyOptionに変換
-                const isChecked = selectedHobbies.includes(value);
+                  const [value, label, image] = option as HobbyOption; // オプションの型をHobbyOptionに変換
+                  const isChecked = selectedHobbies.includes(value);
 
-                return (
-                  <div key={value} className="w-1/5 pb-2 relative px-1">
-                    <label className="image-dark">
-                      <input
-                        type="checkbox"
-                        className={`${classes.checkBox}`}
-                        checked={isChecked}
-                        onChange={() => handleHobbySelection(value)}
-                      />
-                      <img
-                        src={`${process.env.PUBLIC_URL}/images/hobby/${image}`}
-                        className={`rounded ${isChecked ? classes.checkBoxChecked : ""
+                  return (
+                    <div key={value} className="w-1/5 pb-2 relative px-1">
+                      <label className="image-dark">
+                        <input
+                          type="checkbox"
+                          className={`${classes.checkBox}`}
+                          checked={isChecked}
+                          onChange={() => handleHobbySelection(value)}
+                        />
+                        <img
+                          src={`${process.env.PUBLIC_URL}/images/hobby/${image}`}
+                          className={`rounded ${
+                            isChecked ? classes.checkBoxChecked : ""
                           }`}
-                        alt=""
-                      />
-                    </label>
-                    <option
-                      value={value}
-                      className="text-center text-10 absolute bottom-7 left-0 right-0 text-white"
-                    >
-                      {label}
-                    </option>
-                  </div>
-                );
-              })}
+                          alt=""
+                        />
+                      </label>
+                      <option
+                        value={value}
+                        className="text-center text-10 absolute bottom-7 left-0 right-0 text-white"
+                      >
+                        {label}
+                      </option>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}
-        <div className="text-center">
-          <button
-            type="submit"
-            className="generalButton text-white bg-blue-base w-3/5"
-          >
-            変更を保存する
-          </button>
+          )}
         </div>
+
+        <FormSubmitButton buttonTitle={"変更を保存する"} />
       </form>
     </>
   );

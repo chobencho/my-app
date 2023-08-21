@@ -1,5 +1,5 @@
 class Api::V1::User::UsersController < ApplicationController
-  before_action :check_user_permission, only: [:edit, :update]
+  before_action :check_user_permission, only: [:edit]
 
   def index
     if keywords = params[:keywords]

@@ -1,14 +1,15 @@
-import { useForm, SubmitHandler } from "react-hook-form";
-
-import { useState, useCallback } from "react";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // Function
 import { createBoardData } from "lib/api/board";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 import { clearPreview } from "lib/api/helper";
-import { uploadUniqueImage } from "lib/api/helper";
-import { previewImage } from "lib/api/helper";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+
+import FormInputText from "views/components/block/FormInputText";
+import FormTextarea from "views/components/block/FormTextarea";
+import FormImage from "views/components/block/FormImage";
+import FormSubmitButton from "views/components/block/FormSubmitButton";
 
 const BoardCreateForm = () => {
   const navigate = useNavigate();
@@ -20,19 +21,11 @@ const BoardCreateForm = () => {
   // Id
   const { stringMyId } = useAuthData();
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
-
-  // 画像アップロード機能
-  const handleUploadImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => uploadUniqueImage(e, setImage),
-    [setImage]
-  );
-
-  // プレビュー機能
-  const handlePreviewImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => previewImage(e, setPreview),
-    [setPreview]
-  );
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   // プレビュー削除機能
   const handleClearPreview = () => {
@@ -40,11 +33,8 @@ const BoardCreateForm = () => {
     clearPreview();
   };
 
-
-  const onSubmit = async (data: Record<string, any>) => { // Record<string, any>型は一時的な解決策です。適切な型情報を追加してください。
-    // フォームデータの送信
+  const onSubmit = async (data: Record<string, any>) => {
     const formData = new FormData();
-
     formData.append("user_id", stringMyId || "");
     formData.append("title", data.title);
     if (image) {
@@ -57,105 +47,37 @@ const BoardCreateForm = () => {
     });
   };
 
-
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className="w-96 m-auto">
-        <div className="input-part">
-          <div className="flex items-center">
-            <b className="input-title">タイトル</b>
-            <p className="required">必須</p>
-          </div>
-          <input
-            type="text"
-            placeholder="タイトル"
-            className="input-text"
-            {...register("title", { required: true })}
-          />
-          {errors.title && (
-            <p className="text-red-500">タイトルは必須です。</p>
-          )}
-        </div>
+        <FormInputText
+          state={title}
+          setState={setTitle}
+          register={register}
+          errors={errors}
+          inputTitle={"タイトル"}
+          column={"title"}
+          type={"text"}
+        />
 
-        <div className="input-part">
-          <b className="input-title">サムネイル</b>
-          <input
-            id="icon-button-file"
-            type="file"
-            className="hidden"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              handleUploadImage(e);
-              handlePreviewImage(e);
-            }}
-          />
+        <FormImage
+          setState={setImage}
+          inputTitle={"サムネイル"}
+          preview={preview}
+          setPreview={setPreview}
+          onClose={handleClearPreview}
+        />
 
-          <div className="relative">
-            <label className="image-label" htmlFor="icon-button-file">
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg
-                  aria-hidden="true"
-                  className="w-6 h-6 mb-1 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  ></path>
-                </svg>
-                <p className="mb-1 text-sm text-gray-400">
-                  <span className="font-semibold">
-                    写真のアップロードはここをクリック
-                  </span>
-                </p>
-                <p className="text-xs text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
-                </p>
-              </div>
-            </label>
-            {preview ? (
-              <div className="absolute top-0 left-0">
-                <HighlightOffIcon
-                  onClick={() => handleClearPreview()}
-                  className="absolute text-white top-1 left-1"
-                />
-                <img
-                  src={preview}
-                  alt="preview img"
-                  className="preview-image"
-                />
-              </div>
-            ) : null}
-          </div>
-        </div>
+        <FormTextarea
+          state={body}
+          setState={setBody}
+          register={register}
+          errors={errors}
+          inputTitle={"内容"}
+          column={"body"}
+        />
 
-        <div className="input-part">
-          <div className="flex items-center">
-            <b className="input-title">内容</b>
-            <p className="required">必須</p>
-          </div>
-          <textarea
-            placeholder="内容"
-            className="input-text whitespace-pre-wrap h-40"
-            {...register("body", { required: true })} // 内容のバリデーションルール
-          ></textarea>
-          {errors.body && (
-            <p className="text-red-500">内容は必須です。</p>
-          )}
-        </div>
-
-        <div className="w-full text-center">
-          <button
-            type="submit"
-            className="generalButton bg-blue-base text-white"
-          >
-            掲示板を作成する
-          </button>
-        </div>
+        <FormSubmitButton buttonTitle={"掲示板を作成する"} />
       </form>
     </>
   );

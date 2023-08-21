@@ -10,6 +10,7 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import FormInputText from "views/components/block/FormInputText";
 import FormTextarea from "views/components/block/FormTextarea";
 import FormImage from "views/components/block/FormImage";
+import FormSubmitButton from "views/components/block/FormSubmitButton";
 
 interface BoardEditFormProps {
   id: string;
@@ -67,6 +68,7 @@ const BoardEditForm = ({
           errors={errors}
           inputTitle={"タイトル"}
           column={"title"}
+          type={"text"}
         />
 
         <FormImage
@@ -86,14 +88,7 @@ const BoardEditForm = ({
           column={"body"}
         />
 
-        <div className="w-full text-center">
-          <button
-            type="submit"
-            className="generalButton bg-blue-base text-white"
-          >
-            変更を保存する
-          </button>
-        </div>
+        <FormSubmitButton buttonTitle={"変更を保存する"} />
       </form>
     </>
   );

@@ -7,6 +7,7 @@ export interface FormInputTextProps {
   errors: Record<string, any>;
   inputTitle: string;
   column: string;
+  type: string;
 }
 
 const FormInputText = ({
@@ -16,6 +17,7 @@ const FormInputText = ({
   errors,
   inputTitle,
   column,
+  type,
 }: FormInputTextProps) => {
   return (
     <div className="input-part">
@@ -24,7 +26,7 @@ const FormInputText = ({
         <p className="required">必須</p>
       </div>
       <input
-        type="text"
+        type={type}
         placeholder={inputTitle}
         className="input-text"
         value={state}
