@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // Function
 import { getEditBoardData } from "lib/api/board";
 // Interface
@@ -12,11 +13,24 @@ const BoardEdit = () => {
   // State
   const [boardData, setBoardData] = useState<BoardData | null>(null);
   // Id
-  const { id } = useAuthData();
+  const { id, stringMyId } = useAuthData();
+
+  const navigate = useNavigate();
 
   // 掲示板情報を取得
   const handleGetBoardData = async () => {
-    getEditBoardData(id).then((res) => setBoardData(res.data));
+    try {
+      const response = await getEditBoardData(id);
+      setBoardData(response.data);
+    } catch (error: any) {
+      if (error.response && error.response.status === 403) {
+        // 403エラーが発生した場合、エラーページにリダイレクト
+        navigate("/error"); // リダイレクト先のURLを適切に設定
+      } else {
+        // 他のエラーが発生した場合、エラーメッセージを表示またはログに記録するなどの処理を追加できます
+        console.error("エラーが発生しました:", error);
+      }
+    }
   };
 
   useEffect(() => {

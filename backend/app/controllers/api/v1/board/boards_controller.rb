@@ -1,4 +1,6 @@
 class Api::V1::Board::BoardsController < ApplicationController
+    before_action :check_user_permission, only: [:edit]
+
   def index
       @boards = Board.joins(:user).select("boards.*, boards.id AS board_id, boards.user_id, users.name, boards.title, boards.body AS board_body, boards.image AS url, users.image AS user_image")
       render json: @boards
@@ -62,4 +64,14 @@ class Api::V1::Board::BoardsController < ApplicationController
   def board_params
       params.permit(:user_id, :title, :image, :body)
   end
+
+  def check_user_permission
+
+    user_id = Board.find_by(id: params[:id]).user_id
+  
+    if user_id != current_api_v1_user.id.to_s
+      render json: { error: "他のユーザーの画面にアクセスできません。" }, status: :forbidden
+    end
+  end
+  
 end

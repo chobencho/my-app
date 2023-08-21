@@ -14,8 +14,14 @@ export const getMessages = (
 };
 
 // 自分がやりとりしてるルーム情報を取得
-export const getChatPartner = (id: string | undefined) => {
-  return client.get<ChatUserData>(`/message/chats/${id}/chatBuddy`);
+export const getChatPartner = (
+  roomId: string | undefined,
+  stringMyId: string | undefined,
+  buddyId: string | undefined
+) => {
+  return client.get<ChatUserData>(`/message/chats/${buddyId}/chatBuddy`, {
+    params: { roomId, stringMyId },
+  });
 };
 
 // チェットメッセージを作成する

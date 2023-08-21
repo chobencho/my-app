@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 // Style
@@ -11,8 +13,7 @@ import Information from "views/pages/mypage/Information";
 import MyBoard from "views/pages/mypage/MyBoard";
 import MyFav from "views/pages/mypage/MyFav";
 
-import SkeletonLoaderMyPage from "views/components/modules/mypage/SkeletonLoaderMyPage"
-
+import SkeletonLoaderMyPage from "views/components/modules/mypage/SkeletonLoaderMyPage";
 
 const useStyles = makeStyles((theme: Theme) => ({}));
 
@@ -32,6 +33,8 @@ const MyPage = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const [showSkeleton, setShowSkeleton] = useState(true); // タイムアウト用
+
+  const navigate = useNavigate();
 
   const handleSettingClick = () => {
     setSettingButtonActive(true);
@@ -53,7 +56,18 @@ const MyPage = () => {
 
   // ユーザ情報を取得
   const handleGetUserData = async () => {
-    getEditUserData(id).then((res) => setUserData(res.data));
+    try {
+      const response = await getEditUserData(id);
+      setUserData(response.data);
+    } catch (error: any) {
+      if (error.response && error.response.status === 403) {
+        // 403エラーが発生した場合、エラーページにリダイレクト
+        navigate("/error"); // リダイレクト先のURLを適切に設定
+      } else {
+        // 他のエラーが発生した場合、エラーメッセージを表示またはログに記録するなどの処理を追加できます
+        console.error("エラーが発生しました:", error);
+      }
+    }
   };
 
   useEffect(() => {
@@ -72,7 +86,6 @@ const MyPage = () => {
 
     return () => clearTimeout(delay); // コンポーネントがアンマウントされたらタイマーをクリア
   }, []);
-
 
   return (
     <>
@@ -117,24 +130,27 @@ const MyPage = () => {
           </div>
           <div className="flex justify-between py-3">
             <div
-              className={`w-1/3 text-center border-b p-1 ${settingButtonActive ? "border-b border-blue-base" : null
-                }`}
+              className={`w-1/3 text-center border-b p-1 ${
+                settingButtonActive ? "border-b border-blue-base" : null
+              }`}
             >
               <button className="text-base" onClick={handleSettingClick}>
                 各種設定
               </button>
             </div>
             <div
-              className={`w-1/3 text-center border-b p-1 ${myBoardButtonActive ? "border-b border-blue-base" : null
-                }`}
+              className={`w-1/3 text-center border-b p-1 ${
+                myBoardButtonActive ? "border-b border-blue-base" : null
+              }`}
             >
               <button className="text-base" onClick={handleMyBoardClick}>
                 自分の掲示板
               </button>
             </div>
             <div
-              className={`w-1/3 text-center border-b p-1 ${likeBoardButtonActive ? "border-b border-blue-base" : null
-                }`}
+              className={`w-1/3 text-center border-b p-1 ${
+                likeBoardButtonActive ? "border-b border-blue-base" : null
+              }`}
             >
               <button className="text-base" onClick={handleLikeBoardClick}>
                 いいね

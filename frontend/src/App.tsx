@@ -26,6 +26,7 @@ import MyBoard from "views/pages/mypage/MyBoard";
 import Setting from "views/pages/mypage/Setting";
 import DeleteAccount from "views/pages/mypage/DeleteAccount";
 import Information from "views/pages/mypage/Information";
+import Error from "views/pages/layouts/Error";
 
 import { getCurrentUser } from "lib/api/auth";
 import { checkAge } from "lib/api/common";
@@ -129,6 +130,7 @@ const App = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/error" element={<Error />} />
             <Route
               path="/"
               element={

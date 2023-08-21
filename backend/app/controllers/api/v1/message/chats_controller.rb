@@ -1,4 +1,6 @@
 class Api::V1::Message::ChatsController < ApplicationController
+  before_action :check_user_permission, only: [:chatBuddy]
+
   def show
     @messages = Message.joins(:user).select("messages.*, users.name AS name, users.image AS userImage").where(room_id: params[:id])
 
@@ -49,5 +51,23 @@ class Api::V1::Message::ChatsController < ApplicationController
 
   def message_params
       params.permit(:room_id, :user_id, :body, :image)
+  end
+  
+  def check_user_permission
+
+    room_present = RoomMember.find_by(room_id: params[:room_id], user_id: params[:string_my_id]).present?
+    buddy_present = RoomMember.find_by(room_id: params[:room_id], user_id: params[:id]).present?
+    
+    puts "room_present: #{room_present}"
+    puts "buddy_present: #{buddy_present}"
+
+    unless current_api_v1_user
+      render json: { error: "ログインが必要です。" }, status: :unauthorized
+      return
+    end
+  
+    if !(room_present && buddy_present)
+      render json: { error: "他のユーザーの画面にアクセスできません。" }, status: :forbidden
+    end
   end
 end

@@ -59,7 +59,7 @@ const Community = () => {
       // subscribed ステートが false の場合にモーダルを表示
       setTimeout(() => {
         setIsModalOpen(true);
-      }, 200); // 3秒遅延
+      }, 500); // 3秒遅延
     }
   }, [subscribed]);
 

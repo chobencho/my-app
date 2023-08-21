@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 // Function
 import { getMessages } from "lib/api/chat";
 import { getChatPartner } from "lib/api/chat";
@@ -19,6 +19,8 @@ const Message = () => {
   const { stringMyId, verifiedAge, id, buddyId } = useAuthData();
   const [buddy, setBuddy] = useState<ChatUserData | null>(null);
 
+  const navigate = useNavigate();
+
   // ルームIDからメッセージ情報を取得・更新する関数
   const handleGetMessages = async () => {
     getMessages(id, buddyId).then((res) => setMessages(res.data));
@@ -26,12 +28,23 @@ const Message = () => {
 
   // ルームIDからメッセージ情報を取得・更新
   const handleGetChatPartner = async () => {
-    getChatPartner(buddyId).then((res) => setBuddy(res.data));
+    try {
+      const response = await getChatPartner(id, stringMyId, buddyId);
+      setBuddy(response.data);
+    } catch (error: any) {
+      if (error.response && error.response.status === 403) {
+        // 403エラーが発生した場合、エラーページにリダイレクト
+        navigate("/error"); // リダイレクト先のURLを適切に設定
+      } else {
+        // 他のエラーが発生した場合、エラーメッセージを表示またはログに記録するなどの処理を追加できます
+        console.error("エラーが発生しました:", error);
+      }
+    }
   };
 
   useEffect(() => {
-    handleGetMessages();
     handleGetChatPartner();
+    handleGetMessages();
   }, []);
 
   return (

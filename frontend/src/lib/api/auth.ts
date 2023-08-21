@@ -2,11 +2,7 @@ import client from "lib/api/client";
 import Cookies from "js-cookie";
 import { AxiosPromise } from "axios";
 
-import {
-  SignUpParams,
-  SignInParams,
-  ResetPasswordParams,
-} from "interfaces/index";
+import { SignUpParams, SignInParams } from "interfaces/index";
 
 // サインアップ（新規アカウント作成）
 export const signUp = (params: SignUpParams) => {
@@ -17,10 +13,6 @@ export const signUp = (params: SignUpParams) => {
 export const signIn = (params: SignInParams) => {
   return client.post("auth/sign_in", params);
 };
-
-// export const resetPassword = (params: ResetPasswordParams) => {
-//   return client.post("auth/password", params);
-// };
 
 // サインアウト（ログアウト）
 export const signOut = () => {

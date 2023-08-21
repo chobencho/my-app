@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 // Function
 import { getEditUserData } from "lib/api/user";
 import { getHobbyData } from "lib/api/user";
@@ -23,21 +23,33 @@ const UserEdit = () => {
   // Id
   const { id } = useParams<{ id: string }>();
 
+  const navigate = useNavigate();
+
   // ユーザ情報取得
   const handleGetUserData = async () => {
-    // Promise.allを使ってすべての非同期処理が完了するのを待つ
-    const [userDataRes, hobbyDataRes, interestDataRes, researchTagDataRes] =
-      await Promise.all([
-        getEditUserData(id),
-        getHobbyData(id),
-        getInterestData(id),
-        getResearchTagData(id),
-      ]);
+    try {
+      // Promise.allを使ってすべての非同期処理が完了するのを待つ
+      const [userDataRes, hobbyDataRes, interestDataRes, researchTagDataRes] =
+        await Promise.all([
+          getEditUserData(id),
+          getHobbyData(id),
+          getInterestData(id),
+          getResearchTagData(id),
+        ]);
 
-    setUserData(userDataRes.data);
-    setHobbyData(hobbyDataRes.data);
-    setInterestData(interestDataRes.data);
-    setResearchTagData(researchTagDataRes.data);
+      setUserData(userDataRes.data);
+      setHobbyData(hobbyDataRes.data);
+      setInterestData(interestDataRes.data);
+      setResearchTagData(researchTagDataRes.data);
+    } catch (error: any) {
+      if (error.response && error.response.status === 403) {
+        // 403エラーが発生した場合、エラーページにリダイレクト
+        navigate("/error"); // リダイレクト先のURLを適切に設定
+      } else {
+        // 他のエラーが発生した場合、エラーメッセージを表示またはログに記録するなどの処理を追加できます
+        console.error("エラーが発生しました:", error);
+      }
+    }
   };
 
   useEffect(() => {
