@@ -12,6 +12,8 @@ import "moment/locale/ja"; // 日本語ロケールをインポート
 
 import CommonDeleteButton from "views/components/modules/common/CommonDeleteButton";
 
+import UserCircleImage from "views/components/block/UserCircleImage";
+
 type BoardContentProps = {
   board: BoardData;
   boardId: string;
@@ -45,19 +47,13 @@ const BoardContent = ({
 
   return (
     <>
-      {board.image?.url ? (
-        <img
-          src={board.image.url}
-          alt="boardData image"
-          className={`${classes.boardImage}`}
-        />
-      ) : (
-        <img
-          src={`${process.env.PUBLIC_URL}/images/common/no-image.jpg`}
-          alt="boardData image"
-          className={`${classes.boardImage}`}
-        />
-      )}
+      <UserCircleImage
+        generalData={board}
+        imageWidth={"100%"}
+        imageHeight={"220px"}
+        rounded={""}
+        marginRight={""}
+      />
       <div className="w-96 m-auto">
         <p className="text-xl my-2">{board.title}</p>
         <div className="flex justify-between">

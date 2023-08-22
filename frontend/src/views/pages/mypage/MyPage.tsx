@@ -1,12 +1,10 @@
-import Cookies from "js-cookie";
-import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 // Style
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import { getEditUserData } from "lib/api/user";
-import { UserData } from "interfaces/index";
+import { UserDataResponse } from "interfaces/index";
 
 import Setting from "views/pages/mypage/Setting";
 import Information from "views/pages/mypage/Information";
@@ -15,6 +13,8 @@ import MyFav from "views/pages/mypage/MyFav";
 
 import SkeletonLoaderMyPage from "views/components/modules/mypage/SkeletonLoaderMyPage";
 
+import UserCircleImage from "views/components/block/UserCircleImage";
+
 const useStyles = makeStyles((theme: Theme) => ({}));
 
 const MyPage = () => {
@@ -22,7 +22,7 @@ const MyPage = () => {
   // Id
   const { id } = useAuthData();
 
-  const [userData, setUserData] = useState<UserData | null>(null);
+  const [user, setUser] = useState<UserDataResponse | null>(null);
 
   const [settingButtonActive, setSettingButtonActive] = useState<boolean>(true);
   const [myBoardButtonActive, setMyBoardButtonActive] =
@@ -57,8 +57,8 @@ const MyPage = () => {
   // ユーザ情報を取得
   const handleGetUserData = async () => {
     try {
-      const response = await getEditUserData(id);
-      setUserData(response.data);
+      const res = await getEditUserData(id);
+      setUser(res.data);
     } catch (error: any) {
       if (error.response && error.response.status === 403) {
         // 403エラーが発生した場合、エラーページにリダイレクト
@@ -70,12 +70,14 @@ const MyPage = () => {
     }
   };
 
+  const userData = user?.userData;
+
   useEffect(() => {
     // 初回のみデータを取得するようにする
-    if (userData === null) {
+    if (user === null) {
       handleGetUserData();
     }
-  }, [userData]);
+  }, [user]);
 
   // タイムアウト用
   useEffect(() => {
@@ -96,13 +98,13 @@ const MyPage = () => {
           <div className="p-5">
             {userData && (
               <>
-                {userData.image?.url ? (
-                  <img
-                    src={userData.image.url}
-                    alt="user image"
-                    className="h-36 w-36 object-cover rounded-full m-auto"
-                  />
-                ) : null}
+                <UserCircleImage
+                  generalData={userData}
+                  imageWidth={"144px"}
+                  imageHeight={"144px"}
+                  rounded={"999px"}
+                  marginRight={""}
+                />
                 <p className="text-xl text-center pt-1">{userData.name}</p>
                 <p className="text-sm text-center">
                   {userData.age}歳 {userData.prefectureCode}

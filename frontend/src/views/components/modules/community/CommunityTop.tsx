@@ -73,7 +73,7 @@ const CommunityTop = ({ community, community_id, user_id }: CommunityProps) => {
           </span>
 
           <img
-            src={`${process.env.PUBLIC_URL}/images/community/${community.id}_category.jpg`}
+            src={`${process.env.PUBLIC_URL}/images/community/${community.id}_category.webp`}
             alt=""
             className="w-12 h-8 object-cover rounded mr-2"
           />

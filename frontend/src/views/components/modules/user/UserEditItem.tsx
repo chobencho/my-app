@@ -6,6 +6,8 @@ import { UserTagData } from "interfaces/index";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import TableTr from "views/components/block/TableTr";
 
+import UserCircleImage from "views/components/block/UserCircleImage";
+
 interface UserEditItemProps {
   myId: string | undefined;
   userId: string | undefined;
@@ -13,7 +15,7 @@ interface UserEditItemProps {
   userData: UserData;
   hobbyData: UserHobbyData[];
   interestData: UserInterestData[];
-  researchTagData: UserTagData[];
+  tagsData: UserTagData[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -46,25 +48,19 @@ const UserEditItem = ({
   userData,
   hobbyData,
   interestData,
-  researchTagData,
+  tagsData,
 }: UserEditItemProps) => {
   const classes = useStyles();
 
   return (
     <>
-      {userData.image?.url ? (
-        <img
-          src={userData.image.url}
-          alt="userData image"
-          className={`${classes.userImage}`}
-        />
-      ) : (
-        <img
-          src={`${process.env.PUBLIC_URL}/images/common/no-image.jpg`}
-          alt="boardData image"
-          className={`${classes.userImage}`}
-        />
-      )}
+      <UserCircleImage
+        generalData={userData}
+        imageWidth={"100%"}
+        imageHeight={"220px"}
+        rounded={""}
+        marginRight={""}
+      />
 
       <div className="w-96 m-auto">
         <p className="text-center m-1 text-lg font-semibold">{userData.name}</p>
@@ -77,7 +73,7 @@ const UserEditItem = ({
           <TableTr trTitle={"専攻分野"} trData={userData.subjectCode} />
           <TableTr trTitle={"居住地"} trData={userData.prefectureCode} />
           <TableTr trTitle={"出身地"} trData={userData.birthplaceCode} />
-          <TableTr trTitle={"研究タグ"} trData={researchTagData} />
+          <TableTr trTitle={"研究タグ"} trData={tagsData} />
           <TableTr trTitle={"趣味"} trData={hobbyData} />
           <TableTr trTitle={"興味分野"} trData={interestData} />
         </table>

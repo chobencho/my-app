@@ -11,15 +11,15 @@ import Category from "options/category";
 import { clearModal } from "lib/api/helper";
 
 type CommunityProps = {
-  allCommunity: CommunityData[];
-  popularCommunity: CommunityData[];
-  newCommunity: CommunityData[];
+  allCommunityData: CommunityData[];
+  latestCommunityData: CommunityData[];
+  popularCommunityData: CommunityData[];
 };
 
 const CommunitiesBranchSearch = ({
-  allCommunity,
-  popularCommunity,
-  newCommunity,
+  allCommunityData,
+  latestCommunityData,
+  popularCommunityData,
 }: CommunityProps) => {
   // モーダルを制御するstate
   const [showModal, setShowModal] = useState(false);
@@ -32,8 +32,7 @@ const CommunitiesBranchSearch = ({
   const handleDisplayCategoryCommunity = (value: string, category: string) => {
     setSelectedCategory(value); // 選択されたカテゴリをセット
     setStrSelectedCategory(category);
-    console.log(strSelectedCategory);
-    const categoryData = allCommunity.filter(
+    const categoryData = allCommunityData.filter(
       (com) => String(com.categoryId) === value
     );
     setSelectedCategoryData(categoryData);
@@ -74,18 +73,15 @@ const CommunitiesBranchSearch = ({
 
       <h5 className="text-sm text-center pt-5 pb-3">人気コミュニティ</h5>
 
-      <div className="">
-        {popularCommunity.map((popCom) => (
-          <CommunitiesItem community={popCom} key={popCom.id} />
-        ))}
-      </div>
+      {popularCommunityData.map((popCom) => (
+        <CommunitiesItem community={popCom} key={popCom.id} />
+      ))}
 
       <h5 className="text-sm text-center pt-5 pb-3">新着コミュニティ</h5>
-      <div className="">
-        {newCommunity.map((newCom) => (
-          <CommunitiesItem community={newCom} key={newCom.id} />
-        ))}
-      </div>
+
+      {latestCommunityData.map((newCom) => (
+        <CommunitiesItem community={newCom} key={newCom.id} />
+      ))}
 
       <CommunityCreate />
 

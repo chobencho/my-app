@@ -1,25 +1,11 @@
 import client from "lib/api/client";
 import { CommunityData } from "interfaces/index";
+import { CommunityDataResponse } from "interfaces/index";
 import { AxiosPromise } from "axios";
 
 // コミュニティ一覧を取得
-export const getAllCommunityData = () => {
-  return client.get<CommunityData[]>(`/community/communities`);
-};
-
-// 人気コミュニティを取得
-export const getPopularCommunityData = () => {
-  return client.get<CommunityData[]>("/community/communities/popular");
-};
-
-// 新規コミュニティを取得
-export const getNewCommunityData = () => {
-  return client.get<CommunityData[]>("/community/communities/latest");
-};
-
-// 参加済みコミュニティを取得
-export const getMyCommunityData = (id: string | undefined) => {
-  return client.get<CommunityData[]>(`/community/communities/${id}`);
+export const getCommunityData = (id: string | undefined) => {
+  return client.get<CommunityDataResponse>(`/community/communities/${id}`);
 };
 
 // コミュニティに参加する

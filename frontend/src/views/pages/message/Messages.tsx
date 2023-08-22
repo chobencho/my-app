@@ -1,3 +1,4 @@
+// Common
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -6,22 +7,12 @@ import { getChatRooms } from "lib/api/message";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 // Interface
 import { ChatUserData } from "interfaces/index";
-import moment from "moment"; // moment ライブラリをインポート
-import "moment/locale/ja"; // 日本語ロケールをインポート
+import moment from "moment";
+import "moment/locale/ja";
 
-import { makeStyles, Theme } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme: Theme) => ({
-  userImage: {
-    width: "48px",
-    height: "48px",
-    objectFit: "cover",
-    borderRadius: "30px",
-  },
-}));
+import UserCircleImage from "views/components/block/UserCircleImage";
 
 const Messages = () => {
-  const classes = useStyles();
   // State
   const [chatUsers, setChatUsers] = useState<ChatUserData[]>([]);
   //Id
@@ -45,15 +36,13 @@ const Messages = () => {
           key={chatUser.id}
           className="border-b flex py-1 pl-1 pr-2"
         >
-          <div className="mr-1 flex items-center">
-            {chatUser.image?.url ? (
-              <img
-                src={chatUser.image.url}
-                alt="userData image"
-                className={`${classes.userImage}`}
-              />
-            ) : null}
-          </div>
+          <UserCircleImage
+            generalData={chatUser}
+            imageWidth={"48px"}
+            imageHeight={"48px"}
+            rounded={"999px"}
+            marginRight={"5px"}
+          />
 
           <div className="w-2/3">
             <p className="text-sm px-1">{chatUser.name}</p>

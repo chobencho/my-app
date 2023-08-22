@@ -2,6 +2,7 @@ import client from "lib/api/client";
 import clientImage from "lib/api/clientImage";
 import { AxiosPromise } from "axios";
 import { UserData } from "interfaces/index";
+import { UserDataResponse } from "interfaces/index";
 import Cookies from "js-cookie";
 
 // ユーザ一覧を取得
@@ -20,12 +21,12 @@ export const getSortUsers = (id: string | undefined, sortValue: string) => {
 
 // ユーザ情報取得
 export const getUserData = (id: string | undefined) => {
-  return client.get<UserData>(`/user/users/${id}`);
+  return client.get<UserDataResponse>(`/user/users/${id}`);
 };
 
 // ユーザ情報取得
 export const getEditUserData = (id: string | undefined) => {
-  return client.get(`/user/users/${id}/edit`, {
+  return client.get<UserDataResponse>(`/user/users/${id}/edit`, {
     headers: {
       "access-token": Cookies.get("_access_token"),
       client: Cookies.get("_client"),

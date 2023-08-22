@@ -3,6 +3,8 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 // Interface
 import { BoardData } from "interfaces/index";
 
+import UserCircleImage from "views/components/block/UserCircleImage";
+
 interface BoardItemProps {
   boards: BoardData[];
   handleGetBoardData: Function;
@@ -48,19 +50,15 @@ const BoardsItem = ({ boards }: BoardItemProps) => {
               </div>
             </div>
 
-            {board.image?.url ? (
-              <img
-                src={board.image.url}
-                alt="boardData image"
-                className={`${classes.boardImage}`}
+            <div className="w-2/5">
+              <UserCircleImage
+                generalData={board}
+                imageWidth={"100%"}
+                imageHeight={"80px"}
+                rounded={"5px"}
+                marginRight={""}
               />
-            ) : (
-              <img
-                src={`${process.env.PUBLIC_URL}/images/common/no-image.jpg`}
-                alt="boardData image"
-                className={`${classes.boardImage}`}
-              />
-            )}
+            </div>
           </div>
         </Link>
       ))}

@@ -2,13 +2,13 @@ import CommunitiesItem from "views/components/modules/community/CommunitiesItem"
 import { CommunityData } from "interfaces/index";
 
 type CommunityProps = {
-  myCommunity: CommunityData[];
+  myCommunityData: CommunityData[];
 };
 
-const CommunitiesBranchJoin = ({ myCommunity }: CommunityProps) => {
+const CommunitiesBranchJoin = ({ myCommunityData }: CommunityProps) => {
   return (
     <>
-      {myCommunity.map((community) => (
+      {myCommunityData.map((community) => (
         <CommunitiesItem community={community} key={community.id} />
       ))}
     </>

@@ -76,7 +76,7 @@ const CommonMessageItems = ({ message, stringMyId }: CommunityCommentProps) => {
                 className={`${classes.userImage}`}
               />
             </Link>
-            <div className="pl-2">
+            <div className="">
               <p className="text-xs pb-1">{message.name}</p>
               {message.body ? (
                 <p className="whitespace-pre-wrap text-sm bg-gray-600 text-white border max-w-fit mr-auto rounded-b-2xl rounded-r-2xl py-1 px-3">

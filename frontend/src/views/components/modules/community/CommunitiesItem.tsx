@@ -11,7 +11,7 @@ const CommunitiesItem = ({ community }: CommunityProps) => {
       <Link to={`/community/${community.id}`} className="block border-b py-2">
         <div className="flex">
           <img
-            src={`${process.env.PUBLIC_URL}/images/community/${community.categoryId}_category.jpg`}
+            src={`${process.env.PUBLIC_URL}/images/community/${community.categoryId}_category.webp`}
             alt=""
             className="border rounded w-1/4 h-14 object-cover"
           />

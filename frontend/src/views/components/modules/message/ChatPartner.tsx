@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import TocIcon from "@mui/icons-material/Toc";
 import ModalDeleteForm from "views/components/modules/message/ModalDeleteForm";
+import UserCircleImage from "views/components/block/UserCircleImage";
 // Function
 
 // Interface
@@ -61,13 +62,13 @@ const ChatPartner = ({ buddy, generalId }: ChatPartnerProps) => {
               <ChevronLeftIcon />
             </span>
             <Link to={`/user/${buddy.id}`}>
-              {buddy.image?.url ? (
-                <img
-                  src={buddy.image.url}
-                  alt="userData image"
-                  className="w-8 h-8 object-cover rounded-3xl ml-1 mr-2"
-                />
-              ) : null}
+              <UserCircleImage
+                generalData={buddy}
+                imageWidth={"36px"}
+                imageHeight={"36px"}
+                rounded={"999px"}
+                marginRight={"5px"}
+              />
             </Link>
             <p className="flex items-center">{buddy.name}</p>
           </div>

@@ -1,9 +1,12 @@
 // Common
-import { useState, useCallback } from "react";
+import { useState } from "react";
 // Style
 import SearchIcon from "@mui/icons-material/Search";
 // Components
 import ModalSearchForm from "views/components/modules/home/ModalSearchForm";
+// Helper
+import { openModal } from "lib/api/helper";
+import { clearModal } from "lib/api/helper";
 
 interface ModalSearchFormProps {
   handleGetUsersData: Function;
@@ -15,21 +18,21 @@ const SearchButton = ({
   stringMyId,
 }: ModalSearchFormProps) => {
   // State
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-  // モーダル非表示
   const handleClearModal = () => {
-    setShowModal(false); // モーダルを非表示にする
+    clearModal(setShowModal);
   };
-
-  // モーダル表示
-  const showModalWindow = useCallback(() => {
-    setShowModal(true); // 画像が選択されたときにモーダルを表示
-  }, []);
+  const handleShowModal = () => {
+    openModal(setShowModal);
+  };
 
   return (
     <>
-      <div className="text-black px-1 text-xl flex items-center" onClick={showModalWindow}>
+      <div
+        className="text-black px-1 text-xl flex items-center"
+        onClick={handleShowModal}
+      >
         <SearchIcon fontSize="medium" />
         <span className="text-base">キーワード検索</span>
       </div>

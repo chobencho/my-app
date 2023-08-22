@@ -2,7 +2,7 @@
 import { useState } from "react";
 // Style
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-
+import ClearButton from "views/components/block/ClearButton";
 
 interface ModalSearchFormProps {
   onClose: Function;
@@ -52,9 +52,7 @@ const ModalSearchForm = ({
       >
         <div className="modal">
           <div className="modal-content">
-            <button onClick={() => onClose()} className="">
-              <HighlightOffIcon />
-            </button>
+            <ClearButton onClose={onClose} />
             <div className="p-3">
               <p className="text-xs text-center my-2">
                 キーワードを追加してユーザ検索してみよう
@@ -68,7 +66,7 @@ const ModalSearchForm = ({
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                     setTag(e.target.value);
                   }}
-                  onKeyPress={(e) => {
+                  onKeyDown={(e) => {
                     if (e.key === "Enter") {
                       e.preventDefault();
                       const addButton = document.getElementById("addBtn");
