@@ -8,7 +8,6 @@ import { UserDataResponse } from "interfaces/index";
 import UserItem from "views/components/modules/user/UserItem";
 import CommonEditButton from "views/components/modules/common/CommonEditButton";
 import { useAuthData } from "views/components/modules/common/useAuthData";
-
 import SkeletonLoaderUser from "views/components/modules/user/SkeletonLoaderUser";
 
 const User = () => {

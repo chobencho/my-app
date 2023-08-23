@@ -37,6 +37,7 @@ const UsersItem = ({ userData }: UsersProps) => {
                 name={userData.name}
                 fontSize={"16px"}
                 fontWeight={600}
+                margin={""}
               />
               <JudgeLogin
                 generalData={userData}

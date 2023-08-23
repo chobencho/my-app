@@ -7,18 +7,16 @@ import { getCommunityData } from "lib/api/community";
 import CommunitiesBranchSearch from "views/components/modules/community/CommunitiesBranchSearch";
 import CommunitiesBranchJoin from "views/components/modules/community/CommunitiesBranchJoin";
 import { useAuthData } from "views/components/modules/common/useAuthData";
-
 import SkeletonLoaderCommunities from "views/components/modules/community/SkeletonLoaderCommunities";
 
 const Communities = () => {
   const [data, setData] = useState<CommunityDataResponse | null>(null);
-  const [searchButtonActive, setSearchButtonActive] = useState(true);
-  const [joinButtonActive, setJoinButtonActive] = useState(false);
-
+  const [searchButtonActive, setSearchButtonActive] = useState<boolean>(true);
+  const [joinButtonActive, setJoinButtonActive] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [showSkeleton, setShowSkeleton] = useState<boolean>(true);
+  // Id
   const { stringMyId } = useAuthData();
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [showSkeleton, setShowSkeleton] = useState(true); // タイムアウト用
 
   const handleSearchClick = () => {
     setSearchButtonActive(true);
@@ -43,14 +41,13 @@ const Communities = () => {
     handleGetCommunityData();
   }, []);
 
-  // タイムアウト用
   useEffect(() => {
     const delay = setTimeout(() => {
-      setIsLoading(false); // データ取得完了後にisLoadingをfalseに設定
-      setShowSkeleton(false); // データが取得されたらSkeletonを非表示に
-    }, 300); // 遅延時間を調整（ここでは2000ミリ秒、つまり2秒）
+      setIsLoading(false);
+      setShowSkeleton(false);
+    }, 300);
 
-    return () => clearTimeout(delay); // コンポーネントがアンマウントされたらタイマーをクリア
+    return () => clearTimeout(delay);
   }, []);
 
   return (

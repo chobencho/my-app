@@ -13,6 +13,7 @@ import SignIn from "views/pages/auth/SignIn";
 import ResetPassword from "views/pages/auth/PasswordResetForm";
 import Board from "views/pages/board/Board";
 import Boards from "views/pages/board/Boards";
+import BoardCreate from "views/pages/board/BoardCreate";
 import BoardEdit from "views/pages/board/BoardEdit";
 import Communities from "views/pages/community/Communities";
 import Community from "views/pages/community/Community";
@@ -151,6 +152,14 @@ const App = () => {
               element={
                 <Private>
                   <Board />
+                </Private>
+              }
+            />
+            <Route
+              path="/boardCreate"
+              element={
+                <Private>
+                  <BoardCreate />
                 </Private>
               }
             />

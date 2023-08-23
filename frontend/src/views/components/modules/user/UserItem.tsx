@@ -6,8 +6,12 @@ import { UserTagData } from "interfaces/index";
 // Components
 import LikeButton from "views/components/modules/common/LikeButton";
 import TableTr from "views/components/block/TableTr";
+import TableTrTags from "views/components/block/TableTrTags";
+import TableTrHobby from "views/components/block/TableTrHobby";
+import TableTrInterest from "views/components/block/TableTrInterest";
 import JudgeLogin from "views/components/block/JudgeLogin";
 import UserCircleImage from "views/components/block/UserCircleImage";
+import UserName from "views/components/block/UserName";
 
 export interface UserItemProps {
   myId: string | undefined;
@@ -56,7 +60,14 @@ const UserItem = ({
           />
         </div>
 
-        <p className="text-center m-1 text-lg font-semibold">{userData.name}</p>
+        <div className="m-1 text-center">
+          <UserName
+            name={userData.name}
+            fontSize={"18px"}
+            fontWeight={600}
+            margin={""}
+          />
+        </div>
 
         <table className="w-full">
           <TableTr trTitle={"自己紹介"} trData={userData.body} />
@@ -66,9 +77,9 @@ const UserItem = ({
           <TableTr trTitle={"専攻分野"} trData={userData.subjectCode} />
           <TableTr trTitle={"居住地"} trData={userData.prefectureCode} />
           <TableTr trTitle={"出身地"} trData={userData.birthplaceCode} />
-          <TableTr trTitle={"研究タグ"} trData={tagsData} />
-          <TableTr trTitle={"趣味"} trData={hobbyData} />
-          <TableTr trTitle={"興味分野"} trData={interestData} />
+          <TableTrTags trTitle={"研究タグ"} trData={tagsData} />
+          <TableTrHobby trTitle={"趣味"} trData={hobbyData} />
+          <TableTrInterest trTitle={"興味分野"} trData={interestData} />
         </table>
       </div>
     </>

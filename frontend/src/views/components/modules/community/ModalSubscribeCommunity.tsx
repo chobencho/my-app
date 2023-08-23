@@ -1,12 +1,8 @@
-// Style
-import { makeStyles, Theme } from "@material-ui/core/styles";
 // Function
 import { subscribeCommunity } from "lib/api/community";
 // Components
 import GoBackButton from "views/components/block/GoBackButton";
-
 import Fade from "@mui/material/Fade";
-
 
 export interface ModalSubscribeProps {
   community_id: string | undefined;
@@ -15,36 +11,12 @@ export interface ModalSubscribeProps {
   isModalOpen: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  modal: {
-    position: "fixed",
-    top: "0",
-    left: "0",
-    width: "100%",
-    height: "100%",
-    background: "rgba(0, 0, 0, 0.6)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 100,
-  },
-  modalContent: {
-    width: "80%",
-    maxHeight: "80%",
-    background: "#fff",
-    textAlign: "center",
-    padding: "40px 0",
-  },
-}));
-
 const ModalSubscribeCommunity = ({
   community_id,
   user_id,
   handleGetSubscribedCommunity,
-  isModalOpen
+  isModalOpen,
 }: ModalSubscribeProps) => {
-  const classes = useStyles();
-
   // 送信用フォームデータ作成関数
   const createFormData = (): FormData => {
     const formData = new FormData();
@@ -69,10 +41,10 @@ const ModalSubscribeCommunity = ({
   return (
     <>
       <Fade in={isModalOpen} timeout={500}>
-        <div className={`${classes.modal}`}>
-          <div className={`${classes.modalContent}`}>
-            <h1 className="text-sm mb-5">このコミュニティに参加しますか？</h1>
-            <div className="w-4/5 flex justify-between m-auto">
+        <div className="modal">
+          <div className="modal-content text-center">
+            <h1 className="text-sm my-5">このコミュニティに参加しますか？</h1>
+            <div className="w-4/5 flex justify-between m-auto mb-5">
               <form onSubmit={handleSubscribeCommunity} className="w-1/2">
                 <button
                   type="submit"
@@ -84,7 +56,6 @@ const ModalSubscribeCommunity = ({
               <GoBackButton discriminationText={"参加しない"} />
             </div>
           </div>
-
         </div>
       </Fade>
     </>

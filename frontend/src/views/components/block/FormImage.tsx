@@ -1,13 +1,13 @@
 import React, { useCallback } from "react";
 import { uploadUniqueImage } from "lib/api/helper";
 import { previewImage } from "lib/api/helper";
+import { clearPreview } from "lib/api/helper";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 export interface FormImageProps {
   setState: React.Dispatch<React.SetStateAction<File | undefined>>;
   inputTitle: string;
   preview: string;
   setPreview: React.Dispatch<React.SetStateAction<string>>;
-  onClose: Function;
 }
 
 const FormImage = ({
@@ -15,7 +15,6 @@ const FormImage = ({
   inputTitle,
   preview,
   setPreview,
-  onClose,
 }: FormImageProps) => {
   const handleUploadImage = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => uploadUniqueImage(e, setState),
@@ -71,7 +70,7 @@ const FormImage = ({
         {preview ? (
           <div className="absolute top-0 left-0">
             <HighlightOffIcon
-              onClick={() => onClose()}
+              onClick={() => clearPreview(setPreview)}
               className="absolute text-white top-1 left-1"
             />
             <img src={preview} alt="preview img" className="preview-image" />

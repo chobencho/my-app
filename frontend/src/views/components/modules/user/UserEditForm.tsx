@@ -2,6 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
+import { clearPreview } from "lib/api/helper";
 // Style
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import Gender from "options/gender";
@@ -15,7 +16,6 @@ import { updateUserData } from "lib/api/user";
 // Interface
 import { UserData } from "interfaces/index";
 import { UserTagData } from "interfaces/index";
-import { clearPreview } from "lib/api/helper";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import FormInputText from "views/components/block/FormInputText";
@@ -187,12 +187,6 @@ const UserEditForm = ({
     });
   };
 
-  // プレビュー削除機能
-  const handleClearPreview = () => {
-    setPreview("");
-    clearPreview();
-  };
-
   const onSubmit = async (data: Record<string, any>) => {
     // フォームデータの送信
     const formData = new FormData();
@@ -232,7 +226,7 @@ const UserEditForm = ({
     await updateUserData(id, formData).then(() => {
       handleGetUserData();
     });
-    handleClearPreview();
+    clearPreview(setPreview);
   };
 
   // 興味オプションの表示を切り替えるボタンが押されたときの処理
@@ -289,7 +283,6 @@ const UserEditForm = ({
           inputTitle={"プロフィール画像"}
           preview={preview}
           setPreview={setPreview}
-          onClose={handleClearPreview}
         />
 
         <FormTextarea

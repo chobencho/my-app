@@ -1,5 +1,7 @@
-import CommunitiesItem from "views/components/modules/community/CommunitiesItem";
+// Interface
 import { CommunityData } from "interfaces/index";
+// Components
+import CommunitiesItem from "views/components/modules/community/CommunitiesItem";
 
 type CommunityProps = {
   myCommunityData: CommunityData[];

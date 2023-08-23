@@ -1,16 +1,17 @@
 // Common
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import moment from "moment";
 // Function
 import { getChatRooms } from "lib/api/message";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 // Interface
 import { ChatUserData } from "interfaces/index";
-import moment from "moment";
-import "moment/locale/ja";
-
+// Components
 import UserCircleImage from "views/components/block/UserCircleImage";
+import PageTitle from "views/components/block/PageTitle";
+import Moment from "views/components/block/Moment";
+import UserName from "views/components/block/UserName";
 
 const Messages = () => {
   // State
@@ -29,7 +30,11 @@ const Messages = () => {
 
   return (
     <>
-      <p className="text-center text-sm pt-4 pb-2 border-b">チャット一覧</p>
+      <PageTitle
+        title={"チャット一覧"}
+        padding={"12px 0 6px"}
+        classes={"text-center border-b"}
+      />
       {chatUsers?.map((chatUser) => (
         <Link
           to={`/message/${chatUser.roomId}?buddyId=${chatUser.id}`}
@@ -43,17 +48,26 @@ const Messages = () => {
             rounded={"999px"}
             marginRight={"5px"}
           />
-
           <div className="w-2/3">
-            <p className="text-sm px-1">{chatUser.name}</p>
+            <UserName
+              name={chatUser.name}
+              fontSize={"13px"}
+              fontWeight={0}
+              margin={"4px"}
+            />
+
             <p className="text-xs txt-limit-2 px-1">
               {chatUser.latestMessageBody}
             </p>
           </div>
-          <p className="text-xs text-gray-600 relative top-0 right-0">
-            {chatUser.latestCreatedAt &&
-              moment(chatUser.latestCreatedAt).format("MM/DD HH:mm")}
-          </p>
+
+          <Moment
+            time={chatUser.latestCreatedAt}
+            format={"MM/DD HH:mm"}
+            fontSize={"11px"}
+            margin={""}
+            classes={""}
+          />
         </Link>
       ))}
     </>

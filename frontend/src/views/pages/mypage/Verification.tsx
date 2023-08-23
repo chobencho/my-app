@@ -1,13 +1,9 @@
 import React, { useState, useCallback } from "react";
 // Function
 import { sendCertificateImage } from "lib/api/verification";
-import { clearPreview } from "lib/api/helper";
-import { previewImage } from "lib/api/helper";
-import { uploadUniqueImage } from "lib/api/helper";
 // Components
 import { useAuthData } from "views/components/modules/common/useAuthData";
 import FormImage from "views/components/block/FormImage";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 const Verification = () => {
   // State
@@ -15,12 +11,6 @@ const Verification = () => {
   const [preview, setPreview] = useState<string>("");
   // Id
   const { stringMyId, myEmail } = useAuthData();
-
-  // プレビュークリア機能
-  const handleClearPreview = () => {
-    setPreview("");
-    clearPreview();
-  };
 
   const createFormData = (): FormData => {
     const formData = new FormData();
@@ -97,7 +87,6 @@ const Verification = () => {
           inputTitle={""}
           preview={preview}
           setPreview={setPreview}
-          onClose={handleClearPreview}
         />
 
         <div className="text-center">

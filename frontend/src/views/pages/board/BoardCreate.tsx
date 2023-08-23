@@ -1,17 +1,18 @@
+// Common
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // Function
 import { createBoardData } from "lib/api/board";
 import { useAuthData } from "views/components/modules/common/useAuthData";
-import { clearPreview } from "lib/api/helper";
-
+// Components
 import FormInputText from "views/components/block/FormInputText";
 import FormTextarea from "views/components/block/FormTextarea";
 import FormImage from "views/components/block/FormImage";
 import FormSubmitButton from "views/components/block/FormSubmitButton";
+import PageTitle from "views/components/block/PageTitle";
 
-const BoardCreateForm = () => {
+const BoardCreate = () => {
   const navigate = useNavigate();
   // State
   const [title, setTitle] = useState<string>("");
@@ -27,13 +28,7 @@ const BoardCreateForm = () => {
     formState: { errors },
   } = useForm();
 
-  // プレビュー削除機能
-  const handleClearPreview = () => {
-    setPreview("");
-    clearPreview();
-  };
-
-  const onSubmit = async (data: Record<string, any>) => {
+  const createForm = (data: Record<string, any>) => {
     const formData = new FormData();
     formData.append("user_id", stringMyId || "");
     formData.append("title", data.title);
@@ -42,6 +37,11 @@ const BoardCreateForm = () => {
     }
     formData.append("body", data.body);
 
+    return formData;
+  };
+
+  const onSubmit = async (data: Record<string, any>) => {
+    const formData = createForm(data);
     await createBoardData(formData).then(() => {
       navigate("/boards");
     });
@@ -49,6 +49,11 @@ const BoardCreateForm = () => {
 
   return (
     <>
+      <PageTitle
+        title={"掲示板作成"}
+        padding={"10px"}
+        classes={"text-center"}
+      />
       <form onSubmit={handleSubmit(onSubmit)} className="w-96 m-auto">
         <FormInputText
           state={title}
@@ -65,7 +70,6 @@ const BoardCreateForm = () => {
           inputTitle={"サムネイル"}
           preview={preview}
           setPreview={setPreview}
-          onClose={handleClearPreview}
         />
 
         <FormTextarea
@@ -76,11 +80,10 @@ const BoardCreateForm = () => {
           inputTitle={"内容"}
           column={"body"}
         />
-
         <FormSubmitButton buttonTitle={"掲示板を作成する"} />
       </form>
     </>
   );
 };
 
-export default BoardCreateForm;
+export default BoardCreate;

@@ -35,13 +35,16 @@ export const previewImage = (
 };
 
 // プレビュー削除機能
-export const clearPreview = () => {
+export const clearPreview = (
+  setPreview: React.Dispatch<React.SetStateAction<string>>
+) => {
   const fileInput = document.getElementById(
     "icon-button-file"
   ) as HTMLInputElement;
   if (fileInput) {
     fileInput.value = "";
   }
+  setPreview("");
 };
 
 // モーダル表示

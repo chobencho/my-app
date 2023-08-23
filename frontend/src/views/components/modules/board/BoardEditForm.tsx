@@ -38,12 +38,6 @@ const BoardEditForm = ({
   } = useForm();
   // 画像アップロード機能
 
-  // プレビュー削除機能
-  const handleClearPreview = () => {
-    setPreview("");
-    clearPreview();
-  };
-
   const onSubmit = async (data: Record<string, any>) => {
     const formData = new FormData();
     formData.append("title", data.title);
@@ -54,7 +48,7 @@ const BoardEditForm = ({
 
     await editBoardData(id, formData).then(() => {
       handleGetBoardData();
-      handleClearPreview();
+      clearPreview(setPreview);
     });
   };
 
@@ -76,7 +70,6 @@ const BoardEditForm = ({
           inputTitle={"サムネイル"}
           preview={preview}
           setPreview={setPreview}
-          onClose={handleClearPreview}
         />
 
         <FormTextarea

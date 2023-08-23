@@ -1,3 +1,4 @@
+// Common
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 // Interface
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#fff",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     zIndex: 10,
-    alignItems: "center", // 上下中央寄せ
+    alignItems: "center",
   },
   slideUpContent: {
     position: "fixed",

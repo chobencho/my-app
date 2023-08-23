@@ -5,14 +5,16 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import { createCommunityComment } from "lib/api/communityChat";
 import { createMessage } from "lib/api/chat";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { clearPreview } from "lib/api/helper";
 
 interface ModalCommonMessageFormProps {
   preview: string;
-  onClose: Function;
+  setPreview: React.Dispatch<React.SetStateAction<string>>;
   generalId: string;
   stringMyId: string;
   image: File | undefined;
   handleGetData: Function;
+  another_id: string;
   discrimination: string;
 }
 
@@ -45,11 +47,12 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ModalCommonMessageForm = ({
   preview,
-  onClose,
+  setPreview,
   generalId,
   stringMyId,
   image,
   handleGetData,
+  another_id,
   discrimination,
 }: ModalCommonMessageFormProps) => {
   const classes = useStyles();
@@ -72,22 +75,16 @@ const ModalCommonMessageForm = ({
   ) => {
     e.preventDefault();
 
+    const data = createFormData(another_id);
+
     if (discrimination == "community") {
-      const data = createFormData("community_id");
-
-      await createCommunityComment(data).then(() => {
-        setModalBody("");
-        handleGetData();
-      });
+      await createCommunityComment(data).then(() => {});
     } else if (discrimination == "chat") {
-      const data = createFormData("room_id");
-
-      await createMessage(data).then(() => {
-        setModalBody("");
-        handleGetData();
-      });
+      await createMessage(data).then(() => {});
     }
-    onClose();
+    setModalBody("");
+    handleGetData();
+    clearPreview(setPreview);
   };
 
   return (
@@ -98,7 +95,7 @@ const ModalCommonMessageForm = ({
       >
         <div className={`${classes.modal}`}>
           <div className={`${classes.modalContent}`}>
-            <button onClick={() => onClose()} className="">
+            <button onClick={() => clearPreview(setPreview)} className="">
               <HighlightOffIcon />
             </button>
             <p className="text-sm text-center my-3">ファイルの送信</p>

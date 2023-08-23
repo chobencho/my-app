@@ -7,6 +7,10 @@ import { makeStyles, Theme } from "@material-ui/core/styles";
 import TableTr from "views/components/block/TableTr";
 
 import UserCircleImage from "views/components/block/UserCircleImage";
+import TableTrTags from "views/components/block/TableTrTags";
+import TableTrHobby from "views/components/block/TableTrHobby";
+import TableTrInterest from "views/components/block/TableTrInterest";
+import UserName from "views/components/block/UserName";
 
 interface UserEditItemProps {
   myId: string | undefined;
@@ -63,7 +67,12 @@ const UserEditItem = ({
       />
 
       <div className="w-96 m-auto">
-        <p className="text-center m-1 text-lg font-semibold">{userData.name}</p>
+        <UserName
+          name={userData.name}
+          fontSize={"18px"}
+          fontWeight={600}
+          margin={""}
+        />
 
         <table className="w-full">
           <TableTr trTitle={"自己紹介"} trData={userData.body} />
@@ -73,9 +82,9 @@ const UserEditItem = ({
           <TableTr trTitle={"専攻分野"} trData={userData.subjectCode} />
           <TableTr trTitle={"居住地"} trData={userData.prefectureCode} />
           <TableTr trTitle={"出身地"} trData={userData.birthplaceCode} />
-          <TableTr trTitle={"研究タグ"} trData={tagsData} />
-          <TableTr trTitle={"趣味"} trData={hobbyData} />
-          <TableTr trTitle={"興味分野"} trData={interestData} />
+          <TableTrTags trTitle={"研究タグ"} trData={tagsData} />
+          <TableTrHobby trTitle={"趣味"} trData={hobbyData} />
+          <TableTrInterest trTitle={"興味分野"} trData={interestData} />
         </table>
       </div>
     </>
