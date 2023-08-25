@@ -1,3 +1,4 @@
+// Common
 import { useEffect, useState } from "react";
 // Function
 import { getBoardData } from "lib/api/board";
@@ -8,25 +9,22 @@ import { BoardData } from "interfaces/index";
 import { CommentData } from "interfaces/index";
 // Components
 import CommonEditButton from "views/components/modules/common/CommonEditButton";
-import LikeButton from "views/components/modules/common/LikeButton";
-// import GoBackButton from "views/components/modules/common/GoBackButton";
 import BoardContent from "views/components/modules/board/BoardContent";
 import CommentItem from "views/components/modules/board/CommentItem";
 import CommonMessageForms from "views/components/modules/common/CommonMessageForms";
 import { useAuthData } from "views/components/modules/common/useAuthData";
-
-import SkeletonLoaderBoard from "views/components/modules/board/SkeletonLoaderBoard"
+import SkeletonLoaderBoard from "views/components/modules/board/SkeletonLoaderBoard";
+import PageTitle from "views/components/block/PageTitle";
 
 const Board = () => {
   // State
   const [board, setBoard] = useState<BoardData | null>(null);
   const [comments, setComments] = useState<CommentData[]>([]);
   const [commonRoomId, setCommonRoomId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [showSkeleton, setShowSkeleton] = useState<boolean>(true);
   // Id
   const { stringMyId, id, verifiedAge } = useAuthData();
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [showSkeleton, setShowSkeleton] = useState(true);
 
   // 掲示板情報を取得
   const handleGetBoardData = async () => {
@@ -45,7 +43,6 @@ const Board = () => {
     getCommonRoomId(userId, stringMyId).then((res) =>
       setCommonRoomId(res.data)
     );
-    // setIsLoading(false);
   };
 
   useEffect(() => {
@@ -60,10 +57,10 @@ const Board = () => {
   useEffect(() => {
     const delay = setTimeout(() => {
       setIsLoading(false);
-      setShowSkeleton(false); // データが取得されたらSkeletonを非表示に
-    }, 200); // 遅延時間を調整（ここでは2000ミリ秒、つまり2秒）
+      setShowSkeleton(false);
+    }, 200);
 
-    return () => clearTimeout(delay); // コンポーネントがアンマウントされたらタイマーをクリア
+    return () => clearTimeout(delay);
   }, []);
 
   return (
@@ -94,16 +91,14 @@ const Board = () => {
                   discrimination={"board"}
                 />
 
-                {/* 戻るボタン */}
-                {/* <GoBackButton /> */}
-
                 {/* コメントフォーム */}
                 <div className="border-b border-t w-96 mx-auto py-2">
-                  <p className="m-1">コメント</p>
+                  <PageTitle title={"コメント"} padding={"5px"} classes={""} />
                   <CommonMessageForms
                     handleGetData={handleGetBoardComment}
                     id={id ?? ""}
                     stringMyId={stringMyId ?? ""}
+                    another_id={"board_id"}
                     discrimination={"board"}
                   />
                 </div>
@@ -117,7 +112,6 @@ const Board = () => {
           )}
         </>
       )}
-
     </>
   );
 };

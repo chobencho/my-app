@@ -5,103 +5,75 @@ import { useState } from "react";
 import { MessageItemsData } from "interfaces/index";
 // Function
 import ModalCommonExpansionImage from "views/components/modules/common/ModalCommonExpansionImage";
-import { clearModal } from "lib/api/helper";
-import { expansionImage } from "lib/api/helper";
-
-import moment from "moment"; // moment ライブラリをインポート
-import "moment/locale/ja"; // 日本語ロケールをインポート
-
-import { makeStyles, Theme } from "@material-ui/core/styles";
+// Components
+import MessageImage from "views/components/block/MessageImage";
+import MessageBody from "views/components/block/MessageBody";
+import Moment from "views/components/block/Moment";
+import OtherImage from "views/components/block/OtherImage";
 
 export interface CommunityCommentProps {
   message: MessageItemsData;
   stringMyId: string | undefined;
 }
-
-const useStyles = makeStyles((theme: Theme) => ({
-  userImage: {
-    width: "30px",
-    height: "30px",
-    objectFit: "cover",
-    borderRadius: "20px",
-  },
-}));
-
 const CommonMessageItems = ({ message, stringMyId }: CommunityCommentProps) => {
-  const classes = useStyles();
-
   // State
   const [showModal, setShowModal] = useState<boolean>(false);
-
-  // 画像拡大機能
-  const handleExpansionImage = () => {
-    expansionImage(setShowModal);
-  };
-
-  // モーダルクリア機能
-  const handleCloseModal = () => {
-    clearModal(setShowModal);
-  };
 
   return (
     <>
       {message.userId == stringMyId ? (
         <div className="px-2 py-3 flex w-5/6 justify-end ml-auto">
-          <p className="text-10 pr-1 text-right flex items-end justify-end">
-            {moment(message.createdAt).format("MM月DD日 HH:mm")}
-          </p>
+          <Moment
+            time={message.createdAt}
+            format={"MM月DD日 HH:mm"}
+            fontSize={"10px"}
+            margin={""}
+            classes={"pr-1 text-right flex items-end justify-end"}
+          />
           <div className="w-fit">
-            {message.body ? (
-              <p className="whitespace-pre-wrap text-sm bg-green-400 border w-fit ml-auto rounded-b-2xl rounded-l-2xl py-1 px-3">
-                <span className="break-all">{message.body}</span>
-              </p>
-            ) : null}
-            {message.image?.url ? (
-              <img
-                src={message.image.url}
-                alt="boardData image"
-                className="rounded ml-auto w-56"
-                onClick={() => handleExpansionImage()}
-              />
-            ) : null}
+            <MessageBody
+              generalData={message}
+              bgColor={"#43D466"}
+              classes={"rounded-l-2xl ml-auto w-fit"}
+            />
+
+            <MessageImage generalData={message} setShowModal={setShowModal} />
           </div>
         </div>
       ) : (
         <div className="px-2 py-3 flex w-4/5 justify-start mr-auto">
           <div className="flex">
             <Link to={`/user/${message.userId}`} className="inline-block w-10">
-              <img
-                src={`http://localhost:3001/uploads/user/image/${message.userId}/${message.userImage}`}
-                alt="boardData image"
-                className={`${classes.userImage}`}
+              <OtherImage
+                url={`http://localhost:3001/uploads/user/image/${message.userId}/${message.userImage}`}
+                imageWidth={"30px"}
+                imageHeight={"30px"}
+                borderRadius={"20px"}
               />
             </Link>
-            <div className="pl-2">
+            <div className="">
               <p className="text-xs pb-1">{message.name}</p>
-              {message.body ? (
-                <p className="whitespace-pre-wrap text-sm bg-gray-600 text-white border max-w-fit mr-auto rounded-b-2xl rounded-r-2xl py-1 px-3">
-                  <span className="break-all">{message.body}</span>
-                </p>
-              ) : null}
-              {message.image?.url ? (
-                <img
-                  src={message.image.url}
-                  alt="boardData image"
-                  className="rounded ml-auto w-56"
-                  onClick={() => handleExpansionImage()}
-                />
-              ) : null}
+              <MessageBody
+                generalData={message}
+                bgColor={"#666"}
+                classes={"rounded-r-2xl mr-auto text-white max-w-fit "}
+              />
+              <MessageImage generalData={message} setShowModal={setShowModal} />
             </div>
           </div>
-          <p className="text-10 pl-2 text-left flex items-end justify-start">
-            {moment(message.createdAt).format("MM月DD日 HH:mm")}
-          </p>
+          <Moment
+            time={message.createdAt}
+            format={"MM月DD日 HH:mm"}
+            fontSize={"10px"}
+            margin={""}
+            classes={"pl-1 text-left flex items-end justify-start"}
+          />
         </div>
       )}
 
       {message.image?.url && showModal ? (
         <ModalCommonExpansionImage
-          onClose={handleCloseModal}
+          setShowModal={setShowModal}
           image={message.image.url}
         />
       ) : null}

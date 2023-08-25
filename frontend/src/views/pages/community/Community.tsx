@@ -1,3 +1,4 @@
+// Common
 import { useEffect, useState } from "react";
 // Interface
 import { CommunityData } from "interfaces/index";
@@ -12,16 +13,15 @@ import CommonMessageItems from "views/components/modules/common/CommonMessageIte
 import CommonMessageForms from "views/components/modules/common/CommonMessageForms";
 import ModalSubscribeCommunity from "views/components/modules/community/ModalSubscribeCommunity";
 import { useAuthData } from "views/components/modules/common/useAuthData";
-import Fade from "@mui/material/Fade";
 
 const Community = () => {
+  // State
   const [community, setCommunity] = useState<CommunityData | null>(null);
   const [comments, setComments] = useState<MessageItemsData[]>([]);
   const [subscribed, setSubscribed] = useState<boolean>(false);
-
-  const { stringMyId, id } = useAuthData();
-
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // Id
+  const { stringMyId, id } = useAuthData();
 
   // コミュニティ情報取得
   const handleGetCommunityData = async () => {
@@ -43,7 +43,6 @@ const Community = () => {
   };
 
   useEffect(() => {
-    // データ取得関数を非同期で呼び出す
     const fetchData = async () => {
       await handleGetCommunityData();
       await handleGetCommunityCommentData();
@@ -53,13 +52,11 @@ const Community = () => {
     fetchData();
   }, []);
 
-  // データ取得が完了したらモーダルを表示する
   useEffect(() => {
     if (subscribed === false) {
-      // subscribed ステートが false の場合にモーダルを表示
       setTimeout(() => {
         setIsModalOpen(true);
-      }, 500); // 3秒遅延
+      }, 500);
     }
   }, [subscribed]);
 
@@ -86,6 +83,7 @@ const Community = () => {
               handleGetData={handleGetCommunityCommentData}
               id={id ?? ""}
               stringMyId={stringMyId ?? ""}
+              another_id={"community_id"}
               discrimination={"community"}
             />
           </div>

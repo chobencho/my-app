@@ -1,9 +1,11 @@
+// Common
 import { Link } from "react-router-dom";
 // Interface
 import { CommentData } from "interfaces/index";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import moment from "moment"; // moment ライブラリをインポート
-import "moment/locale/ja"; // 日本語ロケールをインポート
+import Moment from "views/components/block/Moment";
+import UserBody from "views/components/block/UserBody";
+import UserName from "views/components/block/UserName";
 
 interface CommentItemProps {
   comment: CommentData;
@@ -38,12 +40,27 @@ const CommentItem = ({ comment }: CommentItemProps) => {
         </Link>
         <div className="mx-2 my-1 w-full">
           <div className="flex justify-between">
-            <h6 className="text-xs">{comment.name}</h6>
-            <p className="text-10 ml-2 text-gray-600">
-              {moment(comment.createdAt).format("YYYY年MM月DD日")}
-            </p>
+            <UserName
+              name={comment.name}
+              fontSize={"12px"}
+              fontWeight={0}
+              margin={""}
+            />
+
+            <Moment
+              time={comment.createdAt}
+              format={"YYYY年MM月DD日 HH:mm"}
+              fontSize={"10px"}
+              margin={"0 0 0 8px"}
+              classes={""}
+            />
           </div>
-          <p className="whitespace-pre-wrap text-xs mt-1">{comment.body}</p>
+          <UserBody
+            body={comment.body}
+            margin={"2px 0 0 0"}
+            fontSize={"12px"}
+            classes={"whitespace-pre-wrap"}
+          />
         </div>
       </div>
     </>

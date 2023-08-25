@@ -1,3 +1,4 @@
+// Common
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 // Interface
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#fff",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
     zIndex: 10,
-    alignItems: "center", // 上下中央寄せ
+    alignItems: "center",
   },
   slideUpContent: {
     position: "fixed",
@@ -73,7 +74,7 @@ const CommunityTop = ({ community, community_id, user_id }: CommunityProps) => {
           </span>
 
           <img
-            src={`${process.env.PUBLIC_URL}/images/community/${community.id}_category.jpg`}
+            src={`${process.env.PUBLIC_URL}/images/community/${community.id}_category.webp`}
             alt=""
             className="w-12 h-8 object-cover rounded mr-2"
           />

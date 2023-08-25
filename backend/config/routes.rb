@@ -50,8 +50,6 @@ Rails.application.routes.draw do
       namespace :community do
         resources :communities, only: [:index, :create, :destroy] do
           collection do
-            get :popular
-            get :latest
             post :sendMail
           end
           member do
@@ -85,9 +83,6 @@ Rails.application.routes.draw do
             get :show
             get :sort
             get :edit
-            get :hobby
-            get :interest
-            get :researchTag
           end
         end
   

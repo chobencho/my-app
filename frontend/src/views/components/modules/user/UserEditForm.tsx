@@ -2,6 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import Select from "react-select";
+import { clearPreview } from "lib/api/helper";
 // Style
 import { makeStyles, Theme } from "@material-ui/core/styles";
 import Gender from "options/gender";
@@ -15,9 +16,6 @@ import { updateUserData } from "lib/api/user";
 // Interface
 import { UserData } from "interfaces/index";
 import { UserTagData } from "interfaces/index";
-import { clearPreview } from "lib/api/helper";
-import { uploadUniqueImage } from "lib/api/helper";
-import { previewImage } from "lib/api/helper";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import FormInputText from "views/components/block/FormInputText";
@@ -29,7 +27,7 @@ import FormSelect from "views/components/block/FormSelect";
 interface UserEditFormProps {
   handleGetUserData: Function;
   userData: UserData;
-  userResearchTagData: UserTagData[];
+  tagsData: UserTagData[];
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -44,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const UserEditForm = ({
   handleGetUserData,
   userData,
-  userResearchTagData,
+  tagsData,
 }: UserEditFormProps) => {
   const classes = useStyles();
   // State
@@ -52,7 +50,7 @@ const UserEditForm = ({
   const [body, setBody] = useState<string>(userData.body || "");
   const [age, setAge] = useState<string>(userData.age || "");
   const [tags, setTags] = useState<string[]>([
-    ...userResearchTagData.map((tag) => tag.tagName),
+    ...tagsData.map((tag) => tag.tagName),
   ]);
   const [tag, setTag] = useState<string>("");
   const [image, setImage] = useState<File | undefined>();
@@ -96,64 +94,57 @@ const UserEditForm = ({
   const handleGradeChange = (selectedOption: any) => {
     setGrade(selectedOption);
   };
-
   const gradeOptions = Grade.GRD_OPTIONS.map(([value, label]) => ({
     value: value.toString(),
-    label: label.toString(), // labelをstring型に変換
+    label: label.toString(),
   }));
 
+  // Subject
   const initialSubject = userData.subjectId
     ? {
         value: userData.subjectId.toString(),
         label: userData.subjectCode.toString(),
-      } // 適切なラベルをセットしてください
+      }
     : null;
-
   const [subject, setSubject] = useState(initialSubject);
-
   const handleSubjectChange = (selectedOption: any) => {
     setSubject(selectedOption);
   };
-
   const subjectOptions = Subject.SUB_OPTIONS.map(([value, label]) => ({
     value: value.toString(),
-    label: label.toString(), // labelをstring型に変換
+    label: label.toString(),
   }));
 
+  // Prefecture
   const initialPrefecture = userData.prefectureId
     ? {
         value: userData.prefectureId.toString(),
         label: userData.prefectureCode.toString(),
-      } // 適切なラベルをセットしてください
+      }
     : null;
-
   const [prefecture, setPrefecture] = useState(initialPrefecture);
-
   const handlePrefectureChange = (selectedOption: any) => {
     setPrefecture(selectedOption);
   };
-
   const prefectureOptions = Prefectures.PREF_OPTIONS.map(([value, label]) => ({
     value: value.toString(),
-    label: label.toString(), // labelをstring型に変換
+    label: label.toString(),
   }));
 
+  // Birthplace
   const initialBirthplace = userData.birthplaceId
     ? {
         value: userData.birthplaceId.toString(),
         label: userData.birthplaceCode.toString(),
-      } // 適切なラベルをセットしてください
+      }
     : null;
-
   const [birthplace, setBirthplace] = useState(initialBirthplace);
-
   const handleBirthplaceChange = (selectedOption: any) => {
     setBirthplace(selectedOption);
   };
-
   const birthplaceOptions = Prefectures.PREF_OPTIONS.map(([value, label]) => ({
     value: value.toString(),
-    label: label.toString(), // labelをstring型に変換
+    label: label.toString(),
   }));
 
   // 趣味チェック機能
@@ -196,24 +187,6 @@ const UserEditForm = ({
     });
   };
 
-  // 画像アップロード機能
-  const handleUploadImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => uploadUniqueImage(e, setImage),
-    [setImage]
-  );
-
-  // プレビュー機能
-  const handlePreviewImage = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => previewImage(e, setPreview),
-    [setPreview]
-  );
-
-  // プレビュー削除機能
-  const handleClearPreview = () => {
-    setPreview("");
-    clearPreview();
-  };
-
   const onSubmit = async (data: Record<string, any>) => {
     // フォームデータの送信
     const formData = new FormData();
@@ -253,7 +226,7 @@ const UserEditForm = ({
     await updateUserData(id, formData).then(() => {
       handleGetUserData();
     });
-    handleClearPreview();
+    clearPreview(setPreview);
   };
 
   // 興味オプションの表示を切り替えるボタンが押されたときの処理
@@ -310,7 +283,6 @@ const UserEditForm = ({
           inputTitle={"プロフィール画像"}
           preview={preview}
           setPreview={setPreview}
-          onClose={handleClearPreview}
         />
 
         <FormTextarea
@@ -339,57 +311,33 @@ const UserEditForm = ({
           options={genderOptions}
         />
 
-        <div className="my-1">
-          <div className="flex items-center">
-            <b className="input-title">学年</b>
-            <p className="required">必須</p>
-          </div>
-          <Select
-            className=""
-            value={grade}
-            onChange={handleGradeChange}
-            options={gradeOptions}
-          />
-        </div>
+        <FormSelect
+          value={grade}
+          onChange={handleGradeChange}
+          inputTitle="学年"
+          options={gradeOptions}
+        />
 
-        <div className="my-1">
-          <div className="flex items-center">
-            <b className="input-title">専攻</b>
-            <p className="required">必須</p>
-          </div>
-          <Select
-            className=""
-            value={subject}
-            onChange={handleSubjectChange}
-            options={subjectOptions}
-          />
-        </div>
+        <FormSelect
+          value={subject}
+          onChange={handleSubjectChange}
+          inputTitle="専攻"
+          options={subjectOptions}
+        />
 
-        <div className="my-1">
-          <div className="flex items-center">
-            <b className="input-title">居住地</b>
-            <p className="required">必須</p>
-          </div>
-          <Select
-            className=""
-            value={prefecture}
-            onChange={handlePrefectureChange}
-            options={prefectureOptions}
-          />
-        </div>
+        <FormSelect
+          value={prefecture}
+          onChange={handlePrefectureChange}
+          inputTitle="居住地"
+          options={prefectureOptions}
+        />
 
-        <div className="my-1">
-          <div className="flex items-center">
-            <b className="input-title">出身地</b>
-            <p className="required">必須</p>
-          </div>
-          <Select
-            className=""
-            value={birthplace}
-            onChange={handleBirthplaceChange}
-            options={birthplaceOptions}
-          />
-        </div>
+        <FormSelect
+          value={birthplace}
+          onChange={handleBirthplaceChange}
+          inputTitle="出身地"
+          options={birthplaceOptions}
+        />
 
         <div className="mt-2">
           <b className="input-title">研究タグ</b>

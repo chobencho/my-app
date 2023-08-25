@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 // Interface
 import { UserData } from "interfaces/index";
 import JudgeLogin from "views/components/block/JudgeLogin";
+import UserName from "views/components/block/UserName";
 
 interface UsersProps {
   handleGetUsersData: Function;
@@ -14,25 +15,30 @@ const UsersItem = ({ userData }: UsersProps) => {
     <>
       <Link to={`/user/${userData.id}`} key={userData.id} className="w-1/2 p-1">
         <div className="w-full border rounded-md">
-          {userData.image?.url ? (
-            <div className="relative w-full pt-36">
+          <div className="relative w-full pt-36">
+            {userData.image?.url ? (
               <img
                 src={userData.image.url}
                 alt="user image"
                 className="absolute top-0 w-full h-full object-cover border-b rounded-t"
               />
-            </div>
-          ) : (
-            <img
-              src={`${process.env.PUBLIC_URL}/images/common/no-image.jpg`}
-              alt="boardData image"
-              className="absolute top-0 w-full h-full object-cover border-b rounded-t"
-            />
-          )}
+            ) : (
+              <img
+                src={`${process.env.PUBLIC_URL}/images/common/no-image.jpg`}
+                alt="boardData image"
+                className="absolute top-0 w-full h-full object-cover border-b rounded-t"
+              />
+            )}
+          </div>
 
           <div className="py-1 px-2">
             <div className="flex w-full flex-wrap justify-between items-center">
-              <p className="text-base font-semibold">{userData.name}</p>
+              <UserName
+                name={userData.name}
+                fontSize={"16px"}
+                fontWeight={600}
+                margin={""}
+              />
               <JudgeLogin
                 generalData={userData}
                 position={""}

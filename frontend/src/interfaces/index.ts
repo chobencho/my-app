@@ -48,6 +48,13 @@ export interface UserData {
   updatedAt: Date;
 }
 
+export interface UserDataResponse {
+  userData: UserData;
+  hobbyData: UserHobbyData[];
+  interestData: UserInterestData[];
+  tagsData: UserTagData[];
+}
+
 // 趣味情報
 export interface UserTagData {
   id: number;
@@ -157,6 +164,13 @@ export interface CommunityData {
   };
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface CommunityDataResponse {
+  allCommunity: CommunityData[];
+  myCommunity: CommunityData[];
+  latestCommunity: CommunityData[];
+  popularCommunity: CommunityData[];
 }
 
 export interface CommunityCommentData {

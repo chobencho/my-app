@@ -1,28 +1,30 @@
+// Common
 import { useState } from "react";
-import CommunityCreate from "views/components/modules/community/CommunityCreate";
 // Interface
 import { CommunityData } from "interfaces/index";
 // Components
 import CommunitiesItem from "views/components/modules/community/CommunitiesItem";
 import ModalCategoryCommunity from "views/components/modules/community/ModalCategoryCommunity";
+import CommunityCreate from "views/components/modules/community/CommunityCreate";
+import PageTitle from "views/components/block/PageTitle";
+import CommunityBlock from "views/components/block/CommunityBlock";
+
 // Style
 import Category from "options/category";
-// Function
-import { clearModal } from "lib/api/helper";
 
 type CommunityProps = {
-  allCommunity: CommunityData[];
-  popularCommunity: CommunityData[];
-  newCommunity: CommunityData[];
+  allCommunityData: CommunityData[];
+  latestCommunityData: CommunityData[];
+  popularCommunityData: CommunityData[];
 };
 
 const CommunitiesBranchSearch = ({
-  allCommunity,
-  popularCommunity,
-  newCommunity,
+  allCommunityData,
+  latestCommunityData,
+  popularCommunityData,
 }: CommunityProps) => {
-  // モーダルを制御するstate
-  const [showModal, setShowModal] = useState(false);
+  // State
+  const [showModal, setShowModal] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [strSelectedCategory, setStrSelectedCategory] = useState("");
   const [selectedCategoryData, setSelectedCategoryData] = useState<
@@ -30,24 +32,22 @@ const CommunitiesBranchSearch = ({
   >([]);
 
   const handleDisplayCategoryCommunity = (value: string, category: string) => {
-    setSelectedCategory(value); // 選択されたカテゴリをセット
+    setSelectedCategory(value);
     setStrSelectedCategory(category);
-    console.log(strSelectedCategory);
-    const categoryData = allCommunity.filter(
+    const categoryData = allCommunityData.filter(
       (com) => String(com.categoryId) === value
     );
     setSelectedCategoryData(categoryData);
     setShowModal(true);
   };
 
-  // モーダルクリア機能
-  const handleCloseModal = () => {
-    clearModal(setShowModal); // handleClearPreviewを使うように変更
-  };
-
   return (
     <>
-      <h5 className="text-sm text-center pt-2 pb-3">カテゴリから探す</h5>
+      <PageTitle
+        title={"カテゴリから探す"}
+        padding={"8px 0 6px"}
+        classes={"text-center"}
+      />
       <div className=" flex flex-wrap px-3">
         {Category.CAT_OPTIONS.map((option) => {
           const stringValue = String(option[0]);
@@ -72,26 +72,27 @@ const CommunitiesBranchSearch = ({
         })}
       </div>
 
-      <h5 className="text-sm text-center pt-5 pb-3">人気コミュニティ</h5>
+      <CommunityBlock
+        title={"人気コミュニティ"}
+        padding={"8px 0 6px"}
+        margin={"10px 0 0 0"}
+        classes={"text-center"}
+        generalData={popularCommunityData}
+      />
 
-      <div className="">
-        {popularCommunity.map((popCom) => (
-          <CommunitiesItem community={popCom} key={popCom.id} />
-        ))}
-      </div>
-
-      <h5 className="text-sm text-center pt-5 pb-3">新着コミュニティ</h5>
-      <div className="">
-        {newCommunity.map((newCom) => (
-          <CommunitiesItem community={newCom} key={newCom.id} />
-        ))}
-      </div>
+      <CommunityBlock
+        title={"新着コミュニティ"}
+        padding={"8px 0 6px"}
+        margin={"10px 0 0 0"}
+        classes={"text-center"}
+        generalData={latestCommunityData}
+      />
 
       <CommunityCreate />
 
       {showModal ? (
         <ModalCategoryCommunity
-          onClose={handleCloseModal}
+          setShowModal={setShowModal}
           selectedCategoryData={selectedCategoryData}
           strSelectedCategory={strSelectedCategory}
         />

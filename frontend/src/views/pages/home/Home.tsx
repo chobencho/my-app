@@ -10,14 +10,14 @@ import UsersItem from "views/components/modules/home/UsersItem";
 import SearchButton from "views/components/modules/home/SearchButton";
 import SortButton from "views/components/modules/home/SortButton";
 import { useAuthData } from "views/components/modules/common/useAuthData";
-import SkeletonLoaderHome from "views/components/modules/home/SkeletonLoaderHome"
+import SkeletonLoaderHome from "views/components/modules/home/SkeletonLoaderHome";
 
 const Home = () => {
   // State
   const [users, setUsers] = useState<UserData[]>([]);
   const [sortValue, setSortValue] = useState<string>("sortLogin");
   // Id
-  const { stringMyId, verifiedAge } = useAuthData();
+  const { stringMyId } = useAuthData();
   const [isLoading, setIsLoading] = useState(true);
   const [showSkeleton, setShowSkeleton] = useState(true);
 
@@ -29,21 +29,18 @@ const Home = () => {
   // ユーザソート
   const handleSortUsersData = async (sortValue: string) => {
     getSortUsers(stringMyId, sortValue).then((res) => setUsers(res.data));
-
   };
 
   useEffect(() => {
     handleSortUsersData(sortValue);
   }, []);
 
-  // タイムアウト用
   useEffect(() => {
     const delay = setTimeout(() => {
       setIsLoading(false);
-      setShowSkeleton(false); // データが取得されたらSkeletonを非表示に
-    }, 200); // 遅延時間を調整（ここでは2000ミリ秒、つまり2秒）
-
-    return () => clearTimeout(delay); // コンポーネントがアンマウントされたらタイマーをクリア
+      setShowSkeleton(false);
+    }, 200);
+    return () => clearTimeout(delay);
   }, []);
 
   return (
@@ -60,7 +57,7 @@ const Home = () => {
             />
             {/* 並び替えセレクトボックス */}
             <SortButton handleSort={handleSortUsersData} />
-          </div >
+          </div>
           <div className="w-full flex flex-wrap">
             {/* ユーザ情報表示 */}
             {users.map((user) => (
@@ -71,7 +68,7 @@ const Home = () => {
               />
             ))}
           </div>
-        </div >
+        </div>
       )}
     </>
   );

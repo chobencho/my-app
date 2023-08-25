@@ -5,14 +5,13 @@ import { getMyBoards } from "lib/api/board";
 import { BoardData } from "interfaces/index";
 // Components
 import BoardsItem from "views/components/modules/board/BoardsItem";
-import CreateNewBoardButton from "views/components/modules/board/CreateNewBoardButton";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 
 const MyBoard = () => {
   // State
   const [boards, setBoards] = useState<BoardData[]>([]);
   // Id
-  const { id, verifiedAge } = useAuthData();
+  const { id } = useAuthData();
 
   // 掲示板情報を取得
   const handleGetBoardData = async () => {

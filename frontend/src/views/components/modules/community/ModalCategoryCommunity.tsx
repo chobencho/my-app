@@ -1,56 +1,26 @@
 // Interface
 import { CommunityData } from "interfaces/index";
-// Style
-import { makeStyles, Theme } from "@material-ui/core/styles";
 // Components
 import CommunitiesItem from "views/components/modules/community/CommunitiesItem";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import { clearModal } from "lib/api/helper";
 
 interface ModalCategoryCommunityProps {
-  onClose: Function;
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   selectedCategoryData: CommunityData[];
   strSelectedCategory: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  modal: {
-    position: "fixed",
-    top: "0",
-    left: "0",
-    width: "100%",
-    height: "100%",
-    background: "rgba(0, 0, 0, 0.6)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 99,
-  },
-  modalContent: {
-    width: "80%",
-    maxHeight: "60%",
-    background: "#fff",
-    padding: "5px",
-  },
-  modalImg: {
-    display: "block",
-    margin: "0 auto",
-    maxWidth: "100%",
-    maxHeight: "100%",
-  },
-}));
-
 const ModalCategoryCommunity = ({
-  onClose,
+  setShowModal,
   selectedCategoryData,
   strSelectedCategory,
 }: ModalCategoryCommunityProps) => {
-  const classes = useStyles();
-
   return (
     <>
-      <div className={`${classes.modal}`}>
-        <p className={`${classes.modalContent}`}>
-          <button onClick={() => onClose()} className="">
+      <div className="modal">
+        <p className="modal-content">
+          <button onClick={() => clearModal(setShowModal)} className="">
             <HighlightOffIcon />
           </button>
           <p className="text-center text-sm pt-1 pb-3">

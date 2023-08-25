@@ -22,8 +22,13 @@ class Api::V1::User::UsersController < ApplicationController
   end
 
   def show
-    @user = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("*, users.id AS id, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code, COUNT(user_likes.id) AS like_count").left_joins(:user_likes).group("users.id").find_by(id: params[:id])
-    render json: @user  
+    userData = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("*, users.id AS id, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code, COUNT(user_likes.id) AS like_count").left_joins(:user_likes).group("users.id").find_by(id: params[:id])
+    hobbyData = UserHobby.joins(:hobby).select('user_hobbies.id', 'user_hobbies.user_id', 'user_hobbies.hobby_id', 'hobbies.hobby_code', 'user_hobbies.created_at', 'user_hobbies.updated_at').where(user_id: params[:id])
+    interestData = UserInterest.joins(:interest).select('user_interests.id','user_interests.user_id', 'user_interests.interest_id', 'interests.interest_code', 'user_interests.created_at', 'user_interests.updated_at').where(user_id: params[:id])
+    tagsData = UserResearchtag.where(user_id: params[:id])
+
+    combined_data = { userData: userData, hobbyData: hobbyData, interestData: interestData, tagsData: tagsData}
+    render json: combined_data
   end
 
   def sort
@@ -40,8 +45,13 @@ class Api::V1::User::UsersController < ApplicationController
   end
   
   def edit
-    @user = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("*, users.id AS id, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code").find_by(id: params[:id])
-    render json: @user  
+    userData = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("*, users.id AS id, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code").find_by(id: params[:id])
+    hobbyData = UserHobby.joins(:hobby).select('user_hobbies.id', 'user_hobbies.user_id', 'user_hobbies.hobby_id', 'hobbies.hobby_code', 'user_hobbies.created_at', 'user_hobbies.updated_at').where(user_id: params[:id])
+    interestData = UserInterest.joins(:interest).select('user_interests.id','user_interests.user_id', 'user_interests.interest_id', 'interests.interest_code', 'user_interests.created_at', 'user_interests.updated_at').where(user_id: params[:id])
+    tagsData = UserResearchtag.where(user_id: params[:id])
+
+    combined_data = { userData: userData, hobbyData: hobbyData, interestData: interestData, tagsData: tagsData}
+    render json: combined_data
   end
     
   def update
@@ -92,20 +102,7 @@ class Api::V1::User::UsersController < ApplicationController
     end
   end
 
-  def hobby
-    @hobbies = UserHobby.joins(:hobby).select('user_hobbies.id', 'user_hobbies.user_id', 'user_hobbies.hobby_id', 'hobbies.hobby_code', 'user_hobbies.created_at', 'user_hobbies.updated_at').where(user_id: params[:id])
-    render json: @hobbies
-  end
 
-  def interest
-    @interests = UserInterest.joins(:interest).select('user_interests.id','user_interests.user_id', 'user_interests.interest_id', 'interests.interest_code', 'user_interests.created_at', 'user_interests.updated_at').where(user_id: params[:id])
-    render json: @interests
-  end
-
-  def researchTag
-    @tags = UserResearchtag.where(user_id: params[:id])
-    render json: @tags
-  end
 
   private
 

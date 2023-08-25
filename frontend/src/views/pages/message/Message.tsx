@@ -1,3 +1,4 @@
+// Common
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 // Function
@@ -15,10 +16,9 @@ import { useAuthData } from "views/components/modules/common/useAuthData";
 const Message = () => {
   // State
   const [messages, setMessages] = useState<MessageItemsData[]>([]);
+  const [buddy, setBuddy] = useState<ChatUserData | null>(null);
   // Id
   const { stringMyId, verifiedAge, id, buddyId } = useAuthData();
-  const [buddy, setBuddy] = useState<ChatUserData | null>(null);
-
   const navigate = useNavigate();
 
   // ルームIDからメッセージ情報を取得・更新する関数
@@ -33,10 +33,8 @@ const Message = () => {
       setBuddy(response.data);
     } catch (error: any) {
       if (error.response && error.response.status === 403) {
-        // 403エラーが発生した場合、エラーページにリダイレクト
-        navigate("/error"); // リダイレクト先のURLを適切に設定
+        navigate("/error");
       } else {
-        // 他のエラーが発生した場合、エラーメッセージを表示またはログに記録するなどの処理を追加できます
         console.error("エラーが発生しました:", error);
       }
     }
@@ -57,23 +55,22 @@ const Message = () => {
             {messages.map((message) => (
               <div key={message.id}>
                 <CommonMessageItems
-                  // buddy={buddy}
                   message={message}
                   stringMyId={stringMyId ?? ""}
                 />
-                {!verifiedAge && (
-                  <span
-                    className="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer"
-                    style={{
-                      backgroundColor: "#fff",
-                      border: "1px solid #000",
-                    }}
-                  >
-                    年齢確認後に表示されます
-                  </span>
-                )}
               </div>
             ))}
+            {!verifiedAge && (
+              <span
+                className="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer"
+                style={{
+                  backgroundColor: "#fcfcfc",
+                  border: "1px solid #000",
+                }}
+              >
+                年齢確認後に表示されます
+              </span>
+            )}
           </div>
         </>
       ) : null}
@@ -84,16 +81,9 @@ const Message = () => {
           handleGetData={handleGetMessages}
           id={id ?? ""}
           stringMyId={stringMyId ?? ""}
+          another_id={"room_id"}
           discrimination={"chat"}
         />
-        {!verifiedAge && (
-          <span
-            className="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer"
-            style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-          >
-            年齢確認が完了していません
-          </span>
-        )}
       </div>
     </>
   );
