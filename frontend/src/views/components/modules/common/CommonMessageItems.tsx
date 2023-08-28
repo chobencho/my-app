@@ -42,10 +42,11 @@ const CommonMessageItems = ({ message, stringMyId }: CommunityCommentProps) => {
         </div>
       ) : (
         <div className="px-2 py-3 flex w-11/12 justify-start mr-auto">
-          <div className="flex w-3/4">
-            <Link to={`/user/${message.userId}`} className="inline-block w-1/6">
+          <div className="flex w-fit">
+            <Link to={`/user/${message.userId}`} className="block w-12">
               <OtherImage
-                url={`http://localhost:3001/uploads/user/image/${message.userId}/${message.userImage}`}
+                id={message.userId}
+                url={message.userImage}
                 imageWidth={"30px"}
                 imageHeight={"30px"}
                 borderRadius={"20px"}

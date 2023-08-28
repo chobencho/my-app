@@ -1,6 +1,7 @@
 import React from "react";
 
 export interface OtherImageProps {
+  id: string;
   url: string;
   imageWidth: string;
   imageHeight: string;
@@ -8,6 +9,7 @@ export interface OtherImageProps {
 }
 
 const OtherImage = ({
+  id,
   url,
   imageWidth,
   imageHeight,
@@ -18,8 +20,18 @@ const OtherImage = ({
     height: imageHeight,
     borderRadius: borderRadius,
     objectFit: "cover",
+    margin: "3px"
   };
-  return <img src={url} alt="boardData image" style={image} />;
+  return (
+    <>
+      {url !== null ? (
+        <img src={`http://localhost:3001/uploads/user/image/${id}/${url}`} alt="boardData image" style={image} />
+      ) : (
+        <img src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`} alt="boardData image" style={image} />
+
+      )}
+    </>
+  );
 };
 
 export default OtherImage;

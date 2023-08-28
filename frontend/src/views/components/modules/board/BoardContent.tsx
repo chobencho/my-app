@@ -40,7 +40,9 @@ const BoardContent = ({
         <div className="flex justify-between">
           <Link to={`/user/${board.userId}`} className="flex my-auto">
             <OtherImage
-              url={`http://localhost:3001/uploads/user/image/${board.userId}/${board.userImage}`}
+              // url={`http://localhost:3001/uploads/user/image/${board.userId}/${board.userImage}`}
+              id={board.userId}
+              url={board.userImage}
               imageWidth={"30px"}
               imageHeight={"30px"}
               borderRadius={"20px"}

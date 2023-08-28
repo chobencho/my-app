@@ -39,7 +39,8 @@ const BoardsItem = ({ boards }: BoardItemProps) => {
               <p className="text-base h-12 txt-limit-2 pr-2">{board.title}</p>
               <div className="flex my-1">
                 <OtherImage
-                  url={`http://localhost:3001/uploads/user/image/${board.userId}/${board.userImage}`}
+                  id={board.userId}
+                  url={board.userImage}
                   imageWidth={"25px"}
                   imageHeight={"25px"}
                   borderRadius={"20px"}
