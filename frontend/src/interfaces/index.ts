@@ -13,8 +13,14 @@ export interface SignInParams {
   password: string;
 }
 
-export interface ResetPasswordParams {
+export interface SendResetMailParams {
   email: string;
+}
+
+export interface ResetPasswordParams {
+  password: string;
+  passwordConfirmation: string;
+  resetPasswordToken: string;
 }
 
 // ユーザー

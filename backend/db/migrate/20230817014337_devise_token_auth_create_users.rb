@@ -30,7 +30,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[7.0]
 
       ## User Info
       t.string :name, :null => false, :default => "NO NAME"
-      t.string :image, :null => false, :default => "no-image.jpg"
+      t.string :image
       t.string :email
 
       t.string :body, :null => false, :default => "よろしくお願いします！"

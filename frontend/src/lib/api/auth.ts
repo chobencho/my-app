@@ -1,6 +1,5 @@
 import client from "lib/api/client";
 import Cookies from "js-cookie";
-import { AxiosPromise } from "axios";
 
 import { SignUpParams, SignInParams } from "interfaces/index";
 

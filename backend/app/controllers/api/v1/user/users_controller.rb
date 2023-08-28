@@ -9,7 +9,7 @@ class Api::V1::User::UsersController < ApplicationController
       conditions = keywords.map { |keyword| "tag_name LIKE '%#{keyword}%'" }.join(" OR ")
       user_ids = UserResearchtag.where(conditions).pluck(:user_id).uniq
     end
-    @users = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.*, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code").where(id: user_ids).where.not(id: params[:id]).order(last_login: :desc)
+    @users = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.id, users.name, users.age, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code").where(id: user_ids).where.not(id: params[:id]).order(last_login: :desc)
 
     render json: @users
   end
@@ -22,7 +22,8 @@ class Api::V1::User::UsersController < ApplicationController
   end
 
   def show
-    userData = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("*, users.id AS id, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code, COUNT(user_likes.id) AS like_count").left_joins(:user_likes).group("users.id").find_by(id: params[:id])
+    userData = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.name, users.body, users.age, users.image, users.last_login, grades.grade_code AS grade_code, genders.gender_code AS gender_code, subjects.subject_code AS subject_code, users.id AS id, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code, COUNT(user_likes.id) AS like_count").left_joins(:user_likes).group("users.id").find_by(id: params[:id])
+
     hobbyData = UserHobby.joins(:hobby).select('user_hobbies.id', 'user_hobbies.user_id', 'user_hobbies.hobby_id', 'hobbies.hobby_code', 'user_hobbies.created_at', 'user_hobbies.updated_at').where(user_id: params[:id])
     interestData = UserInterest.joins(:interest).select('user_interests.id','user_interests.user_id', 'user_interests.interest_id', 'interests.interest_code', 'user_interests.created_at', 'user_interests.updated_at').where(user_id: params[:id])
     tagsData = UserResearchtag.where(user_id: params[:id])
@@ -35,11 +36,11 @@ class Api::V1::User::UsersController < ApplicationController
     sortValue = params[:sort_value]
 
     if sortValue == "sortLogin"
-      @users = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.*, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code").where.not(id: params[:id]).order(last_login: :desc)
+      @users = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.id, users.name, users.age,users.image, users.last_login, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code").where.not(id: params[:id]).order(last_login: :desc)
     elsif sortValue == "sortLike"
-      @users = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.*, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code, COUNT(user_likes.id) AS like_count").left_joins(:user_likes).where.not(id: params[:id]).group("users.id").order(like_count: :desc)
+      @users = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.id, users.name, users.age,users.image, users.last_login, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code, COUNT(user_likes.id) AS like_count").left_joins(:user_likes).where.not(id: params[:id]).group("users.id").order(like_count: :desc)
     elsif sortValue == "sortCreated"
-      @users = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.*, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code").where.not(id: params[:id]).order(created_at: :desc)
+      @users = User.joins(:prefecture, :subject, :gender, :grade).joins("INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id").select("users.id, users.name, users.age,users.image, users.last_login, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code").where.not(id: params[:id]).order(created_at: :desc)
     end
     render json: @users
   end

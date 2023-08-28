@@ -1,7 +1,16 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, 
+         :confirmable, :timeoutable, :lockable
   include DeviseTokenAuth::Concerns::User
+
+  validate :password_complexity
+  
+  def password_complexity
+    return if password.blank? || password =~ /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,70}$/
+
+    errors.add :password, 'パスワードは長さ8~70文字、大文字1字以上、小文字1字以上、数字1字以上、特殊文字1字以上を含める必要があります。'
+  end
 
   mount_uploader :image, ImageUploader
 

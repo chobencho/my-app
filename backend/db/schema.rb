@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_17_082557) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_28_070932) do
   create_table "board_comments", force: :cascade do |t|
     t.string "board_id", null: false
     t.string "user_id", null: false
@@ -179,7 +179,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_082557) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "name", default: "NO NAME", null: false
-    t.string "image", default: "no-image.jpg", null: false
+    t.string "image"
     t.string "email"
     t.string "body", default: "よろしくお願いします！", null: false
     t.string "age", default: "22", null: false
@@ -193,10 +193,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_17_082557) do
     t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "failed_attempts", default: 0
+    t.string "unlock_token"
+    t.datetime "locked_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
 end

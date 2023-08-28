@@ -44,37 +44,6 @@ const Header = () => {
   const classes = useStyles();
   const navigate = useNavigate();
 
-  const AuthButtons = () => {
-    if (!loading) {
-      if (isSignedIn) {
-        return null;
-      } else {
-        return (
-          <>
-            <Button
-              component={Link}
-              to="/signin"
-              color="inherit"
-              className={classes.linkBtn}
-            >
-              Sign in
-            </Button>
-            <Button
-              component={Link}
-              to="/signup"
-              color="inherit"
-              className={classes.linkBtn}
-            >
-              Sign Up
-            </Button>
-          </>
-        );
-      }
-    } else {
-      return <></>;
-    }
-  };
-
   return (
     <>
       <div className="bg-white w-full shadow">
@@ -86,7 +55,6 @@ const Header = () => {
               className="w-2/3 mx-auto"
             />
           </Link>
-          <AuthButtons />
         </div>
       </div>
     </>

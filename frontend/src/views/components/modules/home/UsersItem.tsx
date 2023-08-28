@@ -24,7 +24,7 @@ const UsersItem = ({ userData }: UsersProps) => {
               />
             ) : (
               <img
-                src={`${process.env.PUBLIC_URL}/images/common/no-image.jpg`}
+                src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
                 alt="boardData image"
                 className="absolute top-0 w-full h-full object-cover border-b rounded-t"
               />
