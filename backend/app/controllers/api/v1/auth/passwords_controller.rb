@@ -22,7 +22,7 @@ class Api::V1::Auth::PasswordsController < ApplicationController
       if user.errors.empty?
         reset_password_success
       else
-        reset_password_failed
+        reset_password_failed(user.errors.full_messages)
       end
     end
   
@@ -61,7 +61,7 @@ class Api::V1::Auth::PasswordsController < ApplicationController
       render json: { message: 'Password Reset sucessfully.' }
     end
   
-    def reset_password_failed
-      render json: { message: "Something went wrong." }
+    def reset_password_failed(errors = ['Something went wrong.'])
+      render json: { errors: errors }, status: :unprocessable_entity
     end
 end

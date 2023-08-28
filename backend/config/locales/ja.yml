@@ -1,0 +1,5 @@
+ja:
+  devise:
+    failure:
+      user:
+        locked: "アカウントが多数回の誤ったサインイン試行のためにロックされました"

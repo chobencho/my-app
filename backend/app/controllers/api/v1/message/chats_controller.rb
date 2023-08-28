@@ -43,7 +43,7 @@ class Api::V1::Message::ChatsController < ApplicationController
   end
 
   def chatBuddy
-    @partner = User.find_by(id: params[:id])
+    @partner = User.select(:id, :name, :image).find_by(id: params[:id])
     render json: @partner
   end
 

@@ -14,7 +14,7 @@ class Api::V1::Message::MessagesController < ApplicationController
             room_id = room[:room_id]
             user_id = room[:user_id]
                 
-            user = User.find_by(id: user_id)
+            user = User.select(:id, :name, :image).find_by(id: user_id)
             messages = Message.where(user_id: [user_id, my_id], room_id: room_id).order(created_at: :desc).limit(1) # 最新のメッセージを取得
             body = messages.first&.body # 最新のメッセージのbodyを取得
             created_at = messages.first&.created_at # 最新のメッセージのbodyを取得

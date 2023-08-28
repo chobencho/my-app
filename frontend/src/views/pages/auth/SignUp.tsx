@@ -1,16 +1,9 @@
-import React, { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import { AuthContext } from "App";
 // Style
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
+
 // Function
 import { signUp } from "lib/api/auth";
 // Interface
@@ -18,34 +11,7 @@ import { SignUpParams } from "interfaces/index";
 // Components
 import AlertMessage from "views/components/modules/common/AlertMessage";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    marginTop: theme.spacing(6),
-  },
-  submitBtn: {
-    marginTop: theme.spacing(2),
-    flexGrow: 1,
-    textTransform: "none",
-  },
-  box: {
-    marginTop: "2rem",
-  },
-  header: {
-    textAlign: "center",
-  },
-  link: {
-    textDecoration: "none",
-  },
-  card: {
-    padding: theme.spacing(2),
-    maxWidth: 400,
-  },
-}));
-
 const SignUp = () => {
-  const classes = useStyles();
-  const navigate = useNavigate();
-  const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
   // State
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -56,6 +22,9 @@ const SignUp = () => {
     useState<boolean>(false);
   // URL
   const confirmSuccessUrl = "http://localhost:3000";
+
+  const isButtonDisabled =
+    !name || !email || !password || !passwordConfirmation;
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -73,13 +42,9 @@ const SignUp = () => {
       console.log(res);
 
       if (res.status === 200) {
-        // アカウント作成と同時にログインさせてしまう
-        // 本来であればメール確認などを挟むべきだが、今回はサンプルなので
         Cookies.set("_access_token", res.headers["access-token"]);
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
-        setIsSignedIn(true);
-        setCurrentUser(res.data.data);
         setAlertConfirmMessageOpen(true);
         console.log("Signed in successfully!");
       } else {
@@ -94,9 +59,9 @@ const SignUp = () => {
   return (
     <>
       <form noValidate autoComplete="off">
-        <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Sign Up" />
-          <CardContent>
+        <div className="max-w-sm p-5">
+          <p className="text-center mt-5 text-2xl">Sign Up</p>
+          <div className="my-5">
             <TextField
               variant="outlined"
               required
@@ -138,46 +103,56 @@ const SignUp = () => {
               onChange={(event) => setPasswordConfirmation(event.target.value)}
             />
 
+            <ul className="text-xs my-2">
+              <p className="m-1">パスワード設定の条件</p>
+              <div className="flex flex-wrap">
+                <li className="w-2/5">・大文字1文字以上</li>
+                <li className="w-2/5">・小文字1文字以上</li>
+                <li className="w-2/5">・数字1文字以上</li>
+                <li className="w-2/5">・特殊文字1文字以上</li>
+              </div>
+
+              <li className="text-xs ml-2 mt-1">
+                ( 使用可能な特殊文字 #, ?, !, @, $, %, ^, &, *, - )
+              </li>
+            </ul>
+
             <TextField type="hidden" value={confirmSuccessUrl} />
 
-            <Button
+            <button
               type="submit"
-              variant="contained"
-              size="large"
-              fullWidth
-              color="default"
-              disabled={
-                !name || !email || !password || !passwordConfirmation
-                  ? true
-                  : false
-              }
-              className={classes.submitBtn}
+              disabled={isButtonDisabled}
+              className={`w-full p-3 rounded my-5  ${
+                isButtonDisabled
+                  ? "bg-gray-200 text-gray-400"
+                  : "bg-blue-base text-white"
+              }`}
               onClick={handleSubmit}
             >
               Submit
-            </Button>
-            <Box textAlign="center" className={classes.box}>
-              <Typography variant="body2">
-                Have an account! &nbsp;
-                <Link to="/signin" className={classes.link}>
-                  Sign In now!
-                </Link>
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>
+            </button>
+            <div className="mt-5">
+              <Link
+                to="/signin"
+                className="block text-center text-xs underline"
+              >
+                アカウントをお持ちの方はこちら
+              </Link>
+            </div>
+          </div>
+        </div>
       </form>
       <AlertMessage
         open={alertMessageOpen}
         setOpen={setAlertMessageOpen}
         severity="error"
-        message="Invalid email or password"
+        message="入力内容が不適切です。"
       />
       <AlertMessage
         open={alertConfirmMessageOpen}
         setOpen={setAlertConfirmMessageOpen}
         severity="success"
-        message="Confirm email. Check your mailbox."
+        message="ご入力のメールアドレスに認証メールを送りました。"
       />
     </>
   );

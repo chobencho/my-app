@@ -22,13 +22,13 @@ const CommonMessageItems = ({ message, stringMyId }: CommunityCommentProps) => {
   return (
     <>
       {message.userId == stringMyId ? (
-        <div className="px-2 py-3 flex w-5/6 justify-end ml-auto">
+        <div className="px-2 py-3 flex w-11/12 justify-end ml-auto">
           <Moment
             time={message.createdAt}
-            format={"MM月DD日 HH:mm"}
+            format={"Mo月Do H:mm"}
             fontSize={"10px"}
             margin={""}
-            classes={"pr-1 text-right flex items-end justify-end"}
+            classes={"pr-1 text-right flex items-end justify-end w-1/4"}
           />
           <div className="w-fit">
             <MessageBody
@@ -41,9 +41,9 @@ const CommonMessageItems = ({ message, stringMyId }: CommunityCommentProps) => {
           </div>
         </div>
       ) : (
-        <div className="px-2 py-3 flex w-4/5 justify-start mr-auto">
-          <div className="flex">
-            <Link to={`/user/${message.userId}`} className="inline-block w-10">
+        <div className="px-2 py-3 flex w-11/12 justify-start mr-auto">
+          <div className="flex w-3/4">
+            <Link to={`/user/${message.userId}`} className="inline-block w-1/6">
               <OtherImage
                 url={`http://localhost:3001/uploads/user/image/${message.userId}/${message.userImage}`}
                 imageWidth={"30px"}
@@ -51,7 +51,7 @@ const CommonMessageItems = ({ message, stringMyId }: CommunityCommentProps) => {
                 borderRadius={"20px"}
               />
             </Link>
-            <div className="">
+            <div className="w-5/6">
               <p className="text-xs pb-1">{message.name}</p>
               <MessageBody
                 generalData={message}
@@ -63,10 +63,10 @@ const CommonMessageItems = ({ message, stringMyId }: CommunityCommentProps) => {
           </div>
           <Moment
             time={message.createdAt}
-            format={"MM月DD日 HH:mm"}
+            format={"Mo月Do H:m"}
             fontSize={"10px"}
             margin={""}
-            classes={"pl-1 text-left flex items-end justify-start"}
+            classes={"pl-1 text-left flex items-end justify-start w-1/4"}
           />
         </div>
       )}

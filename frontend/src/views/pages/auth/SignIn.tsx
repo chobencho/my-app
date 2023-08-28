@@ -2,57 +2,25 @@ import React, { useState, useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import { AuthContext } from "App";
-// import { useAuthData } from "views/components/modules/common/useAuthData";
 // Style
-import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardHeader from "@material-ui/core/CardHeader";
-import Button from "@material-ui/core/Button";
-import Box from "@material-ui/core/Box";
 // Function
 import { signIn } from "lib/api/auth";
 // Interface
 import { SignInParams } from "interfaces/index";
-import { updateLastLogin } from "lib/api/auth";
 // Components
 import AlertMessage from "views/components/modules/common/AlertMessage";
 
-const useStyles = makeStyles((theme: Theme) => ({
-  container: {
-    marginTop: theme.spacing(6),
-  },
-  submitBtn: {
-    marginTop: theme.spacing(2),
-    flexGrow: 1,
-    textTransform: "none",
-  },
-  header: {
-    textAlign: "center",
-  },
-  card: {
-    padding: theme.spacing(2),
-    maxWidth: 400,
-  },
-  box: {
-    marginTop: "2rem",
-  },
-  link: {
-    textDecoration: "none",
-  },
-}));
-
 const SignIn = () => {
-  const classes = useStyles();
   const navigate = useNavigate();
   const { setIsSignedIn, setCurrentUser } = useContext(AuthContext);
   // State
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
-  // const { stringMyId } = useAuthData();
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const isButtonDisabled = !email || !password;
 
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -77,8 +45,9 @@ const SignIn = () => {
       } else {
         setAlertMessageOpen(true);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      const errorMessages = err.response.data.errors;
+      setErrorMessage(errorMessages[0]);
       setAlertMessageOpen(true);
     }
   };
@@ -86,9 +55,9 @@ const SignIn = () => {
   return (
     <>
       <form noValidate autoComplete="off">
-        <Card className={classes.card}>
-          <CardHeader className={classes.header} title="Sign In" />
-          <CardContent>
+        <div className="max-w-sm p-5">
+          <p className="text-center mt-5 text-2xl">Sign In</p>
+          <div className="my-5">
             <TextField
               variant="outlined"
               required
@@ -110,40 +79,40 @@ const SignIn = () => {
               autoComplete="current-password"
               onChange={(event) => setPassword(event.target.value)}
             />
-            <Button
+            <button
               type="submit"
-              variant="contained"
-              size="large"
-              fullWidth
-              color="default"
-              disabled={!email || !password ? true : false}
-              className={classes.submitBtn}
               onClick={handleSubmit}
+              disabled={isButtonDisabled}
+              className={`w-full p-3 rounded my-5  ${
+                isButtonDisabled
+                  ? "bg-gray-200 text-gray-400"
+                  : "bg-blue-base text-white"
+              }`}
             >
               Submit
-            </Button>
-            <Box textAlign="center" className={classes.box}>
-              <Typography variant="body2">
-                Don't have an account? &nbsp;
-                <Link to="/signup" className={classes.link}>
-                  Sign Up now!
-                </Link>
-              </Typography>
-              <Typography variant="body2">
-                Forgot your password? &nbsp;
-                <Link to="/resetpassword" className={classes.link}>
-                  Reset Password!
-                </Link>
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>
+            </button>
+            <div className="mt-5">
+              <Link
+                to="/signup"
+                className="block text-center text-xs underline mb-3"
+              >
+                アカウントをお持ちでない方はこちら
+              </Link>
+              <Link
+                to="/resetpassword"
+                className="block text-center text-xs underline"
+              >
+                パスワードを忘れた方はこちら
+              </Link>
+            </div>
+          </div>
+        </div>
       </form>
       <AlertMessage
         open={alertMessageOpen}
         setOpen={setAlertMessageOpen}
         severity="error"
-        message="Invalid email or password"
+        message={errorMessage}
       />
     </>
   );
