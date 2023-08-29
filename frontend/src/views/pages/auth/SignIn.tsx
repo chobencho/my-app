@@ -62,7 +62,7 @@ const SignIn = () => {
               variant="outlined"
               required
               fullWidth
-              label="Email"
+              label="メールアドレス"
               value={email}
               margin="dense"
               onChange={(event) => setEmail(event.target.value)}
@@ -71,7 +71,7 @@ const SignIn = () => {
               variant="outlined"
               required
               fullWidth
-              label="Password"
+              label="パスワード"
               type="password"
               placeholder="At least 6 characters"
               value={password}
@@ -89,7 +89,7 @@ const SignIn = () => {
                   : "bg-blue-base text-white"
               }`}
             >
-              Submit
+              ログイン
             </button>
             <div className="mt-5">
               <Link

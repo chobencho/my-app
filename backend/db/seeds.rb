@@ -176,7 +176,7 @@ CommunityCategory.create(community_code: '学問')
 CommunityCategory.create(community_code: '募集')
 CommunityCategory.create(community_code: '進路')
 
-Information.create(title: "年齢確認のお願い", body: "年齢確認をお願いいたします。\n\n年齢確認が完了していない方は一部機能が利用できません。\n\n下記から学生証の提出をお願いいたします。\n https:~~")
+Information.create(title: "年齢確認のお願い", body: "年齢確認をお願いいたします。\n\n年齢確認が完了していない方は一部機能が利用できません。\n\n年齢確認ページより学生証の提出をお願いいたします。")
 Information.create(title: "ユーザー情報の登録", body: "ユーザー情報を入力することで返信率が上がります！")
 
 Community.create(category_id: 1, title: "雑談しましょう！", body: "大学院生の日常を雑多に話しあうコミュニティです")

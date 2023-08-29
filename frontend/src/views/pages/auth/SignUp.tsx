@@ -20,6 +20,7 @@ const SignUp = () => {
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
   const [alertConfirmMessageOpen, setAlertConfirmMessageOpen] =
     useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
   // URL
   const confirmSuccessUrl = "http://localhost:3000";
 
@@ -50,8 +51,9 @@ const SignUp = () => {
       } else {
         setAlertMessageOpen(true);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      const errorMessages = err.response.data.errors;
+      setErrorMessage(errorMessages[0]);
       setAlertMessageOpen(true);
     }
   };
@@ -66,7 +68,7 @@ const SignUp = () => {
               variant="outlined"
               required
               fullWidth
-              label="Name"
+              label="名前"
               value={name}
               margin="dense"
               onChange={(event) => setName(event.target.value)}
@@ -75,7 +77,7 @@ const SignUp = () => {
               variant="outlined"
               required
               fullWidth
-              label="Email"
+              label="メールアドレス"
               value={email}
               margin="dense"
               onChange={(event) => setEmail(event.target.value)}
@@ -84,7 +86,7 @@ const SignUp = () => {
               variant="outlined"
               required
               fullWidth
-              label="Password"
+              label="パスワード"
               type="password"
               value={password}
               margin="dense"
@@ -95,7 +97,7 @@ const SignUp = () => {
               variant="outlined"
               required
               fullWidth
-              label="Password Confirmation"
+              label="パスワード確認用"
               type="password"
               value={passwordConfirmation}
               margin="dense"
@@ -129,7 +131,7 @@ const SignUp = () => {
               }`}
               onClick={handleSubmit}
             >
-              Submit
+              サインアップ
             </button>
             <div className="mt-5">
               <Link
