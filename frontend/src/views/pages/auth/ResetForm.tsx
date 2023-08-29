@@ -1,12 +1,6 @@
-import React, { useState, useContext } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-
+import React, { useState } from "react";
 import Cookies from "js-cookie";
-import {
-  onReset,
-  PasswordReset,
-  PasswordResetType,
-} from "views/components/modules/common/authAction";
+import { onReset } from "views/components/modules/common/authAction";
 import { ResetPasswordParams } from "interfaces/index";
 import AlertMessage from "views/components/modules/common/AlertMessage";
 
@@ -18,12 +12,6 @@ const ResetForm = ({ resetPasswordToken }: ResetFormProps) => {
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
   const [alertConfirmMessageOpen, setAlertConfirmMessageOpen] =
     useState<boolean>(false);
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    watch,
-  } = useForm<PasswordResetType>({ criteriaMode: "all" });
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
 
@@ -81,7 +69,6 @@ const ResetForm = ({ resetPasswordToken }: ResetFormProps) => {
           <input
             type="hidden"
             value={resetPasswordToken}
-            {...register("resetPasswordToken")}
           />
           <ul className="text-xs">
             <p className="m-1">パスワード設定の条件</p>

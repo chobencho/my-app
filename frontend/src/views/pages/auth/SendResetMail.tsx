@@ -1,14 +1,10 @@
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "App";
 import Cookies from "js-cookie";
 import { signOut } from "lib/api/auth";
-import { useForm, SubmitHandler } from "react-hook-form";
 import { SendResetMailParams } from "interfaces/index";
-import {
-  sendEmail,
-  SendResetMailType,
-} from "views/components/modules/common/authAction";
+import { sendEmail } from "views/components/modules/common/authAction";
 import AlertMessage from "views/components/modules/common/AlertMessage";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 
@@ -18,19 +14,7 @@ const SendResetMail = () => {
   const [alertConfirmMessageOpen, setAlertConfirmMessageOpen] =
     useState<boolean>(false);
   const { loading, isSignedIn, setIsSignedIn } = useContext(AuthContext);
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<SendResetMailType>({ criteriaMode: "all" });
   const { stringMyId } = useAuthData();
-
-  const navigate = useNavigate();
-
-  // const onSubmit: SubmitHandler<SendResetMailType> = (data: any) => {
-  //   void PasswordReset.sendEmail(data);
-  //   setAlertConfirmMessageOpen(true);
-  // };
 
   const handleSendResetMail = async (
     e: React.MouseEvent<HTMLButtonElement>

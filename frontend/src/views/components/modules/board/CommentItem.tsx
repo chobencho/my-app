@@ -36,7 +36,13 @@ const CommentItem = ({ comment }: CommentItemProps) => {
               alt="comment image"
               className={`${classes.userImage}`}
             />
-          ) : null}
+          ) : (
+            <img
+              src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
+              alt="comment image"
+              className={`${classes.userImage}`}
+            />
+          )}
         </Link>
         <div className="mx-2 my-1 w-full">
           <div className="flex justify-between">
