@@ -14,44 +14,40 @@ const UsersItem = ({ userData }: UsersProps) => {
   return (
     <>
       <Link to={`/user/${userData.id}`} key={userData.id} className="w-1/2 p-1">
-        <div className="w-full border rounded-md">
-          <div className="relative w-full pt-36">
-            {userData.image?.url ? (
-              <img
-                src={userData.image.url}
-                alt="user image"
-                className="absolute top-0 w-full h-full object-cover border-b rounded-t"
-              />
-            ) : (
-              <img
-                src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
-                alt="boardData image"
-                className="absolute top-0 w-full h-full object-cover border-b rounded-t"
-              />
-            )}
-          </div>
-
-          <div className="py-1 px-2">
-            <div className="flex w-full flex-wrap justify-between items-center">
-              <UserName
-                name={userData.name}
-                fontSize={"16px"}
-                fontWeight={600}
-                margin={""}
-              />
+        <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+          {userData.image?.url ? (
+            <img
+              src={userData.image.url}
+              alt="user image"
+              className="w-full h-36 rounded-t-xl object-cover "
+            />
+          ) : (
+            <img
+              src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
+              alt="boardData image"
+              className="w-full h-36 rounded-t-xl object-cover "
+            />
+          )}
+          <div className="p-2 md:p-3">
+            <div className="flex justify-between items-center">
+              <h3 className="text-base font-bold text-gray-800 dark:text-white">
+                {userData.name}
+              </h3>
               <JudgeLogin
                 generalData={userData}
                 position={""}
                 padding={""}
-                fontSize={"text-10"}
+                fontSize={"text-xs"}
               />
             </div>
+
             <div className="flex justify-between">
-              <p className="text-10">
+              <p className="text-xs mt-1 text-gray-800 dark:text-gray-400">
                 {userData.age}歳 {userData.prefectureCode}
               </p>
-
-              <p className="text-10">{userData.subjectCode}専攻</p>
+              <p className="text-xs mt-1 text-gray-800 dark:text-gray-400">
+                {userData.subjectCode}専攻
+              </p>
             </div>
           </div>
         </div>

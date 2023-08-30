@@ -1,8 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,isx,ts,tsx}"],
+  content: [
+    "node_modules/preline/dist/*.js",
+    "./src/**/*.{html,js,isx,ts,tsx}",
+  ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        sm: "540px",
+      },
+    },
   },
-  plugins: [],
+  plugins: [require("preline/plugin")],
 };

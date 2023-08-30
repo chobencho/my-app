@@ -61,17 +61,20 @@ const UserEditItem = ({
       <UserCircleImage
         generalData={userData}
         imageWidth={"100%"}
-        imageHeight={"220px"}
+        imageHeight={"auto"}
+        maxImageHeight={""}
         rounded={""}
         marginRight={""}
       />
 
-      <div className="w-96 m-auto">
+      <div className="w-base m-auto">
         <UserName
           name={userData.name}
-          fontSize={"18px"}
+          pcFontSize={"18px"}
+          spFontSize={"18px"}
           fontWeight={600}
           margin={""}
+          option={""}
         />
 
         <table className="w-full">

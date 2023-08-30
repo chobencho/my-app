@@ -53,7 +53,7 @@ const UserEdit = () => {
           tagsData={tagsData}
         />
       )}
-      <div className="border-t w-96 mx-auto mt-5 py-2">
+      <div className="border-t w-base mx-auto mt-5 py-2">
         <p className="m-1">プレビュー</p>
       </div>
       {userData && (

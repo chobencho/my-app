@@ -39,35 +39,40 @@ const Messages = () => {
         <Link
           to={`/message/${chatUser.roomId}?buddyId=${chatUser.id}`}
           key={chatUser.id}
-          className="border-b flex py-1 pl-1 pr-2"
+          className="border-b flex py-1 bg-white"
         >
-          <UserCircleImage
-            generalData={chatUser}
-            imageWidth={"48px"}
-            imageHeight={"48px"}
-            rounded={"999px"}
-            marginRight={"5px"}
-          />
-          <div className="w-2/3">
+          <div className="p-1 w-16 sm:w-14 ">
+            {chatUser.image?.url ? (
+              <img
+                src={chatUser.image.url}
+                alt="userData image"
+                className="object-cover w-12 h-12 rounded-full"
+              />
+            ) : (
+              <img
+                src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
+                alt="image"
+                className="object-cover"
+              />
+            )}
+          </div>
+          <div className="w-3/4 ">
             <UserName
               name={chatUser.name}
-              fontSize={"13px"}
+              pcFontSize={"12px"}
+              spFontSize={"12px"}
               fontWeight={0}
               margin={"4px"}
+              option={""}
             />
 
             <p className="text-xs txt-limit-2 px-1">
               {chatUser.latestMessageBody}
             </p>
           </div>
-
-          <Moment
-            time={chatUser.latestCreatedAt}
-            format={"MM/DD HH:mm"}
-            fontSize={"11px"}
-            margin={""}
-            classes={""}
-          />
+          <p className=" ml-auto w-20 text-10 pt-2 pr-1 flex justify-end items-start">
+            {moment(chatUser.latestCreatedAt).format("Mo月Do H:mm")}
+          </p>
         </Link>
       ))}
     </>

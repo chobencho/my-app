@@ -1,14 +1,11 @@
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "App";
 import Cookies from "js-cookie";
 import { signOut } from "lib/api/auth";
-import { useForm, SubmitHandler } from "react-hook-form";
+import TextField from "@material-ui/core/TextField";
 import { SendResetMailParams } from "interfaces/index";
-import {
-  sendEmail,
-  SendResetMailType,
-} from "views/components/modules/common/authAction";
+import { sendEmail } from "views/components/modules/common/authAction";
 import AlertMessage from "views/components/modules/common/AlertMessage";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 
@@ -18,19 +15,9 @@ const SendResetMail = () => {
   const [alertConfirmMessageOpen, setAlertConfirmMessageOpen] =
     useState<boolean>(false);
   const { loading, isSignedIn, setIsSignedIn } = useContext(AuthContext);
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm<SendResetMailType>({ criteriaMode: "all" });
   const { stringMyId } = useAuthData();
 
-  const navigate = useNavigate();
-
-  // const onSubmit: SubmitHandler<SendResetMailType> = (data: any) => {
-  //   void PasswordReset.sendEmail(data);
-  //   setAlertConfirmMessageOpen(true);
-  // };
+  const isButtonDisabled = !email;
 
   const handleSendResetMail = async (
     e: React.MouseEvent<HTMLButtonElement>
@@ -115,28 +102,33 @@ const SendResetMail = () => {
 
   return (
     <>
-      <form>
-        <p className="w-4/5 m-auto text-justify text-sm py-5">
+      <form className="w-4/5 m-auto">
+        <p className="text-sm py-5">
           ご登録中のメールアドレスを入力して送信してください。
           パスワード変更用のURLをご入力のメールアドレスに送信します。
         </p>
-        <div className="w-4/5 m-auto pb-5">
-          <label htmlFor="email"></label>
-          <input
-            className="input-text"
-            placeholder="メールアドレス"
-            onChange={(event) => setEmail(event.target.value)}
-          />
-        </div>
-        <div className="text-center py-5">
-          <button
-            type="submit"
-            className="border w-3/5 rounded-3xl p-3 bg-blue-base text-white"
-            onClick={handleSendResetMail}
-          >
-            送信
-          </button>
-        </div>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          label="メールアドレス"
+          value={email}
+          margin="dense"
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <button
+          type="submit"
+          onClick={handleSendResetMail}
+          disabled={isButtonDisabled}
+          className={`w-full p-3 rounded my-5  ${
+            isButtonDisabled
+              ? "bg-gray-200 text-gray-400"
+              : "bg-blue-base text-white"
+          }`}
+        >
+          送信
+        </button>
+
         <AuthButtons />
       </form>
       <AlertMessage

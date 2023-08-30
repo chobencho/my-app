@@ -55,30 +55,28 @@ const Footer = () => {
       <ThemeProvider theme={theme}>
         <div color="inherit" className="border-y bg-white">
           <div className="my-1 mx-2 flex justify-evenly">
-            <Link to="/" className={`${classes.transitionButton}`}>
-              <PersonSearchIcon fontSize="large" className={classes.icon} />
-              <Typography className={`${classes.text}`}>ユーザ検索</Typography>
+            <Link to="/" className="footer-transition-button">
+              <PersonSearchIcon fontSize="large" className="footer-icon" />
+              <p className="footer-text">ユーザ検索</p>
             </Link>
-            <Link to="/boards" className={`${classes.transitionButton}`}>
-              <AssignmentIcon fontSize="large" className={classes.icon} />
-              <Typography className={`${classes.text}`}>掲示板</Typography>
+            <Link to="/boards" className="footer-transition-button">
+              <AssignmentIcon fontSize="large" className="footer-icon" />
+              <p className="footer-text">掲示板</p>
             </Link>
-            <Link to="/communities" className={`${classes.transitionButton}`}>
-              <GroupsIcon fontSize="large" className={classes.icon} />
-              <Typography className={`${classes.text}`}>
-                コミュニティ
-              </Typography>
+            <Link to="/communities" className="footer-transition-button">
+              <GroupsIcon fontSize="large" className="footer-icon" />
+              <p className="footer-text">コミュニティ</p>
             </Link>
-            <Link to="/messages" className={`${classes.transitionButton}`}>
-              <MessageIcon fontSize="large" className={classes.icon} />
-              <Typography className={`${classes.text}`}>チャット</Typography>
+            <Link to="/messages" className="footer-transition-button">
+              <MessageIcon fontSize="large" className="footer-icon" />
+              <p className="footer-text">チャット</p>
             </Link>
             <Link
               to={`/myPage/${currentUser?.id}`}
-              className={`${classes.transitionButton}`}
+              className="footer-transition-button"
             >
-              <AccountBoxIcon fontSize="large" className={classes.icon} />
-              <Typography className={`${classes.text}`}>マイページ</Typography>
+              <AccountBoxIcon fontSize="large" className="footer-icon" />
+              <p className="footer-text">マイページ</p>
             </Link>
           </div>
         </div>

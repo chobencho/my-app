@@ -13,10 +13,12 @@ export interface SignInParams {
   password: string;
 }
 
+// リセットメール送信
 export interface SendResetMailParams {
   email: string;
 }
 
+// パスワードリセット
 export interface ResetPasswordParams {
   password: string;
   passwordConfirmation: string;
@@ -54,6 +56,7 @@ export interface UserData {
   updatedAt: Date;
 }
 
+// ユーザ個別データ
 export interface UserDataResponse {
   userData: UserData;
   hobbyData: UserHobbyData[];
@@ -102,6 +105,7 @@ export interface BoardData {
   name: string;
 }
 
+// コメントデータ
 export interface CommentData {
   id: number;
   name: string;
@@ -125,6 +129,7 @@ export interface InfoData {
   updatedAt: Date;
 }
 
+// チャットユーザデータ
 export interface ChatUserData {
   id: string;
   uid: string;

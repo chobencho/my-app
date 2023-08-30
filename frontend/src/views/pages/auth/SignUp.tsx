@@ -61,9 +61,9 @@ const SignUp = () => {
   return (
     <>
       <form noValidate autoComplete="off">
-        <div className="max-w-sm p-5">
-          <p className="text-center mt-5 text-2xl">Sign Up</p>
-          <div className="my-5">
+        <div className="">
+          <p className="text-center  text-2xl">Sign Up</p>
+          <div className="my-5 w-4/5 mx-auto">
             <TextField
               variant="outlined"
               required
@@ -108,10 +108,10 @@ const SignUp = () => {
             <ul className="text-xs my-2">
               <p className="m-1">パスワード設定の条件</p>
               <div className="flex flex-wrap">
-                <li className="w-2/5">・大文字1文字以上</li>
-                <li className="w-2/5">・小文字1文字以上</li>
-                <li className="w-2/5">・数字1文字以上</li>
-                <li className="w-2/5">・特殊文字1文字以上</li>
+                <li className="w-40">・大文字1文字以上</li>
+                <li className="w-40">・小文字1文字以上</li>
+                <li className="w-40">・数字1文字以上</li>
+                <li className="w-40">・特殊文字1文字以上</li>
               </div>
 
               <li className="text-xs ml-2 mt-1">

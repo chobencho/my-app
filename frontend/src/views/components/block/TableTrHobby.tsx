@@ -16,13 +16,13 @@ const HobbyComponent = ({ hobbies }: HobbyProps) => (
       if (hobbyOption) {
         const [, hobbyName, hobbyImage] = hobbyOption;
         return (
-          <div key={hobby.hobbyId} className="w-1/5 p-1 relative">
+          <div key={hobby.hobbyId} className="w-1/5 p-1">
             <div className="relative">
               <img
                 src={`${process.env.PUBLIC_URL}/images/hobby/${hobbyImage}`}
                 className="w-full h-auto rounded image-dark"
               />
-              <span className="absolute bottom-4 left-0 right-0 text-white text-sm text-center py-1">
+              <span className="absolute inset-1/2 left-0 right-0 text-white text-sm text-center flex items-center justify-center">
                 {hobbyName}
               </span>
             </div>
@@ -40,38 +40,30 @@ export interface TableTrProps {
 }
 
 const TableTr = ({ trTitle, trData }: TableTrProps) => {
-  const trStyle: React.CSSProperties = {
-    display: "block",
-    borderBottom: "1px solid #eee",
-    margin: "10px 0 0",
-    paddingBottom: "5px",
-  };
-  const tdLeftStyle: React.CSSProperties = {
-    fontSize: "14px",
-    fontWeight: 600,
-    width: "80px",
-  };
   const tdRightStyle: React.CSSProperties = {
     fontSize: "14px",
     whiteSpace: "pre-wrap",
   };
 
   return (
-    <tr style={trStyle}>
-      <td style={tdLeftStyle}>{trTitle}</td>
-
-      {Array.isArray(trData) ? (
-        trData.length > 0 && "hobbyId" in trData[0] ? (
-          <>
-            <td style={tdRightStyle}></td>
-            <HobbyComponent hobbies={trData as UserHobbyData[]} />
-          </>
+    <tr>
+      <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+        {trTitle}
+      </td>
+      <td className="whitespace-pre-wrap  py-4  text-sm text-gray-800 dark:text-gray-200">
+        {Array.isArray(trData) ? (
+          trData.length > 0 && "hobbyId" in trData[0] ? (
+            <>
+              <td style={tdRightStyle}></td>
+              <HobbyComponent hobbies={trData as UserHobbyData[]} />
+            </>
+          ) : (
+            <span>設定されていません</span>
+          )
         ) : (
-          <span>設定されていません</span>
-        )
-      ) : (
-        <span>Invalid data</span>
-      )}
+          <span>Invalid data</span>
+        )}
+      </td>
     </tr>
   );
 };

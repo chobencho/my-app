@@ -265,7 +265,7 @@ const UserEditForm = ({
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className="w-96 m-auto">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-base m-auto">
         <p className="text-center pt-5 pb-3">ユーザー情報編集</p>
 
         <FormInputText

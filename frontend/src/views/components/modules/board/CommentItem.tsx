@@ -25,7 +25,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
 
   return (
     <>
-      <div className="border-b w-96 mx-auto py-2 flex">
+      <div className="border-b w-base mx-auto py-2 flex">
         <Link to={`/user/${comment.userId}`} className="w-12">
           {comment.image?.url ? (
             <img
@@ -36,15 +36,23 @@ const CommentItem = ({ comment }: CommentItemProps) => {
               alt="comment image"
               className={`${classes.userImage}`}
             />
-          ) : null}
+          ) : (
+            <img
+              src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
+              alt="comment image"
+              className={`${classes.userImage}`}
+            />
+          )}
         </Link>
         <div className="mx-2 my-1 w-full">
           <div className="flex justify-between">
             <UserName
               name={comment.name}
-              fontSize={"12px"}
+              pcFontSize={"12px"}
+              spFontSize={"12px"}
               fontWeight={0}
               margin={""}
+              option={""}
             />
 
             <Moment

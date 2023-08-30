@@ -30,7 +30,7 @@ const SearchButton = ({
   return (
     <>
       <div
-        className="text-black px-1 text-xl flex items-center"
+        className="text-black px-1 text-xl flex items-center cursor-pointer"
         onClick={handleShowModal}
       >
         <SearchIcon fontSize="medium" />

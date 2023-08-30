@@ -91,15 +91,18 @@ const MyPage = () => {
                   generalData={userData}
                   imageWidth={"144px"}
                   imageHeight={"144px"}
+                  maxImageHeight={""}
                   rounded={"999px"}
                   marginRight={""}
                 />
                 <div className="text-center">
                   <UserName
                     name={userData.name}
-                    fontSize={"20px"}
+                    pcFontSize={"20px"}
+                    spFontSize={"20px"}
                     fontWeight={0}
                     margin={"2px"}
+                    option={""}
                   />
                 </div>
 
@@ -147,20 +150,20 @@ const MyPage = () => {
           </div>
 
           {settingButtonActive && (
-            <div className="w-96 m-auto">
+            <div className="w-base m-auto">
               <Information />
               <Setting />
             </div>
           )}
 
           {myBoardButtonActive && (
-            <div className="w-96 m-auto">
+            <div className="w-base m-auto">
               <MyBoard />
             </div>
           )}
 
           {likeBoardButtonActive && (
-            <div className="w-96 m-auto">
+            <div className="w-base m-auto">
               <MyFav />
             </div>
           )}

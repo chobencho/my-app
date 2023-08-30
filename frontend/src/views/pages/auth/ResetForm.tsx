@@ -1,31 +1,24 @@
-import React, { useState, useContext } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-
+import React, { useState } from "react";
 import Cookies from "js-cookie";
-import {
-  onReset,
-  PasswordReset,
-  PasswordResetType,
-} from "views/components/modules/common/authAction";
+import { useNavigate } from "react-router-dom";
+import { onReset } from "views/components/modules/common/authAction";
 import { ResetPasswordParams } from "interfaces/index";
 import AlertMessage from "views/components/modules/common/AlertMessage";
+import TextField from "@material-ui/core/TextField";
 
 type ResetFormProps = {
   resetPasswordToken: string;
 };
 
 const ResetForm = ({ resetPasswordToken }: ResetFormProps) => {
+  const navigate = useNavigate();
   const [alertMessageOpen, setAlertMessageOpen] = useState<boolean>(false);
   const [alertConfirmMessageOpen, setAlertConfirmMessageOpen] =
     useState<boolean>(false);
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    watch,
-  } = useForm<PasswordResetType>({ criteriaMode: "all" });
   const [password, setPassword] = useState<string>("");
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
+
+  const isButtonDisabled = !password || !passwordConfirmation;
 
   const handlePasswordReset = async (
     e: React.MouseEvent<HTMLButtonElement>
@@ -47,6 +40,10 @@ const ResetForm = ({ resetPasswordToken }: ResetFormProps) => {
         Cookies.set("_client", res.headers["client"]);
         Cookies.set("_uid", res.headers["uid"]);
         setAlertConfirmMessageOpen(true);
+
+        setTimeout(() => {
+          navigate("/signin");
+        }, 3000);
       } else {
         setAlertMessageOpen(true);
       }
@@ -57,39 +54,40 @@ const ResetForm = ({ resetPasswordToken }: ResetFormProps) => {
 
   return (
     <>
-      <form>
-        <p className="w-4/5 m-auto text-justify text-sm py-5">
+      <form className="w-4/5 m-auto">
+        <p className=" text-justify text-sm py-5">
           新しいパスワードを入力してパスワード変更を完了してください。
         </p>
-        <div className="w-4/5 m-auto pb-5">
-          <label htmlFor="password"></label>
-          <input
-            className="input-text"
+        <div className=" pb-5">
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
             type="password"
+            label="新しいパスワード"
             value={password}
-            placeholder="新しいパスワード"
+            margin="dense"
             onChange={(event) => setPassword(event.target.value)}
           />
-          <label htmlFor="passwordConfirmation"></label>
-          <input
-            className="input-text"
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
             type="password"
+            label="新しいパスワード確認用"
             value={passwordConfirmation}
-            placeholder="新しいパスワード確認用"
+            margin="dense"
             onChange={(event) => setPasswordConfirmation(event.target.value)}
           />
-          <input
-            type="hidden"
-            value={resetPasswordToken}
-            {...register("resetPasswordToken")}
-          />
-          <ul className="text-xs">
+
+          <TextField type="hidden" value={resetPasswordToken} />
+          <ul className="text-xs my-2">
             <p className="m-1">パスワード設定の条件</p>
             <div className="flex flex-wrap">
-              <li className="w-2/5">・大文字1文字以上</li>
-              <li className="w-2/5">・小文字1文字以上</li>
-              <li className="w-2/5">・数字1文字以上</li>
-              <li className="w-2/5">・特殊文字1文字以上</li>
+              <li className="w-40">・大文字1文字以上</li>
+              <li className="w-40">・小文字1文字以上</li>
+              <li className="w-40">・数字1文字以上</li>
+              <li className="w-40">・特殊文字1文字以上</li>
             </div>
 
             <li className="text-xs ml-2 mt-1">
@@ -98,15 +96,18 @@ const ResetForm = ({ resetPasswordToken }: ResetFormProps) => {
           </ul>
         </div>
 
-        <div className="text-center py-5">
-          <button
-            type="submit"
-            className="border w-3/5 rounded-3xl p-3 bg-blue-base text-white"
-            onClick={handlePasswordReset}
-          >
-            パスワード変更
-          </button>
-        </div>
+        <button
+          type="submit"
+          onClick={handlePasswordReset}
+          disabled={isButtonDisabled}
+          className={`w-full p-3 rounded my-5  ${
+            isButtonDisabled
+              ? "bg-gray-200 text-gray-400"
+              : "bg-blue-base text-white"
+          }`}
+        >
+          パスワード変更
+        </button>
       </form>
       <AlertMessage
         open={alertMessageOpen}
@@ -118,7 +119,7 @@ const ResetForm = ({ resetPasswordToken }: ResetFormProps) => {
         open={alertConfirmMessageOpen}
         setOpen={setAlertConfirmMessageOpen}
         severity="success"
-        message="パスワードの変更が完了しました"
+        message="パスワードの変更が完了しました。3秒後にログインページにリダイレクトします。"
       />
     </>
   );

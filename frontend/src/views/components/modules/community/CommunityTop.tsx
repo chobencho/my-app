@@ -6,7 +6,7 @@ import { CommunityData } from "interfaces/index";
 // Function
 import { withdrawCommunity } from "lib/api/community";
 // Style
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ExpandCircleDownOutlinedIcon from "@mui/icons-material/ExpandCircleDownOutlined";
 import TocIcon from "@mui/icons-material/Toc";
 import { makeStyles, Theme } from "@material-ui/core/styles";
 
@@ -18,7 +18,6 @@ export interface CommunityProps {
 
 const useStyles = makeStyles((theme) => ({
   mainContent: {
-    position: "fixed",
     top: 47,
     left: 0,
     display: "flex",
@@ -30,14 +29,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   slideUpContent: {
-    position: "fixed",
     top: -140,
     left: 0,
-    width: "100%",
     height: "230px",
-    borderBottom: "1px solid #eee",
-    backgroundColor: "#fff",
-    padding: 20,
     boxShadow: "0 -2px 4px rgba(0, 0, 0, 0.2)",
     transform: "translateY(0)",
     transition: "transform 0.3s ease-in-out",
@@ -67,10 +61,13 @@ const CommunityTop = ({ community, community_id, user_id }: CommunityProps) => {
 
   return (
     <>
-      <div className={`justify-between ${classes.mainContent}`}>
+      <div className="fixed top-12 bg-white w-full flex justify-between items-center max-w-540 p-2 z-10">
         <div className="flex items-center">
-          <span onClick={() => navigate("/communities")}>
-            <ChevronLeftIcon />
+          <span
+            onClick={() => navigate("/communities")}
+            className="flex items-center mr-2"
+          >
+            <ExpandCircleDownOutlinedIcon className="rotate-90" />
           </span>
 
           <img
@@ -84,14 +81,15 @@ const CommunityTop = ({ community, community_id, user_id }: CommunityProps) => {
           <TocIcon onClick={handleToggleSlideUpContent} />
         </div>
       </div>
+
       <div
-        className={`${classes.slideUpContent} ${
+        className={`fixed bg-white border-b border-gray-200 p-5 sm:px-16 sm:py-8 max-w-540 slide-up-content  ${
           showSlideUpContent ? classes.slideUpContentActive : ""
         }`}
       >
-        <h4 className="text-sm py-1">コミュニティ概要</h4>
+        <h4 className="text-sm py-1 font-semibold">コミュニティ概要</h4>
         <p className="text-sm">{community.body}</p>
-        <h4 className="text-sm py-1 mt-2">カテゴリ</h4>
+        <h4 className="text-sm py-1 mt-2 font-semibold">カテゴリ</h4>
         <p className="text-sm">{community.communityCode}</p>
         <div className="w-full text-center">
           <button

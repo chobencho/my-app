@@ -32,10 +32,11 @@ const BoardContent = ({
         generalData={board}
         imageWidth={"100%"}
         imageHeight={"220px"}
+        maxImageHeight={""}
         rounded={""}
         marginRight={""}
       />
-      <div className="w-96 m-auto">
+      <div className="w-base m-auto">
         <p className="text-xl my-2">{board.title}</p>
         <div className="flex justify-between">
           <Link to={`/user/${board.userId}`} className="flex my-auto">
@@ -50,9 +51,11 @@ const BoardContent = ({
             <div>
               <UserName
                 name={board.name}
-                fontSize={"12px"}
+                pcFontSize={"12px"}
+                spFontSize={"12px"}
                 fontWeight={600}
                 margin={"0 0 0 8px"}
+                option={""}
               />
               <Moment
                 time={board.createdAt}

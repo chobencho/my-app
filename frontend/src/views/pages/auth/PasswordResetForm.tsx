@@ -1,4 +1,3 @@
-import React from "react";
 import { useSearchParams } from "react-router-dom";
 import ResetForm from "./ResetForm";
 import SendResetMail from "./SendResetMail";

@@ -48,7 +48,7 @@ const Home = () => {
       {isLoading ? (
         <SkeletonLoaderHome />
       ) : (
-        <div className="w-96 m-auto pt-2">
+        <div className="w-base m-auto">
           <div className="flex justify-between">
             {/* 検索ボタン */}
             <SearchButton
@@ -58,15 +58,17 @@ const Home = () => {
             {/* 並び替えセレクトボックス */}
             <SortButton handleSort={handleSortUsersData} />
           </div>
-          <div className="w-full flex flex-wrap">
-            {/* ユーザ情報表示 */}
-            {users.map((user) => (
-              <UsersItem
-                key={user.id}
-                handleGetUsersData={handleGetUsersData}
-                userData={user}
-              />
-            ))}
+          <div className="w-full">
+            <div className="flex flex-wrap ">
+              {/* ユーザ情報表示 */}
+              {users.map((user) => (
+                <UsersItem
+                  key={user.id}
+                  handleGetUsersData={handleGetUsersData}
+                  userData={user}
+                />
+              ))}
+            </div>
           </div>
         </div>
       )}

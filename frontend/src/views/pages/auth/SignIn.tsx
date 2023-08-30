@@ -55,9 +55,9 @@ const SignIn = () => {
   return (
     <>
       <form noValidate autoComplete="off">
-        <div className="max-w-sm p-5">
-          <p className="text-center mt-5 text-2xl">Sign In</p>
-          <div className="my-5">
+        <div className="">
+          <p className="text-center text-2xl">Sign In</p>
+          <div className="my-5 w-4/5 mx-auto">
             <TextField
               variant="outlined"
               required
@@ -73,7 +73,6 @@ const SignIn = () => {
               fullWidth
               label="パスワード"
               type="password"
-              placeholder="At least 6 characters"
               value={password}
               margin="dense"
               autoComplete="current-password"

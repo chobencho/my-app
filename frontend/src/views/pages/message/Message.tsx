@@ -49,9 +49,9 @@ const Message = () => {
     <>
       {/* チャット相手の情報 */}
       {buddy !== null ? (
-        <>
+        <div className="w-full">
           <ChatPartner buddy={buddy} generalId={id ?? ""} />
-          <div className="py-12">
+          <div className="py-16">
             {messages.map((message) => (
               <div key={message.id}>
                 <CommonMessageItems
@@ -72,11 +72,11 @@ const Message = () => {
               </span>
             )}
           </div>
-        </>
+        </div>
       ) : null}
 
       {/* チャットフォーム */}
-      <div className="fixed bottom-14 my-1 w-full">
+      <div className="fixed bottom-14 my-1 w-full max-w-540">
         <CommonMessageForms
           handleGetData={handleGetMessages}
           id={id ?? ""}

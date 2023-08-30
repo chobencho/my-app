@@ -31,7 +31,7 @@ const CommunityCreate = () => {
               className="absolute  w-full rounded-3xl py-3 top-0 left-0 text-white"
               style={{ backgroundColor: "rgba(128, 128, 128, 0.7)" }}
             >
-              年齢確認してね
+              年齢確認が未完了です
             </p>
           )}
         </button>
