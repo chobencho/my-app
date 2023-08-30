@@ -1,37 +1,14 @@
-import { makeStyles, Theme } from "@material-ui/core/styles";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 export interface ModalTermsProps {
   onClose: Function;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  modal: {
-    position: "fixed",
-    top: "0",
-    left: "0",
-    width: "100%",
-    height: "100%",
-    background: "rgba(0, 0, 0, 0.6)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 99,
-  },
-  modalContent: {
-    maxWidth: "80%",
-    maxHeight: "80%",
-    background: "#fff",
-    padding: "5px",
-  },
-}));
-
 const ModalTerms = ({ onClose }: ModalTermsProps) => {
-  const classes = useStyles();
 
   return (
-    <div className={`${classes.modal}`}>
-      <p className={`${classes.modalContent}`}>
+    <div className="w-full h-full bg-gray-600 bg-opacity-60 fixed top-0 left-0 flex justify-center items-center z-50">
+      <p className="max-modal bg-white p-2">
         <button onClick={() => onClose()} className="">
           <HighlightOffIcon />
         </button>

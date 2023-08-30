@@ -87,23 +87,25 @@ const MyPage = () => {
           <div className="p-5">
             {userData && (
               <>
-                <UserCircleImage
-                  generalData={userData}
-                  imageWidth={"144px"}
-                  imageHeight={"144px"}
-                  maxImageHeight={""}
-                  rounded={"999px"}
-                  marginRight={""}
-                />
-                <div className="text-center">
-                  <UserName
-                    name={userData.name}
-                    pcFontSize={"20px"}
-                    spFontSize={"20px"}
-                    fontWeight={0}
-                    margin={"2px"}
-                    option={""}
-                  />
+                <div className="flex items-center justify-center">
+                  {userData.image?.url ? (
+                    <img
+                      src={userData.image.url}
+                      alt="userData image"
+                      className="w-40 h-40 object-cover rounded-full"
+                    />
+                  ) : (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
+                      alt="image"
+                      className="w-40 h-40 object-cover rounded-full"
+                    />
+                  )}
+                </div>
+                <div className="text-center mt-1">
+                  <p className="text-xl sm:text-2xl">
+                    {userData.name}
+                  </p>
                 </div>
 
                 <p className="text-sm text-center">
@@ -113,35 +115,37 @@ const MyPage = () => {
             )}
           </div>
           <div className="flex w-full pb-5 px-3">
-            <MyPageButton
-              toLink={`/user/${id}/edit`}
-              buttonTitle={"プロフィール編集"}
-            />
-            <MyPageButton toLink={`/verification`} buttonTitle={"年齢確認"} />
+            <Link to={`/user/${id}/edit`} className="inline-block w-1/2 text-sm text-center">
+              <button className="w-4/5 bg-gray-600 text-white p-3 rounded-full">
+                プロフィール編集
+              </button>
+            </Link>
+            <Link to={`/verification`} className="inline-block w-1/2 text-sm text-center">
+              <button className="w-4/5 bg-gray-600 text-white p-3 rounded-full">
+                年齢確認
+              </button>
+            </Link>
           </div>
           <div className="flex justify-between py-3">
             <div
-              className={`w-1/3 text-center border-b p-1 ${
-                settingButtonActive ? "border-b border-blue-base" : null
-              }`}
+              className={`w-1/3 text-center border-b p-1 ${settingButtonActive ? "border-b border-blue-base" : null
+                }`}
             >
               <button className="text-base" onClick={handleSettingClick}>
                 各種設定
               </button>
             </div>
             <div
-              className={`w-1/3 text-center border-b p-1 ${
-                myBoardButtonActive ? "border-b border-blue-base" : null
-              }`}
+              className={`w-1/3 text-center border-b p-1 ${myBoardButtonActive ? "border-b border-blue-base" : null
+                }`}
             >
               <button className="text-base" onClick={handleMyBoardClick}>
                 自分の掲示板
               </button>
             </div>
             <div
-              className={`w-1/3 text-center border-b p-1 ${
-                likeBoardButtonActive ? "border-b border-blue-base" : null
-              }`}
+              className={`w-1/3 text-center border-b p-1 ${likeBoardButtonActive ? "border-b border-blue-base" : null
+                }`}
             >
               <button className="text-base" onClick={handleLikeBoardClick}>
                 いいね
@@ -150,7 +154,7 @@ const MyPage = () => {
           </div>
 
           {settingButtonActive && (
-            <div className="w-base m-auto">
+            <div className="w-base sm:w-3/4 m-auto">
               <Information />
               <Setting />
             </div>

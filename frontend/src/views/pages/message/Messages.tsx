@@ -70,7 +70,7 @@ const Messages = () => {
               {chatUser.latestMessageBody}
             </p>
           </div>
-          <p className=" ml-auto w-20 text-10 pt-2 pr-1 flex justify-end items-start">
+          <p className="ml-auto w-24 text-10 pt-2 pr-1 flex justify-end items-start">
             {moment(chatUser.latestCreatedAt).format("Mo月Do H:mm")}
           </p>
         </Link>

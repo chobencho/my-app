@@ -21,7 +21,7 @@ const CommunityCreate = () => {
     <>
       <div className="text-center my-5">
         <button
-          className={`relative border w-3/5 rounded-3xl p-3 bg-blue-base text-white`}
+          className={`relative border w-1/2 rounded-3xl p-3 bg-blue-base text-white`}
           onClick={() => handleModalApplyNewCommunity()}
           disabled={!verifiedAge}
         >

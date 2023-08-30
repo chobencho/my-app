@@ -57,34 +57,30 @@ const Communities = () => {
       ) : (
         <>
           <div className="w-base m-auto py-5">
-            <div className="flex justify-center mb-3">
+            <div className="flex justify-center mb-3 w-full">
               <div
-                className={` ${
-                  searchButtonActive ? "border border-blue-base" : "border"
-                }`}
+                className={`w-1/2 sm:w-2/5 ${searchButtonActive ? "border border-blue-base" : "border"
+                  }`}
               >
                 <button
-                  className={`text-xs py-2 px-4 border-2 bg-gray-200 text-gray-600 ${
-                    searchButtonActive
-                      ? "bg-blue-base text-white border-white"
-                      : ""
-                  }`}
+                  className={`w-full text-xs py-2 px-4 border-2 bg-gray-200 text-gray-600 ${searchButtonActive
+                    ? "bg-blue-base text-white border-white"
+                    : ""
+                    }`}
                   onClick={handleSearchClick}
                 >
                   コミュニティを探す
                 </button>
               </div>
               <div
-                className={` ${
-                  joinButtonActive ? "border border-blue-base" : "border"
-                }`}
+                className={`w-1/2 sm:w-2/5 ${joinButtonActive ? "border border-blue-base" : "border"
+                  }`}
               >
                 <button
-                  className={`text-xs py-2 px-4 border-2 bg-gray-200 text-gray-600 ${
-                    joinButtonActive
-                      ? "bg-blue-base text-white border-2 border-white"
-                      : ""
-                  }`}
+                  className={`w-full text-xs py-2 px-4 border-2 bg-gray-200 text-gray-600 ${joinButtonActive
+                    ? "bg-blue-base text-white border-2 border-white"
+                    : ""
+                    }`}
                   onClick={handleJoinClick}
                 >
                   参加中のコミュニティ

@@ -78,7 +78,7 @@ const Community = () => {
               />
             ))}
           </div>
-          <div className="fixed bottom-14 my-1 w-full">
+          <div className="fixed bottom-14 my-1 w-full max-w-540">
             <CommonMessageForms
               handleGetData={handleGetCommunityCommentData}
               id={id ?? ""}

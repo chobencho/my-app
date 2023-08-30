@@ -79,11 +79,10 @@ const LikeButton = ({
         className="flex items-center"
       >
         <FaHeart
-          className={`text-base mx-1 ${like ? "text-red-400" : ""} ${
-            isAnimating ? "animate-like-bounce" : ""
-          }`}
+          className={`text-base mx-1 sm:text-xl ${like ? "text-red-400" : ""} ${isAnimating ? "animate-like-bounce" : ""
+            }`}
         />
-        <span className="text-gray-500 w-4 text-left">
+        <span className="text-gray-500 w-4 text-left sm:text-xl">
           {generalData.likeCount}
         </span>
       </button>

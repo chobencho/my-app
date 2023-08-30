@@ -10,6 +10,7 @@ import OtherImage from "views/components/block/OtherImage";
 import UserName from "views/components/block/UserName";
 import UserBody from "views/components/block/UserBody";
 import Moment from "views/components/block/Moment";
+import moment from "moment";
 
 type BoardContentProps = {
   board: BoardData;
@@ -39,31 +40,26 @@ const BoardContent = ({
       <div className="w-base m-auto">
         <p className="text-xl my-2">{board.title}</p>
         <div className="flex justify-between">
-          <Link to={`/user/${board.userId}`} className="flex my-auto">
-            <OtherImage
-              // url={`http://localhost:3001/uploads/user/image/${board.userId}/${board.userImage}`}
-              id={board.userId}
-              url={board.userImage}
-              imageWidth={"30px"}
-              imageHeight={"30px"}
-              borderRadius={"20px"}
-            />
+          <Link to={`/user/${board.userId}`} className="flex my-auto items-center ">
+            {board.image !== null ? (
+              <img
+                src={`http://localhost:3001/uploads/user/image/${board.userId}/${board.userImage}`}
+                alt="boardData image"
+                className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-full" />
+            ) : (
+              <img src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
+                alt="boardData image"
+                className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-full"
+              />
+
+            )}
             <div>
-              <UserName
-                name={board.name}
-                pcFontSize={"12px"}
-                spFontSize={"12px"}
-                fontWeight={600}
-                margin={"0 0 0 8px"}
-                option={""}
-              />
-              <Moment
-                time={board.createdAt}
-                format={"YYYY年MM月DD日 HH:mm"}
-                fontSize={"10px"}
-                margin={"0 0 0 8px"}
-                classes={""}
-              />
+              <p className="text-xs sm:text-base pl-2">
+                {board.name}
+              </p>
+              <p className="text-10 pl-2">
+                {moment(board.createdAt).format("YYYY年MM月DD日 HH:mm")}
+              </p>
             </div>
           </Link>
 

@@ -9,20 +9,24 @@ const ModalCommonExpansionImage = ({
   setShowModal,
   image,
 }: ModalCommonExpansionImageProps) => {
-  // モーダルをクリックしても何もしない関数
   const handleBackdropClick = (event: React.MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
   };
 
   return (
     <>
-      <div className="modal" onClick={() => clearModal(setShowModal)}>
-        <img
-          src={image}
-          alt="modal image"
-          className="block mx-auto w-4/5"
-          onClick={handleBackdropClick}
-        />
+      <div
+        className="w-full h-full bg-gray-600 bg-opacity-60 fixed top-0 left-0 flex justify-center items-center z-50 "
+        onClick={() => clearModal(setShowModal)}
+      >
+        <div className="max-modal">
+          <img
+            src={image}
+            alt="modal image"
+            className="block mx-auto"
+            onClick={handleBackdropClick}
+          />
+        </div>
       </div>
     </>
   );
