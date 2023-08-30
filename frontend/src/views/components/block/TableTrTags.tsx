@@ -1,7 +1,5 @@
 import React from "react";
-import { UserTagData, UserHobbyData, UserInterestData } from "interfaces/index";
-import Hobby from "options/hobby";
-import Interest from "options/interest";
+import { UserTagData } from "interfaces/index";
 
 interface TagProps {
   tags: UserTagData[];
@@ -43,20 +41,23 @@ const TableTr = ({ trTitle, trData }: TableTrProps) => {
   };
 
   return (
-    <tr style={trStyle}>
-      <td style={tdLeftStyle}>{trTitle}</td>
-
-      {Array.isArray(trData) ? (
-        trData.length > 0 && "tagName" in trData[0] ? (
-          <td style={tdRightStyle}>
-            <TagComponent tags={trData as UserTagData[]} />
-          </td>
+    <tr>
+      <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+        {trTitle}
+      </td>
+      <td className="whitespace-pre-wrap py-4  text-sm text-gray-800 dark:text-gray-200">
+        {Array.isArray(trData) ? (
+          trData.length > 0 && "tagName" in trData[0] ? (
+            <td style={tdRightStyle}>
+              <TagComponent tags={trData as UserTagData[]} />
+            </td>
+          ) : (
+            <span>設定されていません</span>
+          )
         ) : (
-          <span>設定されていません</span>
-        )
-      ) : (
-        <span>Invalid data</span>
-      )}
+          <span>Invalid data</span>
+        )}
+      </td>
     </tr>
   );
 };

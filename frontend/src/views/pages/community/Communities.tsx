@@ -56,7 +56,7 @@ const Communities = () => {
         <SkeletonLoaderCommunities />
       ) : (
         <>
-          <div className="w-96 m-auto py-5">
+          <div className="w-base m-auto py-5">
             <div className="flex justify-center mb-3">
               <div
                 className={` ${

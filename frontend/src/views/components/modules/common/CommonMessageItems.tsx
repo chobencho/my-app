@@ -10,6 +10,8 @@ import MessageImage from "views/components/block/MessageImage";
 import MessageBody from "views/components/block/MessageBody";
 import Moment from "views/components/block/Moment";
 import OtherImage from "views/components/block/OtherImage";
+import moment from "moment";
+import { expansionImage } from "lib/api/helper";
 
 export interface CommunityCommentProps {
   message: MessageItemsData;
@@ -22,53 +24,48 @@ const CommonMessageItems = ({ message, stringMyId }: CommunityCommentProps) => {
   return (
     <>
       {message.userId == stringMyId ? (
-        <div className="px-2 py-3 flex w-11/12 justify-end ml-auto">
-          <Moment
-            time={message.createdAt}
-            format={"Mo月Do H:mm"}
-            fontSize={"10px"}
-            margin={""}
-            classes={"pr-1 text-right flex items-end justify-end w-1/4"}
-          />
-          <div className="w-fit">
-            <MessageBody
-              generalData={message}
-              bgColor={"#43D466"}
-              classes={"rounded-l-2xl ml-auto w-fit"}
-            />
+        <div className="flex w-5/6 sm:w-2/3 ml-auto justify-end my-2 mx-1">
+          <p className=" text-10 w-24 pb-1 flex justify-end items-end">
+            {moment(message.createdAt).format("Mo月Do H:mm")}
+          </p>
+          <div className=" w-fit px-1">
+            {message.body ? (
+              <p className="bg-green-400 rounded-b-md rounded-l-lg py-2 px-3 text-xs w-full">
+                <span className="break-all">{message.body}</span>
+              </p>
+            ) : null}
 
-            <MessageImage generalData={message} setShowModal={setShowModal} />
+            {message.image?.url ? (
+              <img
+                src={message.image?.url}
+                alt="boardData image"
+                className="rounded-lg my-1"
+                onClick={() => expansionImage(setShowModal)}
+              />
+            ) : null}
           </div>
         </div>
       ) : (
-        <div className="px-2 py-3 flex w-11/12 justify-start mr-auto">
-          <div className="flex w-fit">
-            <Link to={`/user/${message.userId}`} className="block w-12">
-              <OtherImage
-                id={message.userId}
-                url={message.userImage}
-                imageWidth={"30px"}
-                imageHeight={"30px"}
-                borderRadius={"20px"}
+        <div className="flex w-5/6 sm:w-2/3 mr-auto justify-start my-2 mx-1">
+          <div className=" w-fit px-1">
+            {message.body ? (
+              <p className="bg-gray-400 rounded-b-md rounded-r-lg py-2 px-3 text-xs w-full">
+                <span className="break-all">{message.body}</span>
+              </p>
+            ) : null}
+
+            {message.image?.url ? (
+              <img
+                src={message.image?.url}
+                alt="boardData image"
+                className="rounded-lg my-1"
+                onClick={() => expansionImage(setShowModal)}
               />
-            </Link>
-            <div className="w-5/6">
-              <p className="text-xs pb-1">{message.name}</p>
-              <MessageBody
-                generalData={message}
-                bgColor={"#666"}
-                classes={"rounded-r-2xl mr-auto text-white max-w-fit "}
-              />
-              <MessageImage generalData={message} setShowModal={setShowModal} />
-            </div>
+            ) : null}
           </div>
-          <Moment
-            time={message.createdAt}
-            format={"Mo月Do H:m"}
-            fontSize={"10px"}
-            margin={""}
-            classes={"pl-1 text-left flex items-end justify-start w-1/4"}
-          />
+          <p className=" text-10 w-24 pb-1 flex justify-start items-end">
+            {moment(message.createdAt).format("Mo月Do H:mm")}
+          </p>
         </div>
       )}
 

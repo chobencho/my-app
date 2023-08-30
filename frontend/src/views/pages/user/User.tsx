@@ -53,10 +53,10 @@ const User = () => {
   useEffect(() => {
     const delay = setTimeout(() => {
       setIsLoading(false);
-      setShowSkeleton(false); // データが取得されたらSkeletonを非表示に
-    }, 500); // 遅延時間を調整（ここでは2000ミリ秒、つまり2秒）
+      setShowSkeleton(false);
+    }, 500);
 
-    return () => clearTimeout(delay); // コンポーネントがアンマウントされたらタイマーをクリア
+    return () => clearTimeout(delay);
   }, []);
 
   return (
@@ -77,14 +77,16 @@ const User = () => {
             />
           )}
           {userData && (
-            <CommonEditButton
-              userId={id || ""}
-              myId={stringMyId || ""}
-              generalId={id || ""}
-              verifiedAge={verifiedAge}
-              commonRoomId={commonRoomId || ""}
-              discrimination={"user"}
-            />
+            <>
+              <CommonEditButton
+                userId={id || ""}
+                myId={stringMyId || ""}
+                generalId={id || ""}
+                verifiedAge={verifiedAge}
+                commonRoomId={commonRoomId || ""}
+                discrimination={"user"}
+              />
+            </>
           )}
         </div>
       )}

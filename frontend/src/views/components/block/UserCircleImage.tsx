@@ -8,6 +8,7 @@ export interface UserCircleImageProps {
   generalData: ChatUserData | UserData | MessageItemsData | BoardData;
   imageWidth: string;
   imageHeight: string;
+  maxImageHeight: string;
   rounded: string;
   marginRight: string;
 }
@@ -16,12 +17,14 @@ const UserCircleImage = ({
   generalData,
   imageWidth,
   imageHeight,
+  maxImageHeight,
   rounded,
   marginRight,
 }: UserCircleImageProps) => {
   const circleImage: React.CSSProperties = {
     width: imageWidth,
     height: imageHeight,
+    maxHeight: maxImageHeight,
     borderRadius: rounded,
     marginRight: marginRight,
   };

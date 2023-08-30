@@ -42,7 +42,7 @@ const Boards = () => {
       {isLoading ? (
         <SkeletonLoaderBoards />
       ) : (
-        <div className="w-96 m-auto">
+        <div className="w-base m-auto">
           <PageTitle
             title={"掲示板一覧"}
             padding={"10px"}

@@ -14,21 +14,21 @@ const CommonLayout = ({ children }: CommonLayoutProps) => {
   const { isSignedIn, currentUser } = useContext(AuthContext);
 
   return (
-    <>
-      <header className="fixed w-full top-0 z-30">
+    <div className="">
+      <header className=" bg-white fixed top-0 h-12  flex items-center z-30">
         <Header />
       </header>
-      <main className="pt-11 pb-20">{children}</main>
+      <main className=" bg-blue-200 pt-12 pb-20">{children}</main>
       {isSignedIn && currentUser ? (
         <>
-          <footer className="fixed w-full bottom-0 z-30">
+          <footer className=" bg-red-200 fixed bottom-0">
             <Footer />
           </footer>
         </>
       ) : (
         <></>
       )}
-    </>
+    </div>
   );
 };
 

@@ -92,7 +92,7 @@ const Board = () => {
                 />
 
                 {/* コメントフォーム */}
-                <div className="border-b border-t w-96 mx-auto py-2">
+                <div className="border-b border-t w-base mx-auto py-2">
                   <PageTitle title={"コメント"} padding={"5px"} classes={""} />
                   <CommonMessageForms
                     handleGetData={handleGetBoardComment}

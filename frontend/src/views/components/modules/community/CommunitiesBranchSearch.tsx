@@ -48,6 +48,7 @@ const CommunitiesBranchSearch = ({
         padding={"8px 0 6px"}
         classes={"text-center"}
       />
+
       <div className=" flex flex-wrap px-3">
         {Category.CAT_OPTIONS.map((option) => {
           const stringValue = String(option[0]);
@@ -56,17 +57,23 @@ const CommunitiesBranchSearch = ({
             <button
               key={option[0]}
               value={option[0]}
-              className=" w-1/3 text-center flex items-center justify-center py-2"
+              className="flex-shrink-0 group w-1/3 flex items-center justify-center mt-3"
               onClick={() =>
                 handleDisplayCategoryCommunity(stringValue, stringCategory)
               }
             >
-              <img
-                src={`${process.env.PUBLIC_URL}/images/community/${option[2]}`}
-                className="h-11 w-11 object-cover rounded-3xl mr-2"
-                alt=""
-              />
-              <span className="text-sm">{option[1]}</span>
+              <div className="flex items-center">
+                <img
+                  className="inline-block object-cover flex-shrink-0 h-[3rem] w-[3rem] sm:h-[3.875rem] sm:w-[3.875rem] rounded-full"
+                  src={`${process.env.PUBLIC_URL}/images/community/${option[2]}`}
+                  alt="Image Description"
+                />
+                <div className="ml-3">
+                  <h3 className="text-sm sm:text-base text-gray-800 dark:text-white">
+                    {option[1]}
+                  </h3>
+                </div>
+              </div>
             </button>
           );
         })}

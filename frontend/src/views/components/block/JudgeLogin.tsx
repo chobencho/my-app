@@ -32,12 +32,12 @@ const JudgeLogin = ({
   }
 
   return (
-    <>
+    <div className="relative">
       <p className={`${position} ${padding} ${fontSize}`}>
         <span className={`${iconColor}`}>●</span>
         <>{stateLogin}</>
       </p>
-    </>
+    </div>
   );
 };
 

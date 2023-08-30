@@ -16,7 +16,7 @@ const InterestComponent = ({ interests }: InterestProps) => (
       if (interestOption) {
         const [, interestName, interestImage] = interestOption;
         return (
-          <div key={interest.interestId} className="w-1/3 p-1 relative">
+          <div key={interest.interestId} className="w-1/3 p-1">
             <div className="relative">
               <img
                 src={`${process.env.PUBLIC_URL}/images/interest/${interestImage}`}
@@ -40,38 +40,30 @@ export interface TableTrProps {
 }
 
 const TableTr = ({ trTitle, trData }: TableTrProps) => {
-  const trStyle: React.CSSProperties = {
-    display: "block",
-    borderBottom: "1px solid #eee",
-    margin: "10px 0 0",
-    paddingBottom: "5px",
-  };
-  const tdLeftStyle: React.CSSProperties = {
-    fontSize: "14px",
-    fontWeight: 600,
-    width: "80px",
-  };
   const tdRightStyle: React.CSSProperties = {
     fontSize: "14px",
     whiteSpace: "pre-wrap",
   };
 
   return (
-    <tr style={trStyle}>
-      <td style={tdLeftStyle}>{trTitle}</td>
-
-      {Array.isArray(trData) ? (
-        trData.length > 0 && "interestId" in trData[0] ? (
-          <>
-            <td style={tdRightStyle}></td>
-            <InterestComponent interests={trData as UserInterestData[]} />
-          </>
+    <tr>
+      <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+        {trTitle}
+      </td>
+      <td className="whitespace-pre-wrap  py-4  text-sm text-gray-800 dark:text-gray-200">
+        {Array.isArray(trData) ? (
+          trData.length > 0 && "interestId" in trData[0] ? (
+            <>
+              <td style={tdRightStyle}></td>
+              <InterestComponent interests={trData as UserInterestData[]} />
+            </>
+          ) : (
+            <span>設定されていません</span>
+          )
         ) : (
-          <span>設定されていません</span>
-        )
-      ) : (
-        <span>Invalid data</span>
-      )}
+          <span>Invalid data</span>
+        )}
+      </td>
     </tr>
   );
 };
