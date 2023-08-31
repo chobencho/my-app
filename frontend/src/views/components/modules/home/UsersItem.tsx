@@ -43,10 +43,16 @@ const UsersItem = ({ userData }: UsersProps) => {
 
             <div className="flex justify-between">
               <p className="text-xs mt-1 text-gray-800 dark:text-gray-400">
-                {userData.age}歳 {userData.prefectureCode}
+                {userData.age}歳
+                {userData.prefectureCode != "未選択" && (
+                  <span className="pl-1">{userData.prefectureCode}</span>
+                )}
+
               </p>
               <p className="text-xs mt-1 text-gray-800 dark:text-gray-400">
-                {userData.subjectCode}専攻
+                {userData.subjectCode != "未選択" && (
+                  <>{userData.subjectCode}専攻</>
+                )}
               </p>
             </div>
           </div>

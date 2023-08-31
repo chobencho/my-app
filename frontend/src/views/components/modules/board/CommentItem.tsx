@@ -30,7 +30,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
             <img
               src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
               alt="comment image"
-              className="w-12 h-12 object-cover"
+              className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-full m-auto"
             />
           )}
         </Link>

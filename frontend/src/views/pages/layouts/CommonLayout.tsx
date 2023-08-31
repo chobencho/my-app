@@ -18,10 +18,10 @@ const CommonLayout = ({ children }: CommonLayoutProps) => {
       <header className=" bg-white fixed top-0 h-12  flex items-center z-30">
         <Header />
       </header>
-      <main className=" bg-blue-200 pt-12 pb-20">{children}</main>
+      <main className="pt-12 pb-20">{children}</main>
       {isSignedIn && currentUser ? (
         <>
-          <footer className=" bg-red-200 fixed bottom-0">
+          <footer className="fixed bottom-0">
             <Footer />
           </footer>
         </>

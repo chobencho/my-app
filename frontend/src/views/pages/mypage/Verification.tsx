@@ -37,7 +37,7 @@ const Verification = () => {
 
   return (
     <>
-      <form onSubmit={handleSendCertificateImage} className="w-96 m-auto">
+      <form onSubmit={handleSendCertificateImage} className="w-base m-auto">
         <p className="text-center p-5">年齢・学生証認証</p>
         <p className="text-center text-sm">
           大学、研究機関及び高等教育機関発行の
@@ -93,9 +93,8 @@ const Verification = () => {
           <button
             type="submit"
             disabled={!preview}
-            className={`generalButton w-3/5 text-white ${
-              preview ? "bg-blue-base" : "bg-gray-200"
-            }`}
+            className={`generalButton w-1/2 text-white ${preview ? "bg-blue-base" : "bg-gray-200"
+              }`}
           >
             送信する
           </button>

@@ -41,7 +41,7 @@ const BoardContent = ({
         <p className="text-xl my-2">{board.title}</p>
         <div className="flex justify-between">
           <Link to={`/user/${board.userId}`} className="flex my-auto items-center ">
-            {board.image !== null ? (
+            {board.userImage !== null ? (
               <img
                 src={`http://localhost:3001/uploads/user/image/${board.userId}/${board.userImage}`}
                 alt="boardData image"

@@ -41,8 +41,8 @@ const ModalSubscribeCommunity = ({
   return (
     <>
       <Fade in={isModalOpen} timeout={500}>
-        <div className="modal">
-          <div className="modal-content text-center">
+        <div className="w-full h-full bg-gray-600 bg-opacity-60 fixed top-0 left-0 flex justify-center items-center z-50">
+          <div className="max-modal bg-white p-2 text-center">
             <h1 className="text-sm my-5">このコミュニティに参加しますか？</h1>
             <div className="w-4/5 flex justify-between m-auto mb-5">
               <form onSubmit={handleSubscribeCommunity} className="w-1/2">
