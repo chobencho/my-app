@@ -187,16 +187,16 @@ const UserEditForm = ({
     });
   };
 
-  const onSubmit = async (data: Record<string, any>) => {
+  const onSubmit = async () => {
     // フォームデータの送信
     const formData = new FormData();
 
-    formData.append("name", data.name);
+    formData.append("name", name);
     if (image) {
       formData.append("image", image);
     }
-    formData.append("body", data.body);
-    formData.append("age", data.age);
+    formData.append("body", body);
+    formData.append("age", age);
     formData.append("gender_id", gender ? gender.value : "");
     formData.append("grade_id", grade ? grade.value : "");
     formData.append("prefecture_id", prefecture ? prefecture.value : "");
@@ -345,16 +345,17 @@ const UserEditForm = ({
             <input
               type="text"
               value={tag}
-              className="input-text"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                 setTag(e.target.value);
               }}
+              className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
             />
+
             <button
-              className="border border-blue-base rounded text-blue-base text-sm w-1/6 m-1.5"
+              className="w-24 text-10 sm:text-xs ml-2 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all  dark:focus:ring-offset-gray-800"
               onClick={handleAddTag}
             >
-              追加
+              タグ追加
             </button>
           </div>
         </div>
@@ -445,7 +446,7 @@ const UserEditForm = ({
                   const isChecked = selectedHobbies.includes(value);
 
                   return (
-                    <div key={value} className="w-1/5 pb-2 relative px-1">
+                    <div key={value} className="w-1/5 my-1 relative px-1">
                       <label className="image-dark">
                         <input
                           type="checkbox"
@@ -463,7 +464,7 @@ const UserEditForm = ({
                       </label>
                       <option
                         value={value}
-                        className="text-center text-10 absolute bottom-7 left-0 right-0 text-white"
+                        className="text-10 sm:text-xs absolute inset-1/2  left-0 right-0 text-white flex items-center justify-center"
                       >
                         {label}
                       </option>

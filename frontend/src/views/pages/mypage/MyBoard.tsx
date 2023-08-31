@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 // Function
 import { getMyBoards } from "lib/api/board";
 // Interface
@@ -7,24 +7,15 @@ import { BoardData } from "interfaces/index";
 import BoardsItem from "views/components/modules/board/BoardsItem";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 
-const MyBoard = () => {
-  // State
-  const [boards, setBoards] = useState<BoardData[]>([]);
-  // Id
-  const { id } = useAuthData();
+export interface MyBoardProps {
+  boards: BoardData[];
+  handleBoardData: Function;
+}
 
-  // 掲示板情報を取得
-  const handleGetBoardData = async () => {
-    getMyBoards(id).then((res) => setBoards(res.data));
-  };
-
-  useEffect(() => {
-    handleGetBoardData();
-  }, []);
-
+const MyBoard = ({ boards, handleBoardData }: MyBoardProps) => {
   return (
     <>
-      <BoardsItem boards={boards} handleGetBoardData={handleGetBoardData} />
+      <BoardsItem boards={boards} handleGetBoardData={handleBoardData} />
     </>
   );
 };

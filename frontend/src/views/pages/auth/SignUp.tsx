@@ -62,7 +62,7 @@ const SignUp = () => {
     <>
       <form noValidate autoComplete="off">
         <div className="">
-          <p className="text-center  text-2xl">Sign Up</p>
+          <p className="text-center  text-2xl mt-10">Sign Up</p>
           <div className="my-5 w-4/5 mx-auto">
             <TextField
               variant="outlined"

@@ -221,26 +221,10 @@ const App = () => {
               }
             />
             <Route
-              path="/myBoard/:id"
-              element={
-                <Private>
-                  <MyBoard />
-                </Private>
-              }
-            />
-            <Route
               path="/mypage/:id"
               element={
                 <Private>
                   <MyPage />
-                </Private>
-              }
-            />
-            <Route
-              path="/myFav"
-              element={
-                <Private>
-                  <MyFav />
                 </Private>
               }
             />
@@ -257,14 +241,6 @@ const App = () => {
               element={
                 <Private>
                   <DeleteAccount />
-                </Private>
-              }
-            />
-            <Route
-              path="/information"
-              element={
-                <Private>
-                  <Information />
                 </Private>
               }
             />

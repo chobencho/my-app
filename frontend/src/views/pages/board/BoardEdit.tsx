@@ -24,10 +24,8 @@ const BoardEdit = () => {
       setBoardData(response.data);
     } catch (error: any) {
       if (error.response && error.response.status === 403) {
-        // 403エラーが発生した場合、エラーページにリダイレクト
-        navigate("/error"); // リダイレクト先のURLを適切に設定
+        navigate("/error");
       } else {
-        // 他のエラーが発生した場合、エラーメッセージを表示またはログに記録するなどの処理を追加できます
         console.error("エラーが発生しました:", error);
       }
     }

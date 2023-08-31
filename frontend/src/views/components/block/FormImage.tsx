@@ -40,8 +40,8 @@ const FormImage = ({
         }}
       />
       <div className="relative">
-        <label className="image-label" htmlFor="icon-button-file">
-          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+        <label className="image-label " htmlFor="icon-button-file">
+          <div className="flex flex-col items-center justify-center image">
             <svg
               aria-hidden="true"
               className="w-6 h-6 mb-1 text-gray-400"
@@ -68,7 +68,7 @@ const FormImage = ({
           </div>
         </label>
         {preview ? (
-          <div className="absolute top-0 left-0">
+          <div className="absolute top-0 left-0 w-full h-full">
             <HighlightOffIcon
               onClick={() => clearPreview(setPreview)}
               className="absolute text-white top-1 left-1"

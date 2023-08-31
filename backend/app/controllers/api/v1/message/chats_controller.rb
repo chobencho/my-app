@@ -57,9 +57,6 @@ class Api::V1::Message::ChatsController < ApplicationController
 
     room_present = RoomMember.find_by(room_id: params[:room_id], user_id: params[:string_my_id]).present?
     buddy_present = RoomMember.find_by(room_id: params[:room_id], user_id: params[:id]).present?
-    
-    puts "room_present: #{room_present}"
-    puts "buddy_present: #{buddy_present}"
 
     unless current_api_v1_user
       render json: { error: "ログインが必要です。" }, status: :unauthorized

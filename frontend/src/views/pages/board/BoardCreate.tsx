@@ -28,20 +28,20 @@ const BoardCreate = () => {
     formState: { errors },
   } = useForm();
 
-  const createForm = (data: Record<string, any>) => {
+  const createForm = () => {
     const formData = new FormData();
     formData.append("user_id", stringMyId || "");
-    formData.append("title", data.title);
+    formData.append("title", title);
     if (image) {
       formData.append("image", image);
     }
-    formData.append("body", data.body);
+    formData.append("body", body);
 
     return formData;
   };
 
-  const onSubmit = async (data: Record<string, any>) => {
-    const formData = createForm(data);
+  const onSubmit = async () => {
+    const formData = createForm();
     await createBoardData(formData).then(() => {
       navigate("/boards");
     });
@@ -54,7 +54,7 @@ const BoardCreate = () => {
         padding={"10px"}
         classes={"text-center"}
       />
-      <form onSubmit={handleSubmit(onSubmit)} className="w-96 m-auto">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-base m-auto">
         <FormInputText
           state={title}
           setState={setTitle}

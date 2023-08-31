@@ -1,7 +1,6 @@
 import React from "react";
-import { UserTagData, UserHobbyData, UserInterestData } from "interfaces/index";
+import { UserHobbyData } from "interfaces/index";
 import Hobby from "options/hobby";
-import Interest from "options/interest";
 
 interface HobbyProps {
   hobbies: UserHobbyData[];
@@ -16,7 +15,7 @@ const HobbyComponent = ({ hobbies }: HobbyProps) => (
       if (hobbyOption) {
         const [, hobbyName, hobbyImage] = hobbyOption;
         return (
-          <div key={hobby.hobbyId} className="w-1/5 p-1">
+          <div key={hobby.hobbyId} className="w-1/5 pr-1">
             <div className="relative">
               <img
                 src={`${process.env.PUBLIC_URL}/images/hobby/${hobbyImage}`}
@@ -50,7 +49,7 @@ const TableTr = ({ trTitle, trData }: TableTrProps) => {
       <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
         {trTitle}
       </td>
-      <td className="whitespace-pre-wrap  py-4  text-sm text-gray-800 dark:text-gray-200">
+      <td className="whitespace-pre-wrap py-4 text-sm text-gray-800 dark:text-gray-200">
         {Array.isArray(trData) ? (
           trData.length > 0 && "hobbyId" in trData[0] ? (
             <>

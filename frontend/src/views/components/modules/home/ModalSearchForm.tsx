@@ -50,8 +50,8 @@ const ModalSearchForm = ({
         onSubmit={handleSearchUsers}
         className="border flex justify-between"
       >
-        <div className="modal">
-          <div className="modal-content">
+        <div className="w-full h-full bg-gray-600 bg-opacity-60 fixed top-0 left-0 flex justify-center items-center z-50">
+          <div className="max-modal bg-white p-2">
             <ClearButton onClose={onClose} />
             <div className="p-3">
               <p className="text-xs text-center my-2">

@@ -7,27 +7,15 @@ import { BoardData } from "interfaces/index";
 import BoardsItem from "views/components/modules/board/BoardsItem";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 
-const MyFav = () => {
-  // State
-  const [boards, setBoards] = useState<BoardData[]>([]);
-  // Id
-  const { stringMyId } = useAuthData();
+export interface MyFavProps {
+  boards: BoardData[];
+  handleBoardData: Function;
+}
 
-  // 自分がいいねした掲示板情報を取得
-  const handleGetMyFavBoardData = async () => {
-    getMyFavBoards(stringMyId).then((res) => setBoards(res.data));
-  };
-
-  useEffect(() => {
-    handleGetMyFavBoardData();
-  }, []);
-
+const MyFav = ({ boards, handleBoardData }: MyFavProps) => {
   return (
     <>
-      <BoardsItem
-        boards={boards}
-        handleGetBoardData={handleGetMyFavBoardData}
-      />
+      <BoardsItem boards={boards} handleGetBoardData={handleBoardData} />
     </>
   );
 };

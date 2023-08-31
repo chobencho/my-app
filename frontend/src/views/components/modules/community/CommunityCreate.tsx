@@ -25,7 +25,7 @@ const CommunityCreate = () => {
           onClick={() => handleModalApplyNewCommunity()}
           disabled={!verifiedAge}
         >
-          <span>新規コミュニティ申請</span>
+          <span className="text-sm">新規コミュニティ申請</span>
           {verifiedAge ? null : (
             <p
               className="absolute  w-full rounded-3xl py-3 top-0 left-0 text-white"

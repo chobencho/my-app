@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-// Function
-import { getInfos } from "lib/api/info";
+import { useState } from "react";
 // Interface
 import { InfoData } from "interfaces/index";
 import ModalInformation from "views/components/modules/information/ModalInformation";
 
 import { clearModal } from "lib/api/helper";
 
-const Information = () => {
+export interface InformationProps {
+  infos: InfoData[];
+}
+
+const Information = ({ infos }: InformationProps) => {
   // State
-  const [infos, setInfos] = useState<InfoData[]>([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedInfo, setSelectedInfo] = useState<InfoData | null>(null);
 
@@ -22,16 +23,6 @@ const Information = () => {
     clearModal(setShowModal);
     setSelectedInfo(null);
   };
-
-  // お知らせ情報を取得
-  const handleGetInfos = async () => {
-    getInfos().then((res) => setInfos(res.data));
-  };
-
-  useEffect(() => {
-    handleGetInfos();
-  }, []);
-
   return (
     <>
       <p className="text-sm text-center pt-1 pb-2">お知らせ一覧</p>

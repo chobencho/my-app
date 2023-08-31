@@ -16,13 +16,13 @@ const InterestComponent = ({ interests }: InterestProps) => (
       if (interestOption) {
         const [, interestName, interestImage] = interestOption;
         return (
-          <div key={interest.interestId} className="w-1/3 p-1">
+          <div key={interest.interestId} className="w-1/3 pr-1">
             <div className="relative">
               <img
                 src={`${process.env.PUBLIC_URL}/images/interest/${interestImage}`}
-                className="w-full h-20 object-cover rounded image-dark"
+                className="w-full h-16 sm:h-20 object-cover rounded image-dark"
               />
-              <span className="absolute h-20 w-full bottom-0 left-0 right-0 text-white text-sm text-center py-1 px-1 flex items-center justify-center">
+              <span className="absolute h-16 sm:h-20 w-full bottom-0 left-0 right-0 text-white text-sm text-center py-1 px-1 flex items-center justify-center">
                 {interestName}
               </span>
             </div>

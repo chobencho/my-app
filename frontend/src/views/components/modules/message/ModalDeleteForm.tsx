@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { makeStyles, Theme } from "@material-ui/core/styles";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import { deleteChatRoom } from "lib/api/chat";
 
@@ -8,23 +7,7 @@ interface ModalDeleteFormProps {
   generalId: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  modal: {
-    // position: "fixed",
-    // top: "0",
-    // left: "0",
-    // width: "100%",
-    // height: "100%",
-    background: "rgba(0, 0, 0, 0.6)",
-    // display: "flex",
-    // justifyContent: "center",
-    // alignItems: "center",
-    // zIndex: 100,
-  },
-}));
-
 const ModalDeleteForm = ({ onClose, generalId }: ModalDeleteFormProps) => {
-  const classes = useStyles();
   const navigate = useNavigate();
 
   // 削除機能(掲示板,チャット)

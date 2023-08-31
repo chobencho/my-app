@@ -38,13 +38,13 @@ const BoardEditForm = ({
   } = useForm();
   // 画像アップロード機能
 
-  const onSubmit = async (data: Record<string, any>) => {
+  const onSubmit = async () => {
     const formData = new FormData();
-    formData.append("title", data.title);
+    formData.append("title", title);
     if (image) {
       formData.append("image", image);
     }
-    formData.append("body", data.body);
+    formData.append("body", body);
 
     await editBoardData(id, formData).then(() => {
       handleGetBoardData();

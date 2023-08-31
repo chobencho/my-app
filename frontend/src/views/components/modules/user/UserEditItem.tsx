@@ -68,14 +68,16 @@ const UserEditItem = ({
       />
 
       <div className="w-base m-auto">
-        <UserName
-          name={userData.name}
-          pcFontSize={"18px"}
-          spFontSize={"18px"}
-          fontWeight={600}
-          margin={""}
-          option={""}
-        />
+        <div className="text-center">
+          <UserName
+            name={userData.name}
+            pcFontSize={"18px"}
+            spFontSize={"18px"}
+            fontWeight={600}
+            margin={"10px"}
+            option={""}
+          />
+        </div>
 
         <table className="w-full">
           <TableTr trTitle={"自己紹介"} trData={userData.body} />

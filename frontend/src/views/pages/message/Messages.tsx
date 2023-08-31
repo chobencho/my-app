@@ -8,9 +8,7 @@ import { useAuthData } from "views/components/modules/common/useAuthData";
 // Interface
 import { ChatUserData } from "interfaces/index";
 // Components
-import UserCircleImage from "views/components/block/UserCircleImage";
 import PageTitle from "views/components/block/PageTitle";
-import Moment from "views/components/block/Moment";
 import UserName from "views/components/block/UserName";
 
 const Messages = () => {
@@ -52,7 +50,7 @@ const Messages = () => {
               <img
                 src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
                 alt="image"
-                className="object-cover"
+                className="object-cover w-12 h-12 rounded-full"
               />
             )}
           </div>

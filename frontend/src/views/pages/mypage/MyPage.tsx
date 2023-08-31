@@ -3,8 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 // Interface
 import { UserDataResponse } from "interfaces/index";
+import { BoardData } from "interfaces/index";
+import { InfoData } from "interfaces/index";
 // Function
 import { getEditUserData } from "lib/api/user";
+import { getMyBoards } from "lib/api/board";
+import { getMyFavBoards } from "lib/api/board";
+import { getInfos } from "lib/api/info";
 // Components
 import Setting from "views/pages/mypage/Setting";
 import Information from "views/pages/mypage/Information";
@@ -12,14 +17,14 @@ import MyBoard from "views/pages/mypage/MyBoard";
 import MyFav from "views/pages/mypage/MyFav";
 import { useAuthData } from "views/components/modules/common/useAuthData";
 import SkeletonLoaderMyPage from "views/components/modules/mypage/SkeletonLoaderMyPage";
-import UserCircleImage from "views/components/block/UserCircleImage";
-import UserName from "views/components/block/UserName";
-import MyPageButton from "views/components/block/MyPageButton";
 
 const MyPage = () => {
   const navigate = useNavigate();
   // State
   const [user, setUser] = useState<UserDataResponse | null>(null);
+  const [infos, setInfos] = useState<InfoData[]>([]);
+  const [myBoards, setMyBoards] = useState<BoardData[]>([]);
+  const [likeBoards, setLikeBoards] = useState<BoardData[]>([]);
   const [settingButtonActive, setSettingButtonActive] = useState<boolean>(true);
   const [myBoardButtonActive, setMyBoardButtonActive] =
     useState<boolean>(false);
@@ -28,7 +33,7 @@ const MyPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [showSkeleton, setShowSkeleton] = useState(true);
   // Id
-  const { id } = useAuthData();
+  const { id, stringMyId } = useAuthData();
 
   const handleSettingClick = () => {
     setSettingButtonActive(true);
@@ -61,6 +66,18 @@ const MyPage = () => {
     }
   };
 
+  const handleGetInfos = async () => {
+    getInfos().then((res) => setInfos(res.data));
+  };
+
+  const handleGetBoardData = async () => {
+    getMyBoards(id).then((res) => setMyBoards(res.data));
+  };
+
+  const handleGetMyFavBoardData = async () => {
+    getMyFavBoards(stringMyId).then((res) => setLikeBoards(res.data));
+  };
+
   const userData = user?.userData;
 
   useEffect(() => {
@@ -68,6 +85,12 @@ const MyPage = () => {
       handleGetUserData();
     }
   }, [user]);
+
+  useEffect(() => {
+    handleGetInfos();
+    handleGetBoardData();
+    handleGetMyFavBoardData();
+  }, []);
 
   useEffect(() => {
     const delay = setTimeout(() => {
@@ -103,9 +126,7 @@ const MyPage = () => {
                   )}
                 </div>
                 <div className="text-center mt-1">
-                  <p className="text-xl sm:text-2xl">
-                    {userData.name}
-                  </p>
+                  <p className="text-xl sm:text-2xl">{userData.name}</p>
                 </div>
 
                 <p className="text-sm text-center">
@@ -115,12 +136,18 @@ const MyPage = () => {
             )}
           </div>
           <div className="flex w-full pb-5 px-3">
-            <Link to={`/user/${id}/edit`} className="inline-block w-1/2 text-sm text-center">
+            <Link
+              to={`/user/${id}/edit`}
+              className="inline-block w-1/2 text-sm text-center"
+            >
               <button className="w-4/5 bg-gray-600 text-white p-3 rounded-full">
                 プロフィール編集
               </button>
             </Link>
-            <Link to={`/verification`} className="inline-block w-1/2 text-sm text-center">
+            <Link
+              to={`/verification`}
+              className="inline-block w-1/2 text-sm text-center"
+            >
               <button className="w-4/5 bg-gray-600 text-white p-3 rounded-full">
                 年齢確認
               </button>
@@ -128,24 +155,27 @@ const MyPage = () => {
           </div>
           <div className="flex justify-between py-3">
             <div
-              className={`w-1/3 text-center border-b p-1 ${settingButtonActive ? "border-b border-blue-base" : null
-                }`}
+              className={`w-1/3 text-center border-b p-1 ${
+                settingButtonActive ? "border-b border-blue-base" : null
+              }`}
             >
               <button className="text-base" onClick={handleSettingClick}>
                 各種設定
               </button>
             </div>
             <div
-              className={`w-1/3 text-center border-b p-1 ${myBoardButtonActive ? "border-b border-blue-base" : null
-                }`}
+              className={`w-1/3 text-center border-b p-1 ${
+                myBoardButtonActive ? "border-b border-blue-base" : null
+              }`}
             >
               <button className="text-base" onClick={handleMyBoardClick}>
                 自分の掲示板
               </button>
             </div>
             <div
-              className={`w-1/3 text-center border-b p-1 ${likeBoardButtonActive ? "border-b border-blue-base" : null
-                }`}
+              className={`w-1/3 text-center border-b p-1 ${
+                likeBoardButtonActive ? "border-b border-blue-base" : null
+              }`}
             >
               <button className="text-base" onClick={handleLikeBoardClick}>
                 いいね
@@ -155,20 +185,23 @@ const MyPage = () => {
 
           {settingButtonActive && (
             <div className="w-base sm:w-3/4 m-auto">
-              <Information />
+              <Information infos={infos} />
               <Setting />
             </div>
           )}
 
           {myBoardButtonActive && (
             <div className="w-base m-auto">
-              <MyBoard />
+              <MyBoard boards={myBoards} handleBoardData={handleGetBoardData} />
             </div>
           )}
 
           {likeBoardButtonActive && (
             <div className="w-base m-auto">
-              <MyFav />
+              <MyFav
+                boards={likeBoards}
+                handleBoardData={handleGetMyFavBoardData}
+              />
             </div>
           )}
         </>
