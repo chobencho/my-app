@@ -64,9 +64,12 @@ const ModalApplyNewCommunity = ({ onClose }: ModalApplyNewCommunityProps) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)} className={`${classes.modal}`}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-full h-full bg-gray-600 bg-opacity-60 fixed top-0 left-0 flex justify-center items-center z-50"
+      >
 
-        <div className={`${classes.modalContent}`}>
+        <div className="max-modal bg-white p-2">
           <button onClick={() => onClose()} className="">
             <HighlightOffIcon />
           </button>

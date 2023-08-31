@@ -28,7 +28,11 @@ const UsersItem = ({ userData }: UsersProps) => {
               className="w-full h-36 rounded-t-xl object-cover "
             />
           )}
+<<<<<<< HEAD
           <div className="p-2 md:p-3">
+=======
+          <div className="p-2  md:p-3">
+>>>>>>> bce83383af6e537856b901e80365bf1306d39657
             <div className="flex justify-between items-center">
               <h3 className="text-base font-bold text-gray-800 dark:text-white">
                 {userData.name}
