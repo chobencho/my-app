@@ -2,20 +2,12 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "App";
 
-import { makeStyles, Theme } from "@material-ui/core/styles";
-
-import AppBar from "@material-ui/core/AppBar";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import MessageIcon from "@mui/icons-material/Message";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import GroupsIcon from "@mui/icons-material/Groups";
-import Typography from "@material-ui/core/Typography";
-
 import { createTheme } from "@mui/material/styles";
-import { ThemeProvider } from "@material-ui/styles";
-
-import Box from "@material-ui/core/Box";
 
 const theme = createTheme({
   palette: {
@@ -28,31 +20,12 @@ const theme = createTheme({
   },
 });
 
-const useStyles = makeStyles((theme) => ({
-  linkBtn: {
-    textTransform: "none",
-  },
-  icon: {
-    margin: "auto",
-  },
-  text: {
-    fontSize: "8pt",
-  },
-  transitionButton: {
-    width: "20%",
-    textAlign: "center",
-    fontSize: "20px",
-  },
-}));
-
 const Footer = () => {
-  const classes = useStyles();
-
   const { currentUser } = useContext(AuthContext);
 
   return (
     <>
-      <ThemeProvider theme={theme}>
+      <div>
         <div color="inherit" className="border-y bg-white">
           <div className="my-1 mx-2 flex justify-evenly">
             <Link to="/" className="footer-transition-button">
@@ -80,7 +53,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-      </ThemeProvider>
+      </div>
     </>
   );
 };
