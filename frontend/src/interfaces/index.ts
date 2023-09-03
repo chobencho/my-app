@@ -147,6 +147,7 @@ export interface ChatUserData {
   updatedAt: Date;
 }
 
+// メッセージ
 export interface MessageData {
   id: string;
   userId: string;
@@ -157,11 +158,13 @@ export interface MessageData {
   };
 }
 
+// コミュニテカテゴリー
 export interface CommunityCategoryData {
   id: string;
   communityCode: string;
 }
 
+// コミュニティ
 export interface CommunityData {
   id: string;
   communityId: string;
@@ -177,6 +180,7 @@ export interface CommunityData {
   updatedAt: Date;
 }
 
+// コミュニティデータレスポンス
 export interface CommunityDataResponse {
   allCommunity: CommunityData[];
   myCommunity: CommunityData[];
@@ -184,6 +188,7 @@ export interface CommunityDataResponse {
   popularCommunity: CommunityData[];
 }
 
+// コミュニティコメント
 export interface CommunityCommentData {
   id: string;
   communityId: string;
@@ -196,6 +201,7 @@ export interface CommunityCommentData {
   updatedAt: Date;
 }
 
+// メッセージ
 export interface MessageItemsData {
   id: string;
   communityId: string;
