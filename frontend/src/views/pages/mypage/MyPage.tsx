@@ -130,7 +130,10 @@ const MyPage = () => {
                 </div>
 
                 <p className="text-sm text-center">
-                  {userData.age}歳 {userData.prefectureCode}
+                  {userData.age}歳
+                  {userData.prefectureCode != "未選択" && (
+                    <span className="pl-1">{userData.prefectureCode}</span>
+                  )}
                 </p>
               </>
             )}
@@ -155,27 +158,24 @@ const MyPage = () => {
           </div>
           <div className="flex justify-between py-3">
             <div
-              className={`w-1/3 text-center border-b p-1 ${
-                settingButtonActive ? "border-b border-blue-base" : null
-              }`}
+              className={`w-1/3 text-center border-b p-1 ${settingButtonActive ? "border-b border-blue-base" : null
+                }`}
             >
               <button className="text-base" onClick={handleSettingClick}>
                 各種設定
               </button>
             </div>
             <div
-              className={`w-1/3 text-center border-b p-1 ${
-                myBoardButtonActive ? "border-b border-blue-base" : null
-              }`}
+              className={`w-1/3 text-center border-b p-1 ${myBoardButtonActive ? "border-b border-blue-base" : null
+                }`}
             >
               <button className="text-base" onClick={handleMyBoardClick}>
                 自分の掲示板
               </button>
             </div>
             <div
-              className={`w-1/3 text-center border-b p-1 ${
-                likeBoardButtonActive ? "border-b border-blue-base" : null
-              }`}
+              className={`w-1/3 text-center border-b p-1 ${likeBoardButtonActive ? "border-b border-blue-base" : null
+                }`}
             >
               <button className="text-base" onClick={handleLikeBoardClick}>
                 いいね
