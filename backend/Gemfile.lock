@@ -101,6 +101,10 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    haml (6.1.2)
+      temple (>= 0.8.2)
+      thor
+      tilt
     hirb (0.7.3)
     hirb-unicode (0.0.5)
       hirb (~> 0.5)
@@ -139,6 +143,11 @@ GEM
     nokogiri (1.15.4-x86_64-darwin)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    prettier (4.0.2)
+      syntax_tree (>= 4.0.1)
+      syntax_tree-haml (>= 2.0.0)
+      syntax_tree-rbs (>= 0.2.0)
+    prettier_print (1.2.1)
     public_suffix (5.0.3)
     puma (5.6.6)
       nio4r (~> 2.0)
@@ -177,6 +186,7 @@ GEM
       thor (~> 1.0)
       zeitwerk (~> 2.5)
     rake (13.0.6)
+    rbs (3.2.1)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -185,7 +195,19 @@ GEM
     sqlite3 (1.6.3-x64-mingw-ucrt)
     sqlite3 (1.6.3-x86_64-darwin)
     ssrf_filter (1.1.1)
+    syntax_tree (6.1.1)
+      prettier_print (>= 1.2.0)
+    syntax_tree-haml (4.0.3)
+      haml (>= 5.2)
+      prettier_print (>= 1.2.1)
+      syntax_tree (>= 6.0.0)
+    syntax_tree-rbs (1.0.0)
+      prettier_print
+      rbs
+      syntax_tree (>= 2.0.1)
+    temple (0.10.2)
     thor (1.2.2)
+    tilt (2.2.0)
     timeout (0.4.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
@@ -212,10 +234,15 @@ DEPENDENCIES
   dotenv-rails
   hirb
   hirb-unicode
+  prettier
+  prettier_print
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.6)
   sqlite3 (~> 1.4)
+  syntax_tree
+  syntax_tree-haml
+  syntax_tree-rbs
   tzinfo-data
 
 RUBY VERSION

@@ -15,6 +15,6 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   # 受け付け可能なファイルの拡張子を指定
   def extension_allowlist
-    %w(jpg jpeg png)
+    %w[jpg jpeg png]
   end
 end

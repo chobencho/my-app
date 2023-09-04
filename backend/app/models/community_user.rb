@@ -1,4 +1,3 @@
 class CommunityUser < ApplicationRecord
-    belongs_to :community
-  end
-  
+  belongs_to :community
+end
