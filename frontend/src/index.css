@@ -3,12 +3,15 @@
 @tailwind utilities;
 
 body {
-  margin: auto;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-sizing: content-box;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+        'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body,
@@ -16,210 +19,230 @@ header,
 footer,
 main,
 .max-w-540 {
-  width: 540px;
+    width: 540px;
 }
 
 .max-modal {
-  width: 324px;
+    width: 324px;
 }
 
 .footer-transition-button {
-  width: 20%;
-  text-align: center;
-  font-size: 20px;
+    width: 20%;
+    text-align: center;
+    font-size: 20px;
 }
 .footer-icon {
-  margin: auto;
+    margin: auto;
 }
 .footer-text {
-  font-size: 8pt;
+    font-size: 8pt;
 }
 
 .w-base {
-  width: 96%;
+    width: 96%;
 }
 
 .w-max-170 {
-  max-width: 170px;
+    max-width: 170px;
 }
 
 .slide-up-content {
-  top: -140px;
-  height: 230px;
-  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
-  transform: translateY(0);
-  transition: transform 0.3s ease-in-out;
+    top: -140px;
+    height: 230px;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.scroll-bar {
+    background-color: #fff;
+    overflow-y: scroll;
+    width: 100%;
+    height: 400px;
+}
+.scroll-bar::-webkit-scrollbar {
+    width: 3px;
+}
+.scroll-bar::-webkit-scrollbar-track {
+    background-color: #ccc;
+}
+.scroll-bar::-webkit-scrollbar-thumb {
+    background-color: #547aff;
+    border-radius: 5px;
 }
 
 @media screen and (max-width: 540px) {
-  body,
-  header,
-  footer,
-  main,
-  .max-w-540 {
-    width: 100%;
-  }
+    body {
+        border: none;
+    }
 
-  .max-modal {
-    width: 80%;
-  }
+    body,
+    header,
+    footer,
+    main,
+    .max-w-540 {
+        width: 100%;
+    }
+
+    .max-modal {
+        width: 80%;
+    }
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .slide-transition {
-  transition: height 1s ease-in-out;
-  /* アニメーション時間とイージングを調整することができます */
-  overflow: hidden;
+    transition: height 1s ease-in-out;
+    /* アニメーション時間とイージングを調整することができます */
+    overflow: hidden;
 }
 
 .open {
-  height: auto;
-  /* アニメーションが開くときの高さ */
+    height: auto;
+    /* アニメーションが開くときの高さ */
 }
 
 .closed {
-  height: 0;
-  /* アニメーションが閉じるときの高さ */
+    height: 0;
+    /* アニメーションが閉じるときの高さ */
 }
 
 .text-10 {
-  font-size: 10px;
+    font-size: 10px;
 }
 
 .text-blue-base {
-  color: #547aff;
+    color: #547aff;
 }
 
 .bg-blue-base {
-  background-color: #547aff;
+    background-color: #547aff;
 }
 
 .border-blue-base {
-  border-color: #547aff;
+    border-color: #547aff;
 }
 
 .generalButton {
-  padding: 15px;
-  margin: 20px auto;
-  border-radius: 30px;
-  text-align: center;
+    padding: 15px;
+    margin: 20px auto;
+    border-radius: 30px;
+    text-align: center;
 }
 
 .input-text {
-  border: 1px solid #ccc;
-  font-size: 14px;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 5px 0;
-  width: 100%;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;
+    width: 100%;
 }
 
 .required {
-  background-color: red;
-  color: #fff;
-  border-radius: 5px;
-  font-size: 10px;
-  padding: 2px 5px;
+    background-color: red;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 10px;
+    padding: 2px 5px;
 }
 
 .input-title {
-  font-size: 14px;
-  padding: 5px;
+    font-size: 14px;
+    padding: 5px;
 }
 
 .input-part {
-  margin: 5px 0 10px;
+    margin: 5px 0 10px;
 }
 
 .image {
-  height: 54vw;
+    height: 54vw;
 }
 
 .image-label {
-  display: flex;
-  width: 100%;
-  max-height: 291px;
-  border: 1px dashed;
-  border-color: #aaa;
-  border-radius: 5px;
-  cursor: pointer;
-  background-color: #fafafa;
-  align-items: center;
-  justify-content: center;
-  margin-top: 5px;
+    display: flex;
+    width: 100%;
+    max-height: 291px;
+    border: 1px dashed;
+    border-color: #aaa;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fafafa;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
 }
 
 .preview-image {
-  width: 100%;
-  height: 100%;
-  max-height: 291px;
-  object-fit: cover;
-  border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    max-height: 291px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 /* テキストが任意の行数を超えたら...表示されるCSS */
 .txt-limit-1 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  /* 任意の行数を指定 */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    /* 任意の行数を指定 */
 }
 
 .txt-limit-2 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  /* 任意の行数を指定 */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* 任意の行数を指定 */
 }
 
 .image-dark {
-  filter: brightness(0.7);
+    filter: brightness(0.7);
 }
 
 @keyframes heartAnime {
-  0% {
-    transform: scale(0);
-  }
+    0% {
+        transform: scale(0);
+    }
 
-  75% {
-    transform: scale(1.1, 0.9) translate(0%, 5%);
-  }
+    75% {
+        transform: scale(1.1, 0.9) translate(0%, 5%);
+    }
 
-  80% {
-    transform: scale(0.95, 1.05) translate(0%, -3%);
-  }
+    80% {
+        transform: scale(0.95, 1.05) translate(0%, -3%);
+    }
 
-  100% {
-    transform: scale(1, 1) translate(0%, 0%);
-  }
+    100% {
+        transform: scale(1, 1) translate(0%, 0%);
+    }
 }
 
 .animate-like-bounce {
-  animation: heartAnime 0.3s ease-in-out;
+    animation: heartAnime 0.3s ease-in-out;
 }
 
 .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
 }
 
 .modal-content {
-  width: 80%;
-  max-height: 80%;
-  background-color: #fff;
-  padding: 5px;
+    width: 80%;
+    max-height: 80%;
+    background-color: #fff;
+    padding: 5px;
 }

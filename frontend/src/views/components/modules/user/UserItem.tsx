@@ -4,11 +4,9 @@ import { UserHobbyData } from 'interfaces/index';
 import { UserInterestData } from 'interfaces/index';
 import { UserTagData } from 'interfaces/index';
 // Components
-import LikeButton from 'views/components/modules/common/LikeButton';
+import LikeButton from 'views/components/block/common/LikeButton';
 
 import JudgeLogin from 'views/components/block/JudgeLogin';
-import UserCircleImage from 'views/components/block/UserCircleImage';
-import UserName from 'views/components/block/UserName';
 import ShowVariousImage from 'views/components/atoms/ShowVariousImage';
 import ShowVariousText from 'views/components/atoms/ShowVariousText';
 import UserDataTable from 'views/components/block/user/UserDataTable';
@@ -44,7 +42,7 @@ const UserItem = ({
             <ShowVariousImage
                 generalData={userData}
                 alt={'user image'}
-                classContent={'object-cover'}
+                classContent={'object-cover border-t border-b'}
                 imageWidth={'100%'}
                 imageHeight={'auto'}
                 maxImageHeight={'40vh'}
@@ -68,7 +66,7 @@ const UserItem = ({
                         fontSize={'18px'}
                         fontWeight={600}
                         margin={'10px'}
-                        classContent={'text-gray-800 dark:text-white'}
+                        classContent={'text-center'}
                         textContent={userData.name}
                         optionContent={''}
                     />

@@ -1,80 +1,95 @@
 // Common
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import moment from "moment";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 // Function
-import { getChatRooms } from "lib/api/message";
-import { useAuthData } from "views/components/modules/common/useAuthData";
+import { getChatRooms } from 'lib/api/message';
+import { useAuthData } from 'views/components/modules/common/useAuthData';
 // Interface
-import { ChatUserData } from "interfaces/index";
+import { ChatUserData } from 'interfaces/index';
 // Components
-import PageTitle from "views/components/block/PageTitle";
-import UserName from "views/components/block/UserName";
+import PageTitle from 'views/components/block/PageTitle';
+import UserName from 'views/components/block/UserName';
+import ShowVariousText from 'views/components/atoms/ShowVariousText';
+import ShowVariousImage from 'views/components/atoms/ShowVariousImage';
+import ShowMoment from 'views/components/atoms/ShowMoment';
 
 const Messages = () => {
-  // State
-  const [chatUsers, setChatUsers] = useState<ChatUserData[]>([]);
-  //Id
-  const { stringMyId } = useAuthData();
+    // State
+    const [chatUsers, setChatUsers] = useState<ChatUserData[]>([]);
+    //Id
+    const { stringMyId } = useAuthData();
 
-  // 自分の入っているチャットルームを取得
-  const handleGetChatRooms = async () => {
-    getChatRooms(stringMyId).then((res) => setChatUsers(res.data));
-  };
+    // 自分の入っているチャットルームを取得
+    const handleGetChatRooms = async () => {
+        getChatRooms(stringMyId).then((res) => setChatUsers(res.data));
+    };
 
-  useEffect(() => {
-    handleGetChatRooms();
-  }, []);
+    useEffect(() => {
+        handleGetChatRooms();
+    }, []);
 
-  return (
-    <>
-      <PageTitle
-        title={"チャット一覧"}
-        padding={"12px 0 6px"}
-        classes={"text-center border-b"}
-      />
-      {chatUsers?.map((chatUser) => (
-        <Link
-          to={`/message/${chatUser.roomId}?buddyId=${chatUser.id}`}
-          key={chatUser.id}
-          className="border-b flex py-1 bg-white"
-        >
-          <div className="p-1 w-16 sm:w-14 ">
-            {chatUser.image?.url ? (
-              <img
-                src={chatUser.image.url}
-                alt="userData image"
-                className="object-cover w-12 h-12 rounded-full"
-              />
-            ) : (
-              <img
-                src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
-                alt="image"
-                className="object-cover w-12 h-12 rounded-full"
-              />
-            )}
-          </div>
-          <div className="w-3/4 ">
-            <UserName
-              name={chatUser.name}
-              pcFontSize={"12px"}
-              spFontSize={"12px"}
-              fontWeight={0}
-              margin={"4px"}
-              option={""}
+    return (
+        <>
+            <ShowVariousText
+                fontSize={'16px'}
+                fontWeight={0}
+                margin={''}
+                classContent={'text-center border-b py-2'}
+                textContent={'チャット一覧'}
+                optionContent={''}
             />
 
-            <p className="text-xs txt-limit-2 px-1">
-              {chatUser.latestMessageBody}
-            </p>
-          </div>
-          <p className="ml-auto w-24 text-10 pt-2 pr-1 flex justify-end items-start">
-            {moment(chatUser.latestCreatedAt).format("Mo月Do H:mm")}
-          </p>
-        </Link>
-      ))}
-    </>
-  );
+            {chatUsers?.map((chatUser) => (
+                <div className="">
+                    <Link
+                        to={`/message/${chatUser.roomId}?buddyId=${chatUser.id}`}
+                        key={chatUser.id}
+                        className="border-b flex py-1 bg-white"
+                    >
+                        <div className="p-1 min-w-fit sm:w-14 ">
+                            <ShowVariousImage
+                                generalData={chatUser}
+                                alt={'user image'}
+                                classContent={'object-cover border'}
+                                imageWidth={'48px'}
+                                imageHeight={'48px'}
+                                maxImageHeight={''}
+                                rounded={'100%'}
+                                margin={''}
+                            />
+                        </div>
+                        <div className="w-3/4 ">
+                            <ShowVariousText
+                                fontSize={'12px'}
+                                fontWeight={0}
+                                margin={'4px'}
+                                classContent={''}
+                                textContent={chatUser.name}
+                                optionContent={''}
+                            />
+                            <ShowVariousText
+                                fontSize={'12px'}
+                                fontWeight={0}
+                                margin={'4px'}
+                                classContent={'txt-limit-1 w-60 sm:w-96'}
+                                textContent={chatUser.latestMessageBody}
+                                optionContent={''}
+                            />
+                        </div>
+
+                        <ShowMoment
+                            fontSize={'10px'}
+                            margin={'0 0 0 auto'}
+                            classContent={'pt-2 pr-1 w-24 flex justify-end items-start'}
+                            time={chatUser.latestCreatedAt}
+                            format={'Mo月Do H:mm'}
+                        />
+                    </Link>
+                </div>
+            ))}
+        </>
+    );
 };
 
 export default Messages;

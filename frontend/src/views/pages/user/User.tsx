@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 // Function
-import { getUserData } from 'lib/api/user';
-import { getCommonRoomId } from 'lib/api/common';
+import { fetchUserData } from 'lib/api/user';
+import { fetchCommonRoomId } from 'lib/api/common';
 // Interface
 import { UserDataResponse } from 'interfaces/index';
 // Components
@@ -22,7 +22,7 @@ const User = () => {
 
     const handleFetchUserData = async () => {
         try {
-            const res = await getUserData(id);
+            const res = await fetchUserData(id);
             setUser(res.data);
         } catch (error) {
             console.error('Failed to fetch user data:', error);
@@ -31,7 +31,7 @@ const User = () => {
 
     const handleFetchCommonRoom = async () => {
         try {
-            const res = await getCommonRoomId(id, stringMyId);
+            const res = await fetchCommonRoomId(id, stringMyId);
             setCommonRoomId(res.data);
         } catch (error) {
             console.error('Failed to fetch common room id:', error);

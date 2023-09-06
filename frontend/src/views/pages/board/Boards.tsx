@@ -9,7 +9,7 @@ import BoardsItem from 'views/components/modules/board/BoardsItem';
 import { useAuthData } from 'views/components/modules/common/useAuthData';
 import SkeletonLoaderBoards from 'views/components/modules/board/SkeletonLoaderBoards';
 import PageTitle from 'views/components/block/PageTitle';
-import VariousButton from 'views/components/block/VariousButton';
+import VariousButton from 'views/components/atoms/VariousButton';
 import ShowVariousText from 'views/components/atoms/ShowVariousText';
 
 const Boards = () => {
@@ -43,7 +43,7 @@ const Boards = () => {
             {isLoading ? (
                 <SkeletonLoaderBoards />
             ) : (
-                <div className="w-base m-auto">
+                <div className="w-base m-auto pb-20">
                     <ShowVariousText
                         fontSize={'16px'}
                         margin={'20px 0 10px 0'}
@@ -62,6 +62,7 @@ const Boards = () => {
                         buttonTitle={'新規作成'}
                         toLink={'/boardCreate'}
                         verifiedAge={verifiedAge}
+                        classContent={'fixed bottom-16 right-0 left-0'}
                     />
                 </div>
             )}

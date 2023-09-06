@@ -1,20 +1,20 @@
 // Common
 import { useEffect, useState } from 'react';
 // Function
-import { getBoardData } from 'lib/api/board';
-import { getBoardComment } from 'lib/api/boardComment';
-import { getCommonRoomId } from 'lib/api/common';
+import { fetchBoardData } from 'lib/api/board';
+import { fetchBoardComment } from 'lib/api/boardComment';
+import { fetchCommonRoomId } from 'lib/api/common';
 // Interface
 import { BoardData } from 'interfaces/index';
 import { CommentData } from 'interfaces/index';
 // Components
-import CommonEditButton from 'views/components/atoms/PageSwitcherButton';
+import PageSwitcherButton from 'views/components/atoms/PageSwitcherButton';
 import BoardContent from 'views/components/modules/board/BoardContent';
-import CommentItem from 'views/components/modules/board/CommentItem';
-import CommonMessageForms from 'views/components/modules/common/CommonMessageForms';
+import CommentItem from 'views/components/block/board/CommentItem';
+import VariousMessageForm from 'views/components/atoms/VariousMessageForm';
 import { useAuthData } from 'views/components/modules/common/useAuthData';
 import SkeletonLoaderBoard from 'views/components/modules/board/SkeletonLoaderBoard';
-import PageTitle from 'views/components/block/PageTitle';
+import ShowVariousText from 'views/components/atoms/ShowVariousText';
 
 const Board = () => {
     // State
@@ -27,31 +27,30 @@ const Board = () => {
     const { stringMyId, id, verifiedAge } = useAuthData();
 
     // 掲示板情報を取得
-    const handleGetBoardData = async () => {
-        getBoardData(id).then((res) => {
+    const handleFetchBoardData = async () => {
+        fetchBoardData(id).then((res) => {
             setBoard(res.data);
-            handleGetCommonRoomId(res.data.userId);
+            handleFetchCommonRoomId(res.data.userId);
         });
     };
     // コメント情報を取得
-    const handleGetBoardComment = async () => {
-        getBoardComment(id).then((res) => setComments(res.data));
+    const handleFetchBoardComment = async () => {
+        fetchBoardComment(id).then((res) => setComments(res.data));
     };
 
     // 自分と相手のチャットルームがすでに存在するか確認する関数
-    const handleGetCommonRoomId = (userId: string) => {
-        getCommonRoomId(userId, stringMyId).then((res) => setCommonRoomId(res.data));
+    const handleFetchCommonRoomId = (userId: string) => {
+        fetchCommonRoomId(userId, stringMyId).then((res) => setCommonRoomId(res.data));
     };
 
     useEffect(() => {
-        handleGetBoardData();
+        handleFetchBoardData();
     }, [id]);
 
     useEffect(() => {
-        handleGetBoardComment();
+        handleFetchBoardComment();
     }, [board]);
 
-    // タイムアウト用
     useEffect(() => {
         const delay = setTimeout(() => {
             setIsLoading(false);
@@ -70,17 +69,15 @@ const Board = () => {
                     {board && (
                         <>
                             <div>
-                                {/* 掲示板表示 */}
                                 <BoardContent
                                     board={board}
-                                    handleGetBoardData={handleGetBoardData}
+                                    handleGetBoardData={handleFetchBoardData}
                                     boardId={board.id.toString()}
                                     myId={stringMyId || ''}
                                     generalId={id || ''}
                                 />
 
-                                {/* チャット開始ボタン || 掲示板編集ボタン */}
-                                <CommonEditButton
+                                <PageSwitcherButton
                                     userId={board.userId || ''}
                                     myId={stringMyId || ''}
                                     generalId={id || ''}
@@ -89,11 +86,17 @@ const Board = () => {
                                     discrimination={'board'}
                                 />
 
-                                {/* コメントフォーム */}
                                 <div className="border-b border-t w-base mx-auto py-2">
-                                    <PageTitle title={'コメント'} padding={'5px'} classes={''} />
-                                    <CommonMessageForms
-                                        handleGetData={handleGetBoardComment}
+                                    <ShowVariousText
+                                        fontSize={'16px'}
+                                        fontWeight={0}
+                                        margin={'5px'}
+                                        classContent={''}
+                                        textContent={'コメント'}
+                                        optionContent={''}
+                                    />
+                                    <VariousMessageForm
+                                        handleGetData={handleFetchBoardComment}
                                         id={id ?? ''}
                                         stringMyId={stringMyId ?? ''}
                                         another_id={'board_id'}
@@ -101,7 +104,6 @@ const Board = () => {
                                     />
                                 </div>
 
-                                {/* コメント欄 */}
                                 {comments.map((comment: CommentData) => (
                                     <CommentItem comment={comment} key={comment.commentId} />
                                 ))}

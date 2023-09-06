@@ -69,7 +69,7 @@ class Api::Message::ChatsController < ApplicationController
         user_id: params[:id]
       ).present?
 
-    unless current_api_v1_user
+    unless current_api_user
       render json: { error: "ログインが必要です。" }, status: :unauthorized
       return
     end

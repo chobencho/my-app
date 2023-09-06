@@ -8,6 +8,7 @@ import OtherImage from 'views/components/block/OtherImage';
 import UserName from 'views/components/block/UserName';
 import ShowVariousImage from 'views/components/atoms/ShowVariousImage';
 import ShowVariousOtherImage from 'views/components/atoms/ShowVariousOtherImage';
+import ShowVariousText from 'views/components/atoms/ShowVariousText';
 
 interface BoardItemProps {
     boards: BoardData[];
@@ -45,33 +46,25 @@ const BoardsItem = ({ boards }: BoardItemProps) => {
                                     {board.body}
                                 </p>
                                 <div className="mt-5 sm:mt-auto flex items-center">
-                                    {board.userImage !== null ? (
-                                        <img
-                                            src={`http://localhost:3001/uploads/user/image/${board.userId}/${board.userImage}`}
-                                            alt="boardData image"
-                                            className="w-8 h-8 object-cover rounded-3xl mr-2"
-                                        />
-                                    ) : (
-                                        <img
-                                            src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
-                                            alt="boardData image"
-                                        />
-                                    )}
-
-                                    {/* <ShowVariousOtherImage
+                                    <ShowVariousOtherImage
                                         generalData={board}
                                         alt={'user image'}
-                                        classContent={'absolute top-0 left-0 object-cover'}
-                                        imageWidth={'100%'}
-                                        imageHeight={'100%'}
+                                        classContent={'object-cover border'}
+                                        imageWidth={'32px'}
+                                        imageHeight={'32px'}
                                         maxImageHeight={''}
-                                        rounded={''}
-                                        margin={''}
-                                    /> */}
+                                        rounded={'100%'}
+                                        margin={'0 8px 0 0'}
+                                    />
 
-                                    <p className="text-md text-gray-500 dark:text-gray-500">
-                                        {board.name}
-                                    </p>
+                                    <ShowVariousText
+                                        fontSize={'16px'}
+                                        fontWeight={0}
+                                        margin={'0px'}
+                                        classContent={'text-gray-800 dark:text-white'}
+                                        textContent={board.name}
+                                        optionContent={''}
+                                    />
                                 </div>
                             </div>
                         </div>

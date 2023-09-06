@@ -1,10 +1,8 @@
-import { ChatUserData } from 'interfaces/index';
-import { UserData } from 'interfaces/index';
-import { MessageItemsData } from 'interfaces/index';
 import { BoardData } from 'interfaces/index';
+import { MessageItemsData } from 'interfaces/index';
 
 export interface ShowVariousOtherImageProps {
-    generalData: ChatUserData | UserData | MessageItemsData | BoardData;
+    generalData: BoardData | MessageItemsData;
     alt: string;
     classContent: string;
     imageWidth: string;
@@ -23,20 +21,31 @@ const ShowVariousOtherImage = ({
     rounded,
     margin,
 }: ShowVariousOtherImageProps) => {
+    const image: React.CSSProperties = {
+        width: imageWidth,
+        height: imageHeight,
+        maxHeight: maxImageHeight,
+        borderRadius: rounded,
+        margin: margin,
+    };
     return (
-        // {generalData.userImage !== null ? (
-        //     <img
-        //         src={`http://localhost:3001/uploads/user/image/${generalData.userId}/${generalData.userImage}`}
-        //         alt="boardData image"
-        //         className="w-8 h-8 object-cover rounded-3xl mr-2"
-        //     />
-        // ) : (
-        //     <img
-        //         src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
-        //         alt="boardData image"
-        //     />
-        // )}
-        <></>
+        <>
+            {generalData.userImage !== null ? (
+                <img
+                    src={`http://localhost:3001/uploads/user/image/${generalData.userId}/${generalData.userImage}`}
+                    alt={alt}
+                    style={image}
+                    className={classContent}
+                />
+            ) : (
+                <img
+                    src={`${process.env.PUBLIC_URL}/images/common/no-image.webp`}
+                    alt={alt}
+                    style={image}
+                    className={classContent}
+                />
+            )}
+        </>
     );
 };
 

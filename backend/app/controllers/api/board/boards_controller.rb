@@ -97,7 +97,7 @@ class Api::Board::BoardsController < ApplicationController
   def check_user_permission
     user_id = Board.find_by(id: params[:id]).user_id
 
-    if user_id != current_api_v1_user.id.to_s
+    if user_id != current_api_user.id.to_s
       render json: { error: "他のユーザーの画面にアクセスできません。" }, status: :forbidden
     end
   end
