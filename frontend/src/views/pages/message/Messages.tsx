@@ -1,15 +1,12 @@
 // Common
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 // Function
 import { getChatRooms } from 'lib/api/message';
 import { useAuthData } from 'views/components/modules/common/useAuthData';
 // Interface
 import { ChatUserData } from 'interfaces/index';
 // Components
-import PageTitle from 'views/components/block/PageTitle';
-import UserName from 'views/components/block/UserName';
 import ShowVariousText from 'views/components/atoms/ShowVariousText';
 import ShowVariousImage from 'views/components/atoms/ShowVariousImage';
 import ShowMoment from 'views/components/atoms/ShowMoment';

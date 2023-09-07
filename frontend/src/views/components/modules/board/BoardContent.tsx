@@ -5,11 +5,6 @@ import { BoardData } from 'interfaces/index';
 // Components
 import LikeButton from 'views/components/block/common/LikeButton';
 import CommonDeleteButton from 'views/components/modules/common/CommonDeleteButton';
-import UserCircleImage from 'views/components/block/UserCircleImage';
-import OtherImage from 'views/components/block/OtherImage';
-import UserName from 'views/components/block/UserName';
-import UserBody from 'views/components/block/UserBody';
-import Moment from 'views/components/block/Moment';
 import ShowVariousImage from 'views/components/atoms/ShowVariousImage';
 import ShowVariousOtherImage from 'views/components/atoms/ShowVariousOtherImage';
 import ShowVariousText from 'views/components/atoms/ShowVariousText';

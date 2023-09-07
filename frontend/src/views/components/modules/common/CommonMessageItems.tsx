@@ -6,10 +6,6 @@ import { MessageItemsData } from 'interfaces/index';
 // Function
 import ModalCommonExpansionImage from 'views/components/modules/common/ModalCommonExpansionImage';
 // Components
-import MessageImage from 'views/components/block/MessageImage';
-import MessageBody from 'views/components/block/MessageBody';
-import Moment from 'views/components/block/Moment';
-import OtherImage from 'views/components/block/OtherImage';
 import moment from 'moment';
 import { expansionImage } from 'lib/api/helper';
 import ShowVariousOtherImage from 'views/components/atoms/ShowVariousOtherImage';

@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
 import TocIcon from '@mui/icons-material/Toc';
 import ModalDeleteForm from 'views/components/modules/message/ModalDeleteForm';
-import UserCircleImage from 'views/components/block/UserCircleImage';
 import ShowVariousImage from 'views/components/atoms/ShowVariousImage';
 // Function
 

@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom';
 // Interface
 import { BoardData } from 'interfaces/index';
 // Components
-import UserCircleImage from 'views/components/block/UserCircleImage';
-import OtherImage from 'views/components/block/OtherImage';
-import UserName from 'views/components/block/UserName';
 import ShowVariousImage from 'views/components/atoms/ShowVariousImage';
 import ShowVariousOtherImage from 'views/components/atoms/ShowVariousOtherImage';
 import ShowVariousText from 'views/components/atoms/ShowVariousText';

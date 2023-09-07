@@ -3,14 +3,6 @@ import { UserData } from 'interfaces/index';
 import { UserHobbyData } from 'interfaces/index';
 import { UserInterestData } from 'interfaces/index';
 import { UserTagData } from 'interfaces/index';
-import { makeStyles, Theme } from '@material-ui/core/styles';
-import TableTr from 'views/components/block/user/ColUserTable';
-
-import UserCircleImage from 'views/components/block/UserCircleImage';
-import TableTrTags from 'views/components/block/user/ColUserTableTags';
-import TableTrHobby from 'views/components/block/user/ColUserTableHobby';
-import TableTrInterest from 'views/components/block/user/ColUserTableInterest';
-import UserName from 'views/components/block/UserName';
 import UserDataTable from 'views/components/block/user/UserDataTable';
 import ShowVariousImage from 'views/components/atoms/ShowVariousImage';
 import ShowVariousText from 'views/components/atoms/ShowVariousText';

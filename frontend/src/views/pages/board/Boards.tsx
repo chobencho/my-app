@@ -8,7 +8,6 @@ import { BoardData } from 'interfaces/index';
 import BoardsItem from 'views/components/modules/board/BoardsItem';
 import { useAuthData } from 'views/components/modules/common/useAuthData';
 import SkeletonLoaderBoards from 'views/components/modules/board/SkeletonLoaderBoards';
-import PageTitle from 'views/components/block/PageTitle';
 import VariousButton from 'views/components/atoms/VariousButton';
 import ShowVariousText from 'views/components/atoms/ShowVariousText';
 
