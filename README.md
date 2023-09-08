@@ -24,9 +24,9 @@
 
 | 期間 | 内容 | 媒体 |
 | ------------- | ------------- | ------------- |
-| 1ヶ月目  | Conten  | Content Cell  |
-| 2ヶ月目  | Content Cell  | Content Cell  |
-| 3〜4ヶ月目  | Content Cell  | Content Cell  |
+| 1ヶ月目 | Progateと公式サイトで下記の基本を学ぶ<br>Ruby, JS, Ruby on Rails, React | Progate(https://prog-8.com/)<br>Railsチュートリアル(https://railstutorial.jp/)<br>Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
+| 2ヶ月目 | Reactが全然理解できなかったのでハンズオン形式の動画で再学習 | プログラミングチュートリアル(https://www.youtube.com/@user-hl9uv6cv7k)<br>トラハックのエンジニア学習講座(https://www.youtube.com/@1492tiger) |
+| 3〜4ヶ月目 | 実際にアプリを作成しながら基礎補完していく形で学習を継続 | Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
 
 
 1カ月目 – Progateと公式サイトで基本を学ぶ
