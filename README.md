@@ -23,7 +23,7 @@
 | ------------- | ------------- | ------------- |
 | 1ヶ月目 | Progateと公式サイトで下記の基本を学ぶ<br>Ruby, JS, Ruby on Rails, React | Progate(https://prog-8.com/)<br>Railsチュートリアル(https://railstutorial.jp/)<br>Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
 | 2ヶ月目 | Reactが全然理解できなかったのでハンズオン形式の動画で再学習 | プログラミングチュートリアル(https://www.youtube.com/@user-hl9uv6cv7k)<br>トラハックのエンジニア学習講座(https://www.youtube.com/@1492tiger) |
-| 3〜4ヶ月目 | 実際にアプリを作成しながら基礎補完していく形で学習を継続 | Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
+| 3〜5ヶ月目 | 実際にアプリを作成しながら基礎補完していく形で学習を継続 | Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
 
 ### 4. アプリケーションの内容
 ■フロントエンド側<br>
@@ -35,14 +35,18 @@
 ヘッダーの取得を可能にするためgemのrack-corsを使用してCORSの設定をしております。
 
 > ホーム画面 <br>
-・ ユーザ全件の表示
-・ キーワード検索機能
-・ 並び替え機能
+・ **ユーザ全件の表示**：<br>
+　1人ずつのユーザの基本的な情報(名前、プロフ画像、年齢、居住地、専攻分野、ログイン状況)を描画します。 <br>
+・ **キーワード検索機能**：<br>
+　ユーザが個々に登録している研究タグを検索してユーザを探すことが可能。キーワードに対する曖昧検索を行います。<br>
+・ **並び替え機能**：<br>
+　ユーザを、`ログイン順`、`いいね順`、`登録順`で並び替えることが可能。
 
 
 
 > ユーザ詳細画面 <br>
 ・ ユーザ情報の表示
+
 
 > 掲示板一覧画面 <br>
 ・ 掲示板全件の表示
