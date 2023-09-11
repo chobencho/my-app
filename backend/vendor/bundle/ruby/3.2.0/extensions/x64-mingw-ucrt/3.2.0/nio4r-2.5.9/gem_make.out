@@ -1,0 +1,18 @@
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/nio4r-2.5.9/ext/nio4r
+C:/Ruby32-x64/bin/ruby.exe extconf.rb
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/nio4r-2.5.9/ext/nio4r
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-pyc1hy sitelibdir\=./.gem.20230907-6880-pyc1hy clean
+make: *** ターゲット 'clean' を make するルールがありません.  中止.
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/nio4r-2.5.9/ext/nio4r
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-pyc1hy sitelibdir\=./.gem.20230907-6880-pyc1hy
+make: 'all' に対して行うべき事はありません.
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/nio4r-2.5.9/ext/nio4r
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-pyc1hy sitelibdir\=./.gem.20230907-6880-pyc1hy install
+make: 'install' に対して行うべき事はありません.
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/nio4r-2.5.9/ext/nio4r
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-pyc1hy sitelibdir\=./.gem.20230907-6880-pyc1hy clean
+make: *** ターゲット 'clean' を make するルールがありません.  中止.

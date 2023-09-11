@@ -1,0 +1,28 @@
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/rbs-3.2.1/ext/rbs_extension
+C:/Ruby32-x64/bin/ruby.exe extconf.rb
+checking for whether -std=gnu99 is accepted as CFLAGS... yes
+creating Makefile
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/rbs-3.2.1/ext/rbs_extension
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-3vtu41 sitelibdir\=./.gem.20230907-6880-3vtu41 clean
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/rbs-3.2.1/ext/rbs_extension
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-3vtu41 sitelibdir\=./.gem.20230907-6880-3vtu41
+generating rbs_extension-x64-mingw-ucrt.def
+compiling constants.c
+compiling lexer.c
+compiling lexstate.c
+compiling location.c
+compiling main.c
+compiling parser.c
+compiling parserstate.c
+compiling ruby_objs.c
+compiling unescape.c
+linking shared-object rbs_extension.so
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/rbs-3.2.1/ext/rbs_extension
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-3vtu41 sitelibdir\=./.gem.20230907-6880-3vtu41 install
+/usr/bin/install -c -m 0755 rbs_extension.so ./.gem.20230907-6880-3vtu41
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/rbs-3.2.1/ext/rbs_extension
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-3vtu41 sitelibdir\=./.gem.20230907-6880-3vtu41 clean

@@ -1,0 +1,19 @@
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+C:/Ruby32-x64/bin/ruby.exe extconf.rb
+creating Makefile
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-ns2j8v sitelibdir\=./.gem.20230907-6880-ns2j8v clean
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-ns2j8v sitelibdir\=./.gem.20230907-6880-ns2j8v
+generating bootsnap-x64-mingw-ucrt.def
+compiling bootsnap.c
+linking shared-object bootsnap/bootsnap.so
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-ns2j8v sitelibdir\=./.gem.20230907-6880-ns2j8v install
+/usr/bin/install -c -m 0755 bootsnap.so ./.gem.20230907-6880-ns2j8v/bootsnap
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/bootsnap-1.16.0/ext/bootsnap
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-ns2j8v sitelibdir\=./.gem.20230907-6880-ns2j8v clean

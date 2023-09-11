@@ -22,7 +22,8 @@ services:
     ports:
       - "3306:3306"
   front:
-    build: ./frontend/
+    build:
+      context: ./frontend
     volumes:
       - ./frontend:/front
     ports:

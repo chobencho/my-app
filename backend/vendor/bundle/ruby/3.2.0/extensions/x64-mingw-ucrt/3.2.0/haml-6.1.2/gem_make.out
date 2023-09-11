@@ -1,0 +1,85 @@
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/haml-6.1.2/ext/haml
+C:/Ruby32-x64/bin/ruby.exe extconf.rb
+creating Makefile
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/haml-6.1.2/ext/haml
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-2w420d sitelibdir\=./.gem.20230907-6880-2w420d clean
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/haml-6.1.2/ext/haml
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-2w420d sitelibdir\=./.gem.20230907-6880-2w420d
+generating haml-x64-mingw-ucrt.def
+compiling haml.c
+In file included from C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/core/rstring.h:30,
+                 from C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/arithmetic/char.h:29,
+                 from C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/arithmetic.h:24,
+                 from C:/Ruby32-x64/include/ruby-3.2.0/ruby/ruby.h:28,
+                 from C:/Ruby32-x64/include/ruby-3.2.0/ruby.h:38,
+                 from haml.c:1:
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h: In function 'RB_OBJ_TAINTABLE':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h:788:24: warning: unused parameter 'obj' [-Wunused-parameter]
+  788 | RB_OBJ_TAINTABLE(VALUE obj)
+      |                  ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h: In function 'RB_OBJ_TAINTED_RAW':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h:805:26: warning: unused parameter 'obj' [-Wunused-parameter]
+  805 | RB_OBJ_TAINTED_RAW(VALUE obj)
+      |                    ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h: In function 'RB_OBJ_TAINTED':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h:822:22: warning: unused parameter 'obj' [-Wunused-parameter]
+  822 | RB_OBJ_TAINTED(VALUE obj)
+      |                ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h: In function 'RB_OBJ_TAINT_RAW':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h:837:24: warning: unused parameter 'obj' [-Wunused-parameter]
+  837 | RB_OBJ_TAINT_RAW(VALUE obj)
+      |                  ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h: In function 'RB_OBJ_TAINT':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h:852:20: warning: unused parameter 'obj' [-Wunused-parameter]
+  852 | RB_OBJ_TAINT(VALUE obj)
+      |              ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h: In function 'RB_OBJ_INFECT_RAW':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h:868:25: warning: unused parameter 'dst' [-Wunused-parameter]
+  868 | RB_OBJ_INFECT_RAW(VALUE dst, VALUE src)
+      |                   ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h:868:36: warning: unused parameter 'src' [-Wunused-parameter]
+  868 | RB_OBJ_INFECT_RAW(VALUE dst, VALUE src)
+      |                              ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h: In function 'RB_OBJ_INFECT':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h:884:21: warning: unused parameter 'dst' [-Wunused-parameter]
+  884 | RB_OBJ_INFECT(VALUE dst, VALUE src)
+      |               ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/fl_type.h:884:32: warning: unused parameter 'src' [-Wunused-parameter]
+  884 | RB_OBJ_INFECT(VALUE dst, VALUE src)
+      |                          ~~~~~~^~~
+In file included from C:/Ruby32-x64/include/ruby-3.2.0/ruby/ruby.h:45:
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/newobj.h: In function 'rb_clone_setup':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/newobj.h:173:22: warning: unused parameter 'clone' [-Wunused-parameter]
+  173 | rb_clone_setup(VALUE clone, VALUE obj)
+      |                ~~~~~~^~~~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/newobj.h:173:35: warning: unused parameter 'obj' [-Wunused-parameter]
+  173 | rb_clone_setup(VALUE clone, VALUE obj)
+      |                             ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/newobj.h: In function 'rb_dup_setup':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/newobj.h:190:20: warning: unused parameter 'dup' [-Wunused-parameter]
+  190 | rb_dup_setup(VALUE dup, VALUE obj)
+      |              ~~~~~~^~~
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/newobj.h:190:31: warning: unused parameter 'obj' [-Wunused-parameter]
+  190 | rb_dup_setup(VALUE dup, VALUE obj)
+      |                         ~~~~~~^~~
+In file included from C:/Ruby32-x64/include/ruby-3.2.0/ruby/encoding.h:22,
+                 from haml.c:2:
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/encoding/ctype.h: In function 'rb_enc_isascii':
+C:/Ruby32-x64/include/ruby-3.2.0/ruby/internal/encoding/ctype.h:82:46: warning: unused parameter 'enc' [-Wunused-parameter]
+   82 | rb_enc_isascii(OnigCodePoint c, rb_encoding *enc)
+      |                                 ~~~~~~~~~~~~~^~~
+haml.c: In function 'escape_html':
+haml.c:62:12: warning: comparison of integer expressions of different signedness: 'unsigned int' and 'long int' [-Wsign-compare]
+   62 |   if (size > RSTRING_LEN(str)) {
+      |            ^
+compiling hescape.c
+linking shared-object haml/haml.so
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/haml-6.1.2/ext/haml
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-2w420d sitelibdir\=./.gem.20230907-6880-2w420d install
+/usr/bin/install -c -m 0755 haml.so ./.gem.20230907-6880-2w420d/haml
+
+current directory: C:/Documents/my-app/backend/vendor/bundle/ruby/3.2.0/gems/haml-6.1.2/ext/haml
+make DESTDIR\= sitearchdir\=./.gem.20230907-6880-2w420d sitelibdir\=./.gem.20230907-6880-2w420d clean
