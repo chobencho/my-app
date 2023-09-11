@@ -138,8 +138,11 @@ GEM
     net-smtp (0.3.3)
       net-protocol
     nio4r (2.5.9)
+<<<<<<< HEAD
     nokogiri (1.15.4-x64-mingw-ucrt)
       racc (~> 1.4)
+=======
+>>>>>>> 8c7b3c845cd1199f68e26a51cc633393c80611ca
     nokogiri (1.15.4-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.4-x86_64-linux)
@@ -194,7 +197,10 @@ GEM
       railties (>= 5.2)
     ruby-vips (2.1.4)
       ffi (~> 1.12)
+<<<<<<< HEAD
     sqlite3 (1.6.4-x64-mingw-ucrt)
+=======
+>>>>>>> 8c7b3c845cd1199f68e26a51cc633393c80611ca
     sqlite3 (1.6.4-x86_64-darwin)
     sqlite3 (1.6.4-x86_64-linux)
     ssrf_filter (1.1.2)
@@ -225,7 +231,10 @@ GEM
     zeitwerk (2.6.11)
 
 PLATFORMS
+<<<<<<< HEAD
   x64-mingw-ucrt
+=======
+>>>>>>> 8c7b3c845cd1199f68e26a51cc633393c80611ca
   x86_64-darwin-20
   x86_64-linux
 
