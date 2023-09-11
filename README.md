@@ -26,7 +26,7 @@
 | ------------- | ------------- | ------------- |
 | 1ヶ月目 | Progateと公式サイトで下記の基本を学ぶ<br>Ruby, JS, Ruby on Rails, React | Progate(https://prog-8.com/)<br>Railsチュートリアル(https://railstutorial.jp/)<br>Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
 | 2ヶ月目 | Reactが全然理解できなかったのでハンズオン形式の動画で再学習 | プログラミングチュートリアル(https://www.youtube.com/@user-hl9uv6cv7k)<br>トラハックのエンジニア学習講座(https://www.youtube.com/@1492tiger) |
-| 3カ月目～ | 実際にアプリを作成しながら基礎補完していく形で学習を継続 | Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
+| 3カ月目〜　 | 実際にアプリを作成しながら基礎補完していく形で学習を継続 | Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
 
 ### 4. アプリケーションの内容
 ■フロントエンド側<br>
