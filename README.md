@@ -157,7 +157,6 @@ Request Spec, Model Spec, jest, testing liblary, storybook
 GitHub<br>
 Sourcetree
 
-
 ### 6. インフラ
 AWSを利用する予定<br>
 インフラ構成図アップ予定
@@ -182,7 +181,6 @@ https://www.figma.com/file/7UBG8Wtn3nsDXjRBrtFX7u/%E9%99%A2%E7%94%9F?type=design
 そこで、**高等教育機関に属する人限定のアプリ**を作ろうと思ったのがきっかけです。<br>
 大学生、専門学生、研究機関の研究員、大学教授などを含みます。<br>
 他にも、「好きな本について語りたい」「自分と同じ専門の人と情報共有したい」みたいな使い方も良いと思います。<br>
-
 
 ### 10. React側開発で気を付けたこと
 
