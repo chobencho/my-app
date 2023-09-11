@@ -17,7 +17,7 @@ class Api::User::UsersController < ApplicationController
           "INNER JOIN prefectures AS birthplace_prefectures ON users.birthplace_id = birthplace_prefectures.id"
         )
         .select(
-          "users.id, users.name, users.age, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code"
+          "users.id, users.name, users.age, users.image, subjects.subject_code AS subject_code, prefectures.prefecture_code AS prefecture_code, birthplace_prefectures.prefecture_code AS birthplace_code"
         )
         .where(id: user_ids)
         .where.not(id: params[:id])
