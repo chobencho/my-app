@@ -1,5 +1,5 @@
 ### 1. はじめに
-５月から進めている開発進捗について書きます。
+いま進めている開発進捗について書きます。
 
 今回は、Academia Matchingというウェブアプリを制作しました。<br>
 大学、高等教育機関に所属する方限定で利用でき、学習仲間や情報共有できる相手を探すことができるようなウェブアプリです。<br>
@@ -19,14 +19,14 @@
 事務作業・単純作業が苦手なので、VBAやPythonを用いて作業自動化したりすることもあります。<br>
 自分も同僚も思考の時間を多く取れるようになってハッピーです！
 
-将来的には、フルスタックエンジニアを目指して日々勉強中です！
+将来的には、フルスタックエンジニアを目指しています！
 
 ### 3. 学習媒体
 | 期間 | 内容 | 媒体 |
 | ------------- | ------------- | ------------- |
 | 1ヶ月目 | Progateと公式サイトで下記の基本を学ぶ<br>Ruby, JS, Ruby on Rails, React | Progate(https://prog-8.com/)<br>Railsチュートリアル(https://railstutorial.jp/)<br>Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
 | 2ヶ月目 | Reactが全然理解できなかったのでハンズオン形式の動画で再学習 | プログラミングチュートリアル(https://www.youtube.com/@user-hl9uv6cv7k)<br>トラハックのエンジニア学習講座(https://www.youtube.com/@1492tiger) |
-| 3〜5ヶ月目 | 実際にアプリを作成しながら基礎補完していく形で学習を継続 | Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
+| 3カ月目～ | 実際にアプリを作成しながら基礎補完していく形で学習を継続 | Railsガイド(https://railsguides.jp/)<br>React公式(https://ja.legacy.reactjs.org/) |
 
 ### 4. アプリケーションの内容
 ■フロントエンド側<br>
