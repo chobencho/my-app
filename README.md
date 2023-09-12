@@ -165,14 +165,16 @@ AWSを利用する予定<br>
 ### 7. DB
 ER図の作成はお馴染みのdraw.ioを使用しました。<br>
 
-
+![ER-1](https://github.com/chobencho/my-app/assets/119166395/84096986-d810-4356-8d5e-16e9321369cb)
 
 テーブル定義書はスプレッドシートにまとめていました。<br>
 https://docs.google.com/spreadsheets/d/1msh-b21RCtlXRvZLDTlD7Dqu_OFtOU8ffpMF4jedCiU/edit?usp=sharing
 
 
 ### 8. UI
-UI設計はお馴染みのFigmaを使用しました。<br>
+UI設計はお馴染みのFigmaを使用しました。(一部抜粋)<br>
+
+![map-1](https://github.com/chobencho/my-app/assets/119166395/1841c84a-b258-4a1d-aa7b-7b77a405fdaa)
 
 Figma<br>
 https://www.figma.com/file/7UBG8Wtn3nsDXjRBrtFX7u/%E9%99%A2%E7%94%9F?type=design&node-id=0%3A1&mode=design&t=svulOeaTSuKSlPZA-1
@@ -201,6 +203,7 @@ https://www.figma.com/file/7UBG8Wtn3nsDXjRBrtFX7u/%E9%99%A2%E7%94%9F?type=design
 なるかなと考えた結果です。<br>
 使いやすいUXを実現しようと考えると、よくあるアプリのような構成になってしまいましたが、1つのページに含まれる情報は<br>
 なるべく簡潔にするようにして、ユーザーのそのページ内での目的や知りたい情報までの導線を明確にするように意識しました。
+
 
 ### 11. Rails側開発で気を付けたこと
 
