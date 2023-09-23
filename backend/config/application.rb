@@ -38,7 +38,7 @@ module Backend
     config.middleware.insert_before 0, Rack::Cors do
       allow do
         # 今回はRailsのポートが3001番、Reactのポートが3000番にするので、Reactのリクエストを許可するためにlocalhost:3000を設定
-        origins "localhost:3000"
+        origins 'http://localhost:3000', "https://web.chobencho.site"
         resource "*",
                  headers: :any,
                  # この一文で、渡される、'access-token'、'uid'、'client'というheaders情報を用いてログイン状態を維持する。
