@@ -63,12 +63,12 @@ const CommunitiesBranchSearch = ({
                         >
                             <div className="flex items-center">
                                 <img
-                                    className="inline-block object-cover flex-shrink-0 h-[3rem] w-[3rem] sm:h-[3.875rem] sm:w-[3.875rem] rounded-full"
+                                    className="inline-block object-cover flex-shrink-0 h-[3rem] w-[3rem] sm:h-[3.875rem] sm:w-[3.875rem] rounded-full border"
                                     src={`${process.env.PUBLIC_URL}/images/community/${option[2]}`}
                                     alt="Image Description"
                                 />
                                 <div className="ml-3">
-                                    <h3 className="text-sm sm:text-base text-gray-800 dark:text-white">
+                                    <h3 className="text-sm sm:text-base text-gray-800">
                                         {option[1]}
                                     </h3>
                                 </div>

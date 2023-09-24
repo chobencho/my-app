@@ -22,7 +22,7 @@ const InterestComponent = ({ interests }: InterestProps) => (
                                 src={`${process.env.PUBLIC_URL}/images/interest/${interestImage}`}
                                 className="w-full h-16 sm:h-20 object-cover rounded image-dark"
                             />
-                            <span className="absolute h-16 sm:h-20 w-full bottom-0 left-0 right-0 text-white text-sm text-center py-1 px-1 flex items-center justify-center">
+                            <span className="absolute h-16 sm:h-20 w-full bottom-0 left-0 right-0 text-white text-xs sm:text-sm text-center py-1 px-1 flex items-center justify-center">
                                 {interestName}
                             </span>
                         </div>
@@ -47,10 +47,10 @@ const ColUserTableInterest = ({ trTitle, trData }: TableTrProps) => {
 
     return (
         <tr>
-            <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+            <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800">
                 {trTitle}
             </td>
-            <td className="whitespace-pre-wrap  py-4  text-sm text-gray-800 dark:text-gray-200">
+            <td className="whitespace-pre-wrap  py-4  text-sm text-gray-800">
                 {Array.isArray(trData) ? (
                     trData.length > 0 && 'interestId' in trData[0] ? (
                         <>

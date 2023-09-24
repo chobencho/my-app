@@ -63,9 +63,9 @@ const UserEditForm = ({ handleGetUserData, userData, tagsData }: UserEditFormPro
     // Gender
     const initialGender = userData.genderId
         ? {
-              value: userData.genderId.toString(),
-              label: userData.genderCode.toString(),
-          }
+            value: userData.genderId.toString(),
+            label: userData.genderCode.toString(),
+        }
         : null;
     const [gender, setGender] = useState(initialGender);
     const handleGenderChange = (selectedOption: any) => {
@@ -79,9 +79,9 @@ const UserEditForm = ({ handleGetUserData, userData, tagsData }: UserEditFormPro
     // Grade
     const initialGrade = userData.gradeId
         ? {
-              value: userData.gradeId.toString(),
-              label: userData.gradeCode.toString(),
-          }
+            value: userData.gradeId.toString(),
+            label: userData.gradeCode.toString(),
+        }
         : null;
     const [grade, setGrade] = useState(initialGrade);
     const handleGradeChange = (selectedOption: any) => {
@@ -95,9 +95,9 @@ const UserEditForm = ({ handleGetUserData, userData, tagsData }: UserEditFormPro
     // Subject
     const initialSubject = userData.subjectId
         ? {
-              value: userData.subjectId.toString(),
-              label: userData.subjectCode.toString(),
-          }
+            value: userData.subjectId.toString(),
+            label: userData.subjectCode.toString(),
+        }
         : null;
     const [subject, setSubject] = useState(initialSubject);
     const handleSubjectChange = (selectedOption: any) => {
@@ -111,9 +111,9 @@ const UserEditForm = ({ handleGetUserData, userData, tagsData }: UserEditFormPro
     // Prefecture
     const initialPrefecture = userData.prefectureId
         ? {
-              value: userData.prefectureId.toString(),
-              label: userData.prefectureCode.toString(),
-          }
+            value: userData.prefectureId.toString(),
+            label: userData.prefectureCode.toString(),
+        }
         : null;
     const [prefecture, setPrefecture] = useState(initialPrefecture);
     const handlePrefectureChange = (selectedOption: any) => {
@@ -127,9 +127,9 @@ const UserEditForm = ({ handleGetUserData, userData, tagsData }: UserEditFormPro
     // Birthplace
     const initialBirthplace = userData.birthplaceId
         ? {
-              value: userData.birthplaceId.toString(),
-              label: userData.birthplaceCode.toString(),
-          }
+            value: userData.birthplaceId.toString(),
+            label: userData.birthplaceCode.toString(),
+        }
         : null;
     const [birthplace, setBirthplace] = useState(initialBirthplace);
     const handleBirthplaceChange = (selectedOption: any) => {
@@ -329,11 +329,11 @@ const UserEditForm = ({ handleGetUserData, userData, tagsData }: UserEditFormPro
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                 setTag(e.target.value);
                             }}
-                            className="border py-3 px-4 block w-full border-gray-300 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400"
+                            className="border py-3 px-4 block w-full border-gray-300 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                         />
 
                         <button
-                            className="w-24 text-10 sm:text-xs ml-2 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all  dark:focus:ring-offset-gray-800"
+                            className="w-24 text-10 sm:text-xs ml-2 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md bg-blue-100 border border-transparent font-semibold text-blue-500 hover:text-white hover:bg-blue-500 focus:outline-none focus:ring-2 ring-offset-white focus:ring-blue-500 focus:ring-offset-2 transition-all"
                             onClick={handleAddTag}
                         >
                             タグ追加
@@ -440,9 +440,8 @@ const UserEditForm = ({ handleGetUserData, userData, tagsData }: UserEditFormPro
                                                 />
                                                 <img
                                                     src={`${process.env.PUBLIC_URL}/images/hobby/${image}`}
-                                                    className={`rounded ${
-                                                        isChecked ? classes.checkBoxChecked : ''
-                                                    }`}
+                                                    className={`rounded ${isChecked ? classes.checkBoxChecked : ''
+                                                        }`}
                                                     alt=""
                                                 />
                                             </label>

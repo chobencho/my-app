@@ -65,7 +65,7 @@ const Community = () => {
                         community_id={id || undefined}
                         user_id={stringMyId || undefined}
                     />
-                    <div className="py-12">
+                    <div className="py-16">
                         {comments.map((message) => (
                             <CommonMessageItems
                                 key={message.id}

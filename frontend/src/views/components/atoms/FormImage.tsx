@@ -41,7 +41,7 @@ const FormImage = ({
       />
       <div className="relative">
         <label className="image-label " htmlFor="icon-button-file">
-          <div className="flex flex-col items-center justify-center image">
+          <div className="flex flex-col items-center justify-center h-72">
             <svg
               aria-hidden="true"
               className="w-6 h-6 mb-1 text-gray-400"

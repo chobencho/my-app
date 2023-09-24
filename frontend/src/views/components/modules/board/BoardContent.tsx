@@ -29,20 +29,20 @@ const BoardContent = ({
         <>
             <ShowVariousImage
                 generalData={board}
-                alt={'user image'}
-                classContent={'object-cover'}
+                alt={'board image'}
+                classContent={'object-cover border-t border-b'}
                 imageWidth={'100%'}
-                imageHeight={'220px'}
-                maxImageHeight={''}
+                imageHeight={'auto'}
+                maxImageHeight={'40vh'}
                 rounded={''}
                 margin={''}
             />
             <div className="w-base m-auto">
                 <ShowVariousText
                     fontSize={'20px'}
-                    fontWeight={0}
+                    fontWeight={600}
                     margin={'8px 0'}
-                    classContent={''}
+                    classContent={'text-center'}
                     textContent={board.title}
                     optionContent={''}
                 />

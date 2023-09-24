@@ -15,7 +15,7 @@ const CommonLayout = ({ children }: CommonLayoutProps) => {
 
     return (
         <div className="">
-            <header className=" bg-white fixed top-0 h-12  flex items-center z-30">
+            <header className=" bg-white fixed top-0 h-12 flex items-center z-30">
                 <Header />
             </header>
             <main className="pt-12 pb-20">{children}</main>

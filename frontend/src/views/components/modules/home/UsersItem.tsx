@@ -15,7 +15,7 @@ const UsersItem = ({ userData }: UsersProps) => {
     return (
         <>
             <Link to={`/user/${userData.id}`} key={userData.id} className="w-1/2 p-1">
-                <div className="flex flex-col bg-white border shadow-sm rounded-xl dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+                <div className="flex flex-col bg-white  shadow-sm rounded-xl shadow-slate-500/[.7]">
                     <ShowVariousImage
                         generalData={userData}
                         alt={'user image'}
@@ -26,13 +26,13 @@ const UsersItem = ({ userData }: UsersProps) => {
                         rounded={'10px 10px 0 0'}
                         margin={''}
                     />
-                    <div className="p-2  md:p-3">
+                    <div className="p-2  md:p-3 bg-white rounded-b-xl">
                         <div className="flex justify-between items-center">
                             <ShowVariousText
                                 fontSize={'16px'}
                                 margin={''}
                                 fontWeight={0}
-                                classContent={'font-bold text-gray-800 dark:text-white'}
+                                classContent={'font-bold text-gray-800'}
                                 textContent={userData.name}
                                 optionContent={''}
                             />
@@ -44,7 +44,7 @@ const UsersItem = ({ userData }: UsersProps) => {
                             />
                         </div>
                         <div className="flex justify-between">
-                            <p className="text-xs mt-1 text-gray-800 dark:text-gray-400 flex">
+                            <p className="text-xs mt-1 text-gray-800 flex">
                                 <ShowVariousText
                                     fontSize={'12px'}
                                     margin={''}
@@ -64,7 +64,7 @@ const UsersItem = ({ userData }: UsersProps) => {
                                     />
                                 )}
                             </p>
-                            <p className="text-xs mt-1 text-gray-800 dark:text-gray-400">
+                            <p className="text-xs mt-1 text-gray-800">
                                 {userData.subjectCode != '未選択' && (
                                     <ShowVariousText
                                         fontSize={'12px'}

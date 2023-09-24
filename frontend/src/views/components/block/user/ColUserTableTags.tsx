@@ -39,10 +39,10 @@ const ColUserTableTags = ({ trTitle, trData }: TableTrProps) => {
 
     return (
         <tr>
-            <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+            <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800">
                 {trTitle}
             </td>
-            <td className="whitespace-pre-wrap py-4  text-sm text-gray-800 dark:text-gray-200">
+            <td className="whitespace-pre-wrap py-4  text-sm text-gray-800">
                 {Array.isArray(trData) ? (
                     trData.length > 0 && 'tagName' in trData[0] ? (
                         <td style={tdRightStyle}>

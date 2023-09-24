@@ -33,7 +33,7 @@ const ChatPartner = ({ buddy, generalId }: ChatPartnerProps) => {
 
     return (
         <>
-            <div className="fixed top-12 bg-white w-full flex justify-between items-center max-w-540 p-2">
+            <div className="fixed top-12 sm:h-14 bg-white w-full flex justify-between items-center max-w-540 p-2">
                 {buddy && (
                     <div className="flex">
                         <span

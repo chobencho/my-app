@@ -11,8 +11,8 @@ export interface FormInputTextProps {
 
 const FormInputText = ({ state, setState, inputTitle, type }: FormInputTextProps) => {
     return (
-        <div>
-            <div className="flex items-center">
+        <div className="my-3">
+            <div className="flex items-center my-1">
                 <b className="input-title">{inputTitle}</b>
                 <ShowRequired />
             </div>
@@ -26,7 +26,7 @@ const FormInputText = ({ state, setState, inputTitle, type }: FormInputTextProps
                     }}
                     id="hs-validation-name-error"
                     name="hs-validation-name-error"
-                    className={`border py-3 pl-4 pr-14 block w-full border-gray-300 rounded-md text-sm focus:border-red-500 focus:ring-red-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400`}
+                    className={`border py-3 pl-4 pr-14 block w-full border-gray-300 rounded-md text-sm focus:border-red-500 focus:ring-red-500`}
                     required
                     aria-describedby="hs-validation-name-error-helper"
                 />

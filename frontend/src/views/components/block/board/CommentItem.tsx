@@ -31,7 +31,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
                         />
                     )}
                 </Link>
-                <div className="w-2/3">
+                <div className="w-4/5">
                     <ShowVariousText
                         fontSize={'14px'}
                         fontWeight={0}
@@ -44,7 +44,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
                         fontSize={'12px'}
                         fontWeight={0}
                         margin={''}
-                        classContent={'break-all'}
+                        classContent={'break-all whitespace-pre-wrap'}
                         textContent={comment.body}
                         optionContent={''}
                     />
@@ -53,9 +53,9 @@ const CommentItem = ({ comment }: CommentItemProps) => {
                 <ShowMoment
                     fontSize={'10px'}
                     margin={'0 5px 0 0'}
-                    classContent={'w-40 text-right'}
+                    classContent={'w-32 text-right'}
                     time={comment.createdAt}
-                    format={'YYYY年MM月DD日 HH:mm'}
+                    format={'Mo月Do H:mm'}
                 />
             </div>
         </>

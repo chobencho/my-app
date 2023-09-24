@@ -61,7 +61,7 @@ const CommunityTop = ({ community, community_id, user_id }: CommunityProps) => {
 
   return (
     <>
-      <div className="fixed top-12 bg-white w-full flex justify-between items-center max-w-540 p-2 z-10">
+      <div className="fixed top-12 bg-white w-full sm:h-14 flex justify-between items-center max-w-540 p-2 z-10">
         <div className="flex items-center">
           <span
             onClick={() => navigate("/communities")}
@@ -83,17 +83,16 @@ const CommunityTop = ({ community, community_id, user_id }: CommunityProps) => {
       </div>
 
       <div
-        className={`fixed bg-white border-b border-gray-200 p-5 sm:px-16 sm:py-8 max-w-540 slide-up-content  ${
-          showSlideUpContent ? classes.slideUpContentActive : ""
-        }`}
+        className={`fixed bg-white border-b border-gray-200 p-5 sm:px-12 sm:py-8 max-w-540 slide-up-content  ${showSlideUpContent ? classes.slideUpContentActive : ""
+          }`}
       >
-        <h4 className="text-sm py-1 font-semibold">コミュニティ概要</h4>
+        <h4 className="text-sm sm:text-base py-1 font-semibold">コミュニティ概要</h4>
         <p className="text-sm">{community.body}</p>
-        <h4 className="text-sm py-1 mt-2 font-semibold">カテゴリ</h4>
+        <h4 className="text-sm sm:text-base py-1 mt-2 font-semibold">カテゴリ</h4>
         <p className="text-sm">{community.communityCode}</p>
         <div className="w-full text-center">
           <button
-            className="bg-red-600 text-white px-5 py-1 mx-auto my-5 text-sm"
+            className="bg-red-600 text-white px-5 py-1 mx-auto my-5 text-sm sm:text-base"
             onClick={() => handleWithdrawCommunity()}
           >
             このコミュニティを退会する

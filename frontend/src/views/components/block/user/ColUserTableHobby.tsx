@@ -21,7 +21,7 @@ const HobbyComponent = ({ hobbies }: HobbyProps) => (
                                 src={`${process.env.PUBLIC_URL}/images/hobby/${hobbyImage}`}
                                 className="w-full h-auto rounded image-dark"
                             />
-                            <span className="absolute inset-1/2 left-0 right-0 text-white text-sm text-center flex items-center justify-center">
+                            <span className="absolute inset-1/2 left-0 right-0 text-white text-xs sm:text-base text-center flex items-center justify-center">
                                 {hobbyName}
                             </span>
                         </div>
@@ -46,10 +46,10 @@ const ColUserTableHobby = ({ trTitle, trData }: TableTrProps) => {
 
     return (
         <tr>
-            <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
+            <td className="font-semibold pl-1 pr-3 py-4 whitespace-nowrap text-sm text-gray-800">
                 {trTitle}
             </td>
-            <td className="whitespace-pre-wrap py-4 text-sm text-gray-800 dark:text-gray-200">
+            <td className="whitespace-pre-wrap py-4 text-sm text-gray-800">
                 {Array.isArray(trData) ? (
                     trData.length > 0 && 'hobbyId' in trData[0] ? (
                         <>

@@ -44,7 +44,7 @@ const Messages = () => {
                         key={chatUser.id}
                         className="border-b flex py-1 bg-white"
                     >
-                        <div className="p-1 min-w-fit sm:w-14 ">
+                        <div className="p-1 min-w-fit sm:w-14">
                             <ShowVariousImage
                                 generalData={chatUser}
                                 alt={'user image'}
@@ -56,7 +56,7 @@ const Messages = () => {
                                 margin={''}
                             />
                         </div>
-                        <div className="w-3/4 ">
+                        <div className="w-3/5">
                             <ShowVariousText
                                 fontSize={'12px'}
                                 fontWeight={0}

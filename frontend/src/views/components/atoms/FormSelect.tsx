@@ -21,7 +21,7 @@ const customStyles = {
 
 const FormSelect = ({ value, onChange, inputTitle, options }: FormSelectProps) => {
     return (
-        <div className="my-1">
+        <div className="my-3">
             <div className="flex items-center">
                 <b className="input-title">{inputTitle}</b>
             </div>
@@ -32,7 +32,7 @@ const FormSelect = ({ value, onChange, inputTitle, options }: FormSelectProps) =
                     value={value}
                     onChange={onChange}
                     options={options}
-                    className="py-3 block w-full border-red-500 rounded-md text-sm focus:border-red-500 focus:ring-red-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400"
+                    className="py-1 block w-full border-red-500 rounded-md text-sm focus:border-red-500 focus:ring-red-500"
                 />
             </div>
         </div>

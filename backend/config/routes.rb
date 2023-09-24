@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
     namespace :auth do
       resources :sessions, only: %i[index]
+      resources :health_check, only: %i[index]
     end
 
     namespace :board do

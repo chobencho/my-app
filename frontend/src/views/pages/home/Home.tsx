@@ -48,7 +48,7 @@ const Home = () => {
             {isLoading ? (
                 <SkeletonLoaderHome />
             ) : (
-                <div className="w-base m-auto">
+                <div className="w-base m-auto my-2">
                     <div className="flex justify-between">
                         <SearchButton
                             handleFetchUsersData={handleFetchUsersData}

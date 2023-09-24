@@ -18,32 +18,6 @@ interface ModalCommonMessageFormProps {
   discrimination: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => ({
-  modal: {
-    position: "fixed",
-    top: "0",
-    left: "0",
-    width: "100%",
-    height: "100%",
-    background: "rgba(0, 0, 0, 0.6)",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 100,
-  },
-  modalContent: {
-    maxWidth: "80%",
-    maxHeight: "80%",
-    backgroundColor: "#fff",
-    padding: "5px",
-  },
-  modalImg: {
-    display: "block",
-    margin: "0 auto",
-    maxWidth: "100%",
-    maxHeight: "100%",
-  },
-}));
 
 const ModalCommonMessageForm = ({
   preview,
@@ -55,7 +29,6 @@ const ModalCommonMessageForm = ({
   another_id,
   discrimination,
 }: ModalCommonMessageFormProps) => {
-  const classes = useStyles();
   // State
   const [modalBody, setModalBody] = useState<string>("");
 
@@ -78,9 +51,9 @@ const ModalCommonMessageForm = ({
     const data = createFormData(another_id);
 
     if (discrimination == "community") {
-      await createCommunityComment(data).then(() => {});
+      await createCommunityComment(data).then(() => { });
     } else if (discrimination == "chat") {
-      await createMessage(data).then(() => {});
+      await createMessage(data).then(() => { });
     }
     setModalBody("");
     handleGetData();
@@ -93,8 +66,8 @@ const ModalCommonMessageForm = ({
         onSubmit={handleCreateCommonMessageForm}
         className="border flex justify-between"
       >
-        <div className={`${classes.modal}`}>
-          <div className={`${classes.modalContent}`}>
+        <div className="modal">
+          <div className="modal-content max-modal">
             <button onClick={() => clearPreview(setPreview)} className="">
               <HighlightOffIcon />
             </button>
