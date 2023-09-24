@@ -22,8 +22,10 @@
     "@types/react-select": "^5.0.1",
     "axios": "^1.4.0",
     "axios-case-converter": "^1.1.0",
+    "build": "^0.1.4",
     "js-cookie": "^3.0.5",
     "moment": "^2.29.4",
+    "npm": "^10.1.0",
     "preline": "^1.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -32,6 +34,7 @@
     "react-router-dom": "^6.15.0",
     "react-scripts": "5.0.1",
     "react-select": "^5.7.4",
+    "run": "^1.4.0",
     "typescript": "^4.9.5",
     "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4"
